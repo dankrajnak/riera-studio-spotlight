@@ -5,11 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "styles": "lessc --js --include-path=node_modules src/Styles/globals.less src/Styles/dist.css"
   },
   "dependencies": {
     "antd": "^4.12.3",
-    "next": "10.0.6",
+    "dayjs": "^1.10.4",
+    "less": "^4.1.1",
+    "next": "^10.0.6",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },
