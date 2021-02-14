@@ -1,0 +1,33 @@
+{
+  "name": "Riera Studios Spotlight",
+  "short_name": "Spotlight",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    }
+  ],
+  "background_color": "#f2e2ce",
+  "description": "What's new at Riera Studios",
+  "display": "minimal-ui",
+  "start_url": "/",
+  "theme_color": "#d95525"
+}
