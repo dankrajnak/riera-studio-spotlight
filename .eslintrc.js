@@ -4,7 +4,7 @@ module.exports = {
     "prettier/@typescript-eslint",
     "react-app",
   ],
-  plugins: ["@typescript-eslint", "react", "jsx-a11y", "react-hooks"],
+  plugins: ["@typescript-eslint", "react", "jsx-a11y", "react-hooks", "import"],
   parser: `@typescript-eslint/parser`,
   rules: {
     "react-hooks/rules-of-hooks": "error",
@@ -20,6 +20,7 @@ module.exports = {
     "react/react-in-jsx-scope": 0,
     "object-shorthand": "error",
     "no-console": ["warn", { allow: ["warn", "error"] }],
+    "import/order": "warn",
   },
   overrides: [
     {
