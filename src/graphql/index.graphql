@@ -1,0 +1,21 @@
+query GetTitle {
+  title {
+    title
+    subheading
+    titlePicture {
+      url
+      responsiveImage(imgixParams: { fit: crop, auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
+  }
+}
