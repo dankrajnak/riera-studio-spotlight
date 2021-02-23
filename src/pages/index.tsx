@@ -87,5 +87,6 @@ export const getStaticProps = async ({ preview }) => {
   const data = await datoRequest({ preview }).GetTitle();
   return {
     props: { data },
+    revalidate: 1,
   };
 };
