@@ -1,5 +1,5 @@
-query GetTitle {
-  title {
+query GetTitle($locale: SiteLocale) {
+  title(locale: $locale) {
     title
     subheading
     titlePicture {

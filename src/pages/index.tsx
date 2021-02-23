@@ -1,9 +1,10 @@
 import { Typography } from "antd";
+import { GetStaticProps } from "next";
 import { Image } from "react-datocms";
 import SEO from "../Utils/SEO";
 import CenterLayout from "../Layout/CenterLayout";
 import { datoRequest } from "../Lib/datocms";
-import { GetTitleQuery } from "../generated/graphql";
+import { GetTitleQuery, SiteLocale } from "../generated/graphql";
 
 const { Title, Text } = Typography;
 
@@ -31,8 +32,6 @@ export default function Home({ data }: { data: GetTitleQuery }) {
             <div
               className="red-fade"
               style={{
-                color: "white",
-                backgroundColor: "#de483f",
                 marginBottom: 10,
               }}
             >
@@ -40,13 +39,7 @@ export default function Home({ data }: { data: GetTitleQuery }) {
                 {data.title.title}
               </Title>
             </div>
-            <div
-              className="red-fade"
-              style={{
-                color: "white",
-                backgroundColor: "#de483f",
-              }}
-            >
+            <div className="red-fade">
               <Typography.Text style={{ color: "white" }}>
                 {data.title.subheading}
               </Typography.Text>
@@ -54,13 +47,15 @@ export default function Home({ data }: { data: GetTitleQuery }) {
           </div>
         </CenterLayout>
       </Plane>
-      <Plane zIndex={0}>
+      <div style={{ width: "100%", height: "100vh" }}>
         <Image
-          data={data.title.titlePicture.responsiveImage}
           style={{ height: "100%" }}
+          pictureStyle={{ objectFit: "cover" }}
+          data={data.title.titlePicture.responsiveImage}
           fadeInDuration={0}
         />
-      </Plane>
+      </div>
+      <div>Hey. This is just a test.</div>
       <style jsx>
         {`
           .red-fade {
@@ -83,8 +78,9 @@ export default function Home({ data }: { data: GetTitleQuery }) {
   );
 }
 
-export const getStaticProps = async ({ preview }) => {
-  const data = await datoRequest({ preview }).GetTitle();
+export const getStaticProps: GetStaticProps = async ({ preview, locale }) => {
+  const siteLocale = locale === "es" ? SiteLocale.Es : SiteLocale.En;
+  const data = await datoRequest({ preview }).GetTitle({ locale: siteLocale });
   return {
     props: { data },
     revalidate: 1,

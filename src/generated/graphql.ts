@@ -144,7 +144,8 @@ export type Tag = {
 
 
 export enum SiteLocale {
-  En = 'en'
+  En = 'en',
+  Es = 'es'
 }
 
 export enum ItemStatus {
@@ -1983,7 +1984,9 @@ export type CollectionMetadata = {
   count: Scalars['IntType'];
 };
 
-export type GetTitleQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTitleQueryVariables = Exact<{
+  locale?: Maybe<SiteLocale>;
+}>;
 
 
 export type GetTitleQuery = (
@@ -2004,8 +2007,8 @@ export type GetTitleQuery = (
 
 
 export const GetTitleDocument = gql`
-    query GetTitle {
-  title {
+    query GetTitle($locale: SiteLocale) {
+  title(locale: $locale) {
     title
     subheading
     titlePicture {
