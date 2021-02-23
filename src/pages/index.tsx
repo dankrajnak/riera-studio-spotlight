@@ -55,7 +55,6 @@ export default function Home({ data }: { data: GetTitleQuery }) {
           fadeInDuration={0}
         />
       </div>
-      <div>Hey. This is just a test.</div>
       <style jsx>
         {`
           .red-fade {
