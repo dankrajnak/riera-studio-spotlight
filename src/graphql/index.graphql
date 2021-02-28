@@ -1,29 +1,20 @@
-query getHomepage {
-  allHomepages {
-    edges {
-      node {
-        active_exhibitions {
-          exhibition {
-            ... on Exhibition {
-              title
-              subtitle
-              main_image
-              start_date
-              end_date
-            }
-          }
-        }
-        old_exhibitions {
-          exhibition {
-            ... on Exhibition {
-              title
-              subtitle
-              main_image
-              start_date
-              end_date
-            }
-          }
-        }
+query GetTitle($locale: SiteLocale) {
+  title(locale: $locale) {
+    title
+    subheading
+    titlePicture {
+      url
+      responsiveImage(imgixParams: { fit: crop, auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
       }
     }
   }
