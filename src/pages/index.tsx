@@ -6,7 +6,7 @@ import CenterLayout from "../Layout/CenterLayout";
 import { datoRequest } from "../Lib/datocms";
 import { GetTitleQuery, SiteLocale } from "../generated/graphql";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
   <>
