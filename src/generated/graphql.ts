@@ -1,7 +1,5 @@
-import { GraphQLClient } from 'graphql-request';
-import * as Dom from 'graphql-request/dist/types.dom';
-import { print } from 'graphql';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -475,15 +473,27 @@ export const GetTitleDocument = gql`
 }
     `;
 
-export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
-
-
-const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    GetTitle(variables?: GetTitleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTitleQuery> {
-      return withWrapper(() => client.request<GetTitleQuery>(print(GetTitleDocument), variables, requestHeaders));
-    }
-  };
-}
-export type Sdk = ReturnType<typeof getSdk>;
+/**
+ * __useGetTitleQuery__
+ *
+ * To run a query within a React component, call `useGetTitleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTitleQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTitleQuery(baseOptions?: Apollo.QueryHookOptions<GetTitleQuery, GetTitleQueryVariables>) {
+        return Apollo.useQuery<GetTitleQuery, GetTitleQueryVariables>(GetTitleDocument, baseOptions);
+      }
+export function useGetTitleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTitleQuery, GetTitleQueryVariables>) {
+          return Apollo.useLazyQuery<GetTitleQuery, GetTitleQueryVariables>(GetTitleDocument, baseOptions);
+        }
+export type GetTitleQueryHookResult = ReturnType<typeof useGetTitleQuery>;
+export type GetTitleLazyQueryHookResult = ReturnType<typeof useGetTitleLazyQuery>;
+export type GetTitleQueryResult = Apollo.QueryResult<GetTitleQuery, GetTitleQueryVariables>;
