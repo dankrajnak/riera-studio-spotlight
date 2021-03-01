@@ -1,8 +1,6 @@
 overwrite: true
-schema:
-  - https://graphql.datocms.com/:
-      headers:
-        Authorization: ${NEXT_PUBLIC_DATOCMS_API_TOKEN}
+customFetch: "codegen-prismic-fetch"
+schema: "https://riera-studio-spotlight.cdn.prismic.io/graphql"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.ts:

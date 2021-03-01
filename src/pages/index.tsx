@@ -3,8 +3,8 @@ import { GetStaticProps } from "next";
 import { Image } from "react-datocms";
 import SEO from "../Utils/SEO";
 import CenterLayout from "../Layout/CenterLayout";
-import { datoRequest } from "../Lib/datocms";
-import { GetTitleQuery, SiteLocale } from "../generated/graphql";
+import getCMS from "../Lib/cms";
+import { GetTitleQuery } from "../generated/graphql";
 
 const { Title } = Typography;
 
@@ -78,10 +78,11 @@ export default function Home({ data }: { data: GetTitleQuery }) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ preview, locale }) => {
-  const siteLocale = locale === "es" ? SiteLocale.Es : SiteLocale.En;
-  const data = await datoRequest({ preview }).GetTitle({ locale: siteLocale });
+  const cms = await getCMS();
   return {
-    props: { data },
+    props: {
+      data: await cms.GetTitle(),
+    },
     revalidate: 1,
   };
 };
