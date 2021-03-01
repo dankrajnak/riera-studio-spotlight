@@ -1,12 +1,12 @@
-import { Typography } from "antd";
 import { GetStaticProps } from "next";
-import { Image } from "react-datocms";
 import SEO from "../Utils/SEO";
 import CenterLayout from "../Layout/CenterLayout";
-import getCMS from "../Lib/cms";
-import { GetTitleQuery } from "../generated/graphql";
-
-const { Title } = Typography;
+import cms from "../Lib/cms";
+import {
+  Exhibition,
+  GetTitleQuery,
+  GetTitleDocument,
+} from "../generated/graphql";
 
 const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
   <>
@@ -22,66 +22,37 @@ const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
   </>
 );
 
+const ExhibitionComp = ({ exhibition }: { exhibition: Exhibition }) => (
+  <>
+    {exhibition.title}
+    {exhibition.main_image}
+  </>
+);
+
 export default function Home({ data }: { data: GetTitleQuery }) {
+  const activeExhibitions = data.allHomepages.edges
+    .map((edge) => edge.node.active_exhibitions)
+    .flatMap((exhibs) => exhibs.map((something) => something.exhibition));
+
+  const oldExhibitions = data.allHomepages.edges.map(
+    (edge) => edge.node.old_exhibitions
+  );
   return (
     <>
       <SEO />
-      <Plane zIndex={1}>
-        <CenterLayout>
-          <div>
-            <div
-              className="red-fade"
-              style={{
-                marginBottom: 10,
-              }}
-            >
-              <Title level={1} style={{ color: "white", marginBottom: 0 }}>
-                {data.title.title}
-              </Title>
-            </div>
-            <div className="red-fade">
-              <Typography.Text style={{ color: "white" }}>
-                {data.title.subheading}
-              </Typography.Text>
-            </div>
-          </div>
-        </CenterLayout>
-      </Plane>
-      <div style={{ width: "100%", height: "100vh" }}>
-        <Image
-          style={{ height: "100%" }}
-          pictureStyle={{ objectFit: "cover" }}
-          data={data.title.titlePicture.responsiveImage}
-          fadeInDuration={0}
-        />
-      </div>
-      <style jsx>
-        {`
-          .red-fade {
-            color: white;
-            background-color: #de483f;
-            opacity: 1;
-            animation: fadeIn ease-in 1s;
-          }
-          @keyframes fadeIn {
-            0% {
-              opacity: 0;
-            }
-            100% {
-              opacity: 1;
-            }
-          }
-        `}
-      </style>
+      {activeExhibitions.map((exhibition, index) => (
+        <ExhibitionComp exhibition={exhibition} key={index} />
+      ))}
     </>
   );
 }
 
 export const getStaticProps: GetStaticProps = async ({ preview, locale }) => {
-  const cms = await getCMS();
+  const data = (await cms.query<GetTitleQuery>({ query: GetTitleDocument }))
+    .data;
   return {
     props: {
-      data: await cms.GetTitle(),
+      data,
     },
     revalidate: 1,
   };
