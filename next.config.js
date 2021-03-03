@@ -4,6 +4,10 @@ module.exports = {
     locales: ["en", "es"],
     defaultLocale: "en",
   },
+  images: {
+    loader: "imgix",
+    path: "",
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
