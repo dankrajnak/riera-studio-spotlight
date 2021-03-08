@@ -22,9 +22,6 @@ export const getPrismicRageImage = (img: any): PrismicRageImage => {
   };
 };
 
-export type PrismicRageExhibition = Omit<
-  Omit<Exhibition, "main_image">,
-  "_meta"
-> & {
-  main_image?: PrismicRageImage;
-};
+export type RageServiceReturn<
+  T extends () => Promise<unknown>
+> = ReturnType<T> extends Promise<infer P> ? P : never;

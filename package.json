@@ -16,6 +16,7 @@
     "apollo-link-prismic": "^1.0.8",
     "codegen-prismic-fetch": "^1.0.3",
     "dayjs": "^1.10.4",
+    "framer-motion": "^3.9.1",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "less": "^4.1.1",
