@@ -125,6 +125,7 @@ export type ExhibitionConnectionEdge = {
 
 export type Homepage = _Document & _Linkable & {
   __typename?: 'Homepage';
+  images?: Maybe<Array<HomepageImages>>;
   active_exhibitions?: Maybe<Array<HomepageActive_Exhibitions>>;
   old_exhibitions?: Maybe<Array<HomepageOld_Exhibitions>>;
   _meta: Meta;
@@ -153,6 +154,11 @@ export type HomepageConnectionEdge = {
   node: Homepage;
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
+};
+
+export type HomepageImages = {
+  __typename?: 'HomepageImages';
+  image?: Maybe<Scalars['Json']>;
 };
 
 export type HomepageOld_Exhibitions = {
@@ -421,7 +427,10 @@ export type GetTitleQuery = (
       { __typename?: 'HomepageConnectionEdge' }
       & { node: (
         { __typename?: 'Homepage' }
-        & { active_exhibitions?: Maybe<Array<(
+        & { images?: Maybe<Array<(
+          { __typename?: 'HomepageImages' }
+          & Pick<HomepageImages, 'image'>
+        )>>, active_exhibitions?: Maybe<Array<(
           { __typename?: 'HomepageActive_exhibitions' }
           & { exhibition?: Maybe<(
             { __typename?: 'Exhibition' }
@@ -445,6 +454,9 @@ export const GetTitleDocument = gql`
   allHomepages {
     edges {
       node {
+        images {
+          image
+        }
         active_exhibitions {
           exhibition {
             ... on Exhibition {

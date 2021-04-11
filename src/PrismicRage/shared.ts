@@ -1,3 +1,4 @@
+import { ImageLoader } from "next/image";
 import { Exhibition } from "../generated/graphql";
 
 export type PrismicRageImage = {
@@ -9,7 +10,9 @@ export type PrismicRageImage = {
 
 export const getPrismicRageImage = (img: any): PrismicRageImage => {
   if (!img.url || typeof img.url !== "string") {
-    throw new Error("img doesn't have required img property");
+    throw new Error(
+      `img doesn't have required url property. ${JSON.stringify(img)}`
+    );
   }
   let url: string = img.url;
   const questionIndex = url.indexOf("?");
@@ -20,6 +23,29 @@ export const getPrismicRageImage = (img: any): PrismicRageImage => {
     ...img,
     url,
   };
+};
+
+export const imgixLoader: ImageLoader = ({ src, width, quality }) => {
+  // Demo: https://static.imgix.net/daisy.png?format=auto&fit=max&w=300
+  const params: Record<string, string> = {
+    auto: "format",
+    fit: "max",
+    width: width?.toString(),
+  };
+
+  if (quality) {
+    params.q = quality.toString();
+  }
+  const url = new URL(src);
+  const passedParams = url.searchParams;
+
+  // Override all default params.
+  for (const [key, val] of passedParams.entries()) {
+    params[key] = val;
+  }
+  return `${url.protocol}//${url.host}${url.pathname}?${new URLSearchParams(
+    params
+  ).toString()}`;
 };
 
 export type RageServiceReturn<

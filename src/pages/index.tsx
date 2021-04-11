@@ -3,13 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { Typography } from "antd";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import SEO from "../Utils/SEO";
 import {
   getPrismicRageImage,
+  imgixLoader,
   PrismicRageImage,
   RageServiceReturn,
 } from "../PrismicRage/shared";
 import indexQuery from "../PrismicRage/indexQuery";
+import CenterLayout from "../Layout/CenterLayout";
 
 const { Title, Text } = Typography;
 
@@ -106,16 +109,66 @@ export default function Home({
   data: RageServiceReturn<typeof indexQuery>;
 }) {
   const activeExhibitions = data.activeExhibitions;
+  const [imageIndex, setImageIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((i) => (i + 1) % data.images.length);
+    }, 700);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [data.images.length]);
 
   return (
     <>
       <SEO />
+      <CenterLayout height="100vh">
+        <div
+          style={{
+            width: "100vw",
+            justifyContent: "space-around",
+            alignItems: "center",
+            display: "flex",
+          }}
+        >
+          <Title level={1}>Riera Studios</Title>
+          <div
+            style={{
+              width: 600,
+              height: 600,
+              position: "relative",
+              borderRadius: 5,
+              overflow: "hidden",
+              border: "solid 1px black",
+            }}
+          >
+            {data.images.map((image, imIndex) => (
+              <div
+                key={imIndex}
+                className={`header-image header-image-${imIndex}`}
+              >
+                <Image
+                  src={image.url}
+                  objectFit="cover"
+                  width={600}
+                  height={600}
+                  loader={imgixLoader}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </CenterLayout>
+      <Plane zIndex={2}>
+        <CenterLayout></CenterLayout>
+      </Plane>
+      {/* <div style={{ height: "100vh" }} /> */}
       <div className="container">
         {activeExhibitions.map(
           (exhibition, index) =>
             // This is included here for type reasons.
             exhibition.__typename === "Exhibition" && (
-              <div className="exhibition-container">
+              <div className="exhibition-container" key={index}>
                 <ExhibitionComp
                   image={getPrismicRageImage(exhibition.main_image)}
                   title={exhibition.title}
@@ -137,6 +190,20 @@ export default function Home({
           margin-bottom: 50px;
         }
       `}</style>
+      <style jsx global>
+        {`
+          .header-image {
+            position: absolute;
+            margin: 10px;
+          }
+          .header-image:not(.header-image-${imageIndex}) {
+            z-index: -1;
+          }
+          .header-image-${imageIndex} {
+            z-index: 1;
+          }
+        `}
+      </style>
     </>
   );
 }
