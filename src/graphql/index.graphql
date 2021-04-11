@@ -2,6 +2,9 @@ query GetTitle {
   allHomepages {
     edges {
       node {
+        images {
+          image
+        }
         active_exhibitions {
           exhibition {
             ... on Exhibition {
