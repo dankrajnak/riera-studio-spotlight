@@ -65,6 +65,7 @@ const ExhibitionComp = ({
               className="image"
               layout="fill"
               objectFit="cover"
+              priority
             />
           </div>
         </Plane>
