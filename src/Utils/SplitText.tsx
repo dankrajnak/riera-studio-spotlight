@@ -13,6 +13,7 @@ const SplitText = ({ children, ...rest }: any) => {
           <motion.h1
             {...rest}
             style={{
+              margin: 0,
               display: "inline-block",
               willChange: "transform",
             }}
