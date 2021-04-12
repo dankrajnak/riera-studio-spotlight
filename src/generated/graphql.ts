@@ -28,6 +28,7 @@ export type Exhibition = _Document & _Linkable & {
   title?: Maybe<Scalars['String']>;
   subtitle?: Maybe<Scalars['Json']>;
   main_image?: Maybe<Scalars['Json']>;
+  secondary_image?: Maybe<Scalars['Json']>;
   start_date?: Maybe<Scalars['Date']>;
   end_date?: Maybe<Scalars['Date']>;
   body?: Maybe<Array<ExhibitionBody>>;
@@ -434,13 +435,13 @@ export type GetTitleQuery = (
           { __typename?: 'HomepageActive_exhibitions' }
           & { exhibition?: Maybe<(
             { __typename?: 'Exhibition' }
-            & Pick<Exhibition, 'title' | 'subtitle' | 'main_image' | 'start_date' | 'end_date'>
+            & Pick<Exhibition, 'title' | 'subtitle' | 'main_image' | 'secondary_image' | 'start_date' | 'end_date'>
           ) | { __typename?: 'Homepage' } | { __typename?: '_ExternalLink' } | { __typename?: '_FileLink' } | { __typename?: '_ImageLink' }> }
         )>>, old_exhibitions?: Maybe<Array<(
           { __typename?: 'HomepageOld_exhibitions' }
           & { exhibition?: Maybe<(
             { __typename?: 'Exhibition' }
-            & Pick<Exhibition, 'title' | 'subtitle' | 'main_image' | 'start_date' | 'end_date'>
+            & Pick<Exhibition, 'title' | 'subtitle' | 'main_image' | 'secondary_image' | 'start_date' | 'end_date'>
           ) | { __typename?: 'Homepage' } | { __typename?: '_ExternalLink' } | { __typename?: '_FileLink' } | { __typename?: '_ImageLink' }> }
         )>> }
       ) }
@@ -463,6 +464,7 @@ export const GetTitleDocument = gql`
               title
               subtitle
               main_image
+              secondary_image
               start_date
               end_date
             }
@@ -474,6 +476,7 @@ export const GetTitleDocument = gql`
               title
               subtitle
               main_image
+              secondary_image
               start_date
               end_date
             }

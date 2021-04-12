@@ -2,8 +2,8 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Typography } from "antd";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import SEO from "../Utils/SEO";
 import {
   getPrismicRageImage,
@@ -13,6 +13,7 @@ import {
 } from "../PrismicRage/shared";
 import indexQuery from "../PrismicRage/indexQuery";
 import CenterLayout from "../Layout/CenterLayout";
+import SplitText from "../Utils/SplitText";
 
 const { Title, Text } = Typography;
 
@@ -21,10 +22,12 @@ const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
     <div>{children}</div>
     <style jsx>
       {`
-        z-index: ${zIndex};
-        position: absolute;
-        width: 100%;
-        height: 100%;
+        div {
+          z-index: ${zIndex};
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
       `}
     </style>
   </>
@@ -34,32 +37,93 @@ const ExhibitionComp = ({
   title,
   image,
   subtitle,
+  secondaryImage,
   start,
   end,
 }: {
   title: string;
   image: PrismicRageImage;
+  secondaryImage: string;
   subtitle?: string | null;
   start?: Date | null;
   end?: Date | null;
 }) => (
   <>
     <Link href="/exhibition">
-      <motion.div layout>
-        <motion.div layoutId="excard">
-          <div className="card">
-            <div className="image-container">
-              <Image
-                src={image.url}
-                className="image"
-                layout="fill"
-                objectFit="cover"
-              />
+      <motion.div
+        initial={{ opacity: 0.8 }}
+        className="card"
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <Plane>
+          <div className="image-container">
+            <Image
+              loader={imgixLoader}
+              src={image.url}
+              className="image"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+        </Plane>
+        <Plane zIndex={20}>
+          <CenterLayout>
+            <div className="secondary-image">
+              {/* <motion.div
+                initial={{
+                  opacity: 0,
+                  transformPerspective: "75rem",
+                  rotateY: "18deg",
+                }}
+                animate={{
+                  opacity: 1,
+                  transformPerspective: "75rem",
+                  rotateY: "0deg",
+                }}
+                transition={{ duration: 1.5 }}
+              >
+                <Image
+                  loader={imgixLoader}
+                  src={secondaryImage}
+                  className="image"
+                  width={500}
+                  height={600}
+                  objectFit="cover"
+                />
+              </motion.div> */}
             </div>
+          </CenterLayout>
+        </Plane>
+        <Plane zIndex={2000}>
+          <CenterLayout>
             <div className="text-container">
-              <Title level={2}>{title}</Title>
+              <SplitText
+                className="title"
+                initial={{ y: "100%" }}
+                animate="visible"
+                transition={{
+                  ease: "anticipate",
+                  duration: 5,
+                  repeat: Infinity,
+                }}
+                variants={{
+                  visible: (i: number) => ({
+                    y: 0,
+                    transition: {
+                      delay: i * 0.2 + 0.5,
+                      ease: "easeOut",
+                      duration: 1.5,
+                      // repeat: Infinity,
+                    },
+                  }),
+                }}
+              >
+                {title}
+              </SplitText>
               {subtitle && <Text>{subtitle}</Text>}
-              {(start || end) && (
+              {/* {(start || end) && (
                 <Text>
                   {start &&
                     Intl.DateTimeFormat("en-US", {
@@ -72,28 +136,33 @@ const ExhibitionComp = ({
                       year: "numeric",
                     }).format(end)}{" "}
                 </Text>
-              )}
+              )} */}
             </div>
-          </div>
-        </motion.div>
+          </CenterLayout>
+        </Plane>
       </motion.div>
     </Link>
-    <style jsx>{`
-      .image {
-        filter: "grayscale(100%)";
+    <style jsx global>{`
+      .title {
+        font-weight: 200;
+        font-size: 20vh;
+        font-family: "EB Garamond";
+        color: white;
+        margin-bottom: 0;
       }
+    `}</style>
+    <style jsx>{`
       .image-container {
         position: relative;
-        height: 500px;
+        height: 100%;
       }
-      .text-container {
-        padding: 30px;
+      .secondary-image {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+          0 10px 10px rgba(0, 0, 0, 0.22);
       }
+
       .card {
-        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07),
-          0 6.7px 5.3px rgba(0, 0, 0, 0.05), 0 12.5px 10px rgba(0, 0, 0, 0.042),
-          0 22.3px 17.9px rgba(0, 0, 0, 0.035),
-          0 41.8px 33.4px rgba(0, 0, 0, 0.028), 0 100px 80px rgba(0, 0, 0, 0.02);
+        height: 100vh;
       }
 
       .card:hover {
@@ -103,104 +172,107 @@ const ExhibitionComp = ({
   </>
 );
 
+const SPOTLIGHT_ANIMATION_DURATION = 1.5;
+
 export default function Home({
   data,
 }: {
   data: RageServiceReturn<typeof indexQuery>;
 }) {
   const activeExhibitions = data.activeExhibitions;
-  const [imageIndex, setImageIndex] = useState(0);
+  const { scrollYProgress } = useViewportScroll();
+
+  const [spotlightOpen, setSpotlightOpen] = useState(false);
+  const [homePageInFront, setHomePageInFront] = useState(true);
+
+  const timeout = useRef<NodeJS.Timeout>();
   useEffect(() => {
-    const interval = setInterval(() => {
-      setImageIndex((i) => (i + 1) % data.images.length);
-    }, 700);
+    scrollYProgress.onChange(() => {
+      clearTimeout(timeout.current);
+      if (scrollYProgress.get() > 0) {
+        setHomePageInFront(false);
+        setSpotlightOpen(true);
+      } else {
+        timeout.current = setTimeout(() => {
+          setHomePageInFront(true);
+        }, SPOTLIGHT_ANIMATION_DURATION * 1000);
+        setSpotlightOpen(false);
+      }
+    });
     return () => {
-      clearInterval(interval);
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
     };
-  }, [data.images.length]);
+  }, [scrollYProgress]);
 
   return (
     <>
       <SEO />
-      <CenterLayout height="100vh">
-        <div
-          style={{
-            width: "100vw",
-            justifyContent: "space-around",
-            alignItems: "center",
-            display: "flex",
-          }}
-        >
-          <Title level={1}>Riera Studios</Title>
-          <div
-            style={{
-              width: 600,
-              height: 600,
-              position: "relative",
-              borderRadius: 5,
-              overflow: "hidden",
-              border: "solid 1px black",
-            }}
-          >
-            {data.images.map((image, imIndex) => (
-              <div
-                key={imIndex}
-                className={`header-image header-image-${imIndex}`}
-              >
-                <Image
-                  src={image.url}
-                  objectFit="cover"
-                  width={600}
-                  height={600}
-                  loader={imgixLoader}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </CenterLayout>
-      <Plane zIndex={2}>
-        <CenterLayout></CenterLayout>
-      </Plane>
-      {/* <div style={{ height: "100vh" }} /> */}
       <div className="container">
-        {activeExhibitions.map(
-          (exhibition, index) =>
-            // This is included here for type reasons.
-            exhibition.__typename === "Exhibition" && (
-              <div className="exhibition-container" key={index}>
-                <ExhibitionComp
-                  image={getPrismicRageImage(exhibition.main_image)}
-                  title={exhibition.title}
-                  start={
-                    exhibition.start_date && new Date(exhibition.start_date)
-                  }
-                  end={exhibition.end_date && new Date(exhibition.end_date)}
-                  key={index}
-                />
-              </div>
-            )
-        )}
+        <div className="home-holder">
+          <Plane>
+            <CenterLayout>
+              <h3 style={{ marginBottom: 0 }}>RIERA STUDIO SPOTLIGHT</h3>
+            </CenterLayout>
+          </Plane>
+          <Plane zIndex={homePageInFront ? -1 : 1000}>
+            <div
+              className={`image-container ${spotlightOpen ? "all-of-me" : ""}`}
+            >
+              <AnimatePresence>
+                {spotlightOpen &&
+                  activeExhibitions.map(
+                    (exhibition, index) =>
+                      // This is included here for type reasons.
+                      exhibition.__typename === "Exhibition" && (
+                        <div className="exhibition-container" key={index}>
+                          <ExhibitionComp
+                            image={getPrismicRageImage(exhibition.main_image)}
+                            title={exhibition.title}
+                            secondaryImage={
+                              getPrismicRageImage(exhibition.secondary_image)
+                                .url
+                            }
+                            start={
+                              exhibition.start_date &&
+                              new Date(exhibition.start_date)
+                            }
+                            end={
+                              exhibition.end_date &&
+                              new Date(exhibition.end_date)
+                            }
+                            key={index}
+                          />
+                        </div>
+                      )
+                  )}
+              </AnimatePresence>
+            </div>
+          </Plane>
+        </div>
       </div>
-      <style jsx>{`
-        .container {
-          padding: 80px 50px;
-        }
-        .exhibition-container {
-          margin-bottom: 50px;
-        }
-      `}</style>
-      <style jsx global>
+      <style jsx>
         {`
-          .header-image {
-            position: absolute;
-            margin: 10px;
+          .container {
+            height: calc(100vh + 10px);
           }
-          .header-image:not(.header-image-${imageIndex}) {
-            z-index: -1;
+          .home-holder {
+            height: 100%;
+            width: 100%;
+            position: fixed;
           }
-          .header-image-${imageIndex} {
-            z-index: 1;
+          .image-container {
+            position: relative;
+            height: 100%;
+            transition: clip-path 1.5s ease;
+            clip-path: circle(0% at center);
+          }
+          .all-of-me {
+            clip-path: circle(100% at center);
+          }
+          svg {
+            position: fixed;
           }
         `}
       </style>
