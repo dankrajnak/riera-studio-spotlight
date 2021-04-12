@@ -11,6 +11,7 @@ query GetTitle {
               title
               subtitle
               main_image
+              secondary_image
               start_date
               end_date
             }
@@ -22,6 +23,7 @@ query GetTitle {
               title
               subtitle
               main_image
+              secondary_image
               start_date
               end_date
             }

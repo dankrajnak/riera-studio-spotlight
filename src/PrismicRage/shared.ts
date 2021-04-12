@@ -1,5 +1,4 @@
 import { ImageLoader } from "next/image";
-import { Exhibition } from "../generated/graphql";
 
 export type PrismicRageImage = {
   alt: string | null;
@@ -8,6 +7,7 @@ export type PrismicRageImage = {
   url: string;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getPrismicRageImage = (img: any): PrismicRageImage => {
   if (!img.url || typeof img.url !== "string") {
     throw new Error(
