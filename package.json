@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "styles": "lessc --js --include-path=node_modules src/Styles/globals.less src/Styles/dist.css",
+    "type-check": "tsc --noEmit --skipLibCheck",
     "schema": "graphql-codegen --config codegen.yml -r dotenv/config --watch"
   },
   "dependencies": {
