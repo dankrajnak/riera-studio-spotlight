@@ -287,7 +287,7 @@ const Spotlights = ({
   maxHeight,
   minWidth,
   maxWidth,
-  minRadius = 40,
+  minRadius = 200,
   maxRadius = 600,
 }: {
   images: string[];
@@ -354,8 +354,6 @@ const Spotlights = ({
       }
     };
   }, [alive, initialize, step]);
-
-  console.log(imgX, imgY, imgR);
 
   return (
     <>
