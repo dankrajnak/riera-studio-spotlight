@@ -163,7 +163,7 @@ export default function Home({
                   </CenterLayout>
                 </Plane>
                 <Plane>
-                  <div className="scroll-dupe">
+                  <div className="scroll-down">
                     <Chevron />
                   </div>
                 </Plane>
@@ -178,6 +178,9 @@ export default function Home({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
+                <div className="scroll-up">
+                  <Chevron up />
+                </div>
                 <ExhibitionComp
                   title={exhibitionShowing.title}
                   start={
@@ -219,11 +222,20 @@ export default function Home({
             display: none;
           }
 
-          .scroll-dupe {
+          .scroll-down,
+          .scroll-up {
             position: absolute;
-            bottom: 20px;
+            z-index: 3000;
             width: 100%;
             text-align: center;
+          }
+
+          .scroll-down {
+            bottom: 20px;
+          }
+
+          .scroll-up {
+            top: 20px;
           }
 
           .home-holder {
