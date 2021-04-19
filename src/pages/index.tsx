@@ -95,7 +95,7 @@ const ExhibitionComp = ({
         font-family: "EB Garamond";
         color: white;
         margin-bottom: 0;
-        border-bottom: 1.5px solid;
+        border-bottom: 2px solid;
         border-color: rgba(18, 18, 18, 0);
         transition: border-color ease 0.5s;
       }
