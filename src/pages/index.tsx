@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useMouse, useWindowSize } from "react-use";
 import SEO from "../Utils/SEO";
 import { getPrismicRageImage, RageServiceReturn } from "../PrismicRage/shared";
 import indexQuery from "../PrismicRage/indexQuery";
@@ -62,7 +63,7 @@ const ExhibitionComp = ({
                   visible: (i: number) => ({
                     y: 0,
                     transition: {
-                      delay: i * 0.2 + 0.5,
+                      delay: i * 0.2,
                       ease: "easeOut",
                       duration: 1.5,
                     },
@@ -157,7 +158,7 @@ export default function Home({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <Plane>
+                <Plane zIndex={5000}>
                   <CenterLayout>
                     <h3 style={{ marginBottom: 0 }}>RIERA STUDIO SPOTLIGHT</h3>
                   </CenterLayout>
@@ -201,11 +202,6 @@ export default function Home({
               (exhibition) => getPrismicRageImage(exhibition.main_image).url
             )}
             activeImage={pageNumber - 1}
-            minWidth={500}
-            maxWidth={1000}
-            minHeight={0}
-            maxHeight={688}
-            alive={pageNumber > 0}
           />
         </div>
       </div>
@@ -281,7 +277,6 @@ const ImageSpotlight = ({
         position: fixed;
         height: 100%;
         width: 100%;
-        transition: clip-path 1.5s ease;
         clip-path: circle(
           ${imgR || 0}px at ${imgX ? `${imgX}px` : "center"}
             ${imgY ? `${imgY}px` : "center"}
@@ -294,95 +289,42 @@ const ImageSpotlight = ({
 const Spotlights = ({
   images,
   activeImage,
-  alive,
-  minHeight,
-  maxHeight,
-  minWidth,
-  maxWidth,
-  minRadius = 200,
-  maxRadius = 600,
 }: {
   images: string[];
   activeImage: number;
-  minHeight: number;
-  maxHeight: number;
-  minWidth: number;
-  maxWidth: number;
-  minRadius?: number;
-  maxRadius?: number;
-  alive: boolean;
 }) => {
-  const [imgX, setImgX] = useState(null);
-  const [imgY, setImgY] = useState(null);
-  const [imgR, setImgR] = useState(null);
-  const animateInterval = useRef<NodeJS.Timeout>();
-
-  const randomInBounds = (min: number, max: number) =>
-    Math.round(Math.random() * (max - min) + min);
-
-  const initialize = useCallback(() => {
-    setImgX(randomInBounds(minWidth, maxWidth));
-    setImgY(randomInBounds(minHeight, maxHeight));
-    setImgR(randomInBounds(minRadius, maxRadius));
-  }, [maxHeight, maxRadius, maxWidth, minHeight, minRadius, minWidth]);
-
-  const step = useCallback(() => {
-    const stepInBounds = (
-      num: number,
-      min: number,
-      max: number,
-      minStep = -50,
-      maxStep = 50
-    ) => {
-      const step = randomInBounds(minStep, maxStep);
-      const newNum = num + step;
-      if (newNum < min) {
-        return min;
-      } else if (newNum > max) {
-        return max;
-      }
-      return newNum;
-    };
-
-    setImgX((x) => stepInBounds(x, minWidth, maxWidth, -200, 200));
-    setImgY((y) => stepInBounds(y, minHeight, maxHeight, -200, 200));
-    setImgR((r) => stepInBounds(r, minRadius, maxRadius));
-  }, [maxHeight, maxRadius, maxWidth, minHeight, minRadius, minWidth]);
-
-  useEffect(() => {
-    if (!alive) {
-      setImgX(null);
-      setImgY(null);
-      setImgR(null);
-    } else {
-      initialize();
-      animateInterval.current = setInterval(() => {
-        step();
-      }, 2000);
-    }
-    return () => {
-      if (animateInterval.current) {
-        clearInterval(animateInterval.current);
-      }
-    };
-  }, [alive, initialize, step]);
+  const ref = useRef();
+  const { docX, docY } = useMouse(ref);
+  const { width } = useWindowSize();
 
   return (
     <>
       {images.map((image, index) => (
-        <div
-          style={{ display: index === activeImage ? undefined : "none" }}
+        <motion.div
+          style={{
+            display: index === activeImage ? undefined : "none",
+          }}
+          animate={index === activeImage ? "visible" : "hidden"}
+          variants={{
+            visible: {
+              opacity: 1,
+              transition: { duration: 2, delay: 1.5, ease: "easeIn" },
+            },
+            hidden: { opacity: 0 },
+          }}
           key={index}
         >
-          <ImageSpotlight
-            src={image}
-            imgX={imgX}
-            imgY={imgY}
-            imgR={imgR}
-            zIndex={1000}
-            priority={index === 0}
-          ></ImageSpotlight>
-        </div>
+          <div ref={ref}>
+            <ImageSpotlight
+              src={image}
+              imgX={docX}
+              imgY={docY}
+              imgR={(1 - docX / width) * 600 + 100}
+              zIndex={1000}
+              priority={index === 0}
+            ></ImageSpotlight>
+          </div>
+        </motion.div>
       ))}
     </>
   );
