@@ -2,7 +2,7 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useMouse, useWindowSize } from "react-use";
 import SEO from "../Utils/SEO";
 import { getPrismicRageImage, RageServiceReturn } from "../PrismicRage/shared";
@@ -10,6 +10,7 @@ import indexQuery from "../PrismicRage/indexQuery";
 import CenterLayout from "../Layout/CenterLayout";
 import SplitText from "../Utils/SplitText";
 import Chevron from "../Utils/Chevron";
+import throttle from "../Utils/throttle";
 
 const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
   <>
@@ -51,21 +52,26 @@ const ExhibitionComp = ({
           <Link href="/exhibition">
             <div className="text-holder">
               <SplitText
+                key="heading"
                 className="title"
-                initial={{ y: "100%" }}
+                initial="hidden"
                 animate="visible"
-                transition={{
-                  ease: "anticipate",
-                  duration: 5,
-                  repeat: Infinity,
-                }}
+                exit="hidden"
                 variants={{
                   visible: (i: number) => ({
                     y: 0,
                     transition: {
                       delay: i * 0.2,
                       ease: "easeOut",
-                      duration: 1.5,
+                      duration: 1,
+                    },
+                  }),
+                  hidden: (i: number) => ({
+                    y: "100%",
+                    transition: {
+                      delay: i * 0.1,
+                      ease: "easeOut",
+                      duration: 0.8,
                     },
                   }),
                 }}
@@ -135,15 +141,22 @@ export default function Home({
   }, [activeExhibitions, pageNumber]);
 
   useEffect(() => {
-    scrollYProgress.onChange(() => {
-      if (scrollYProgress.get() > 0) {
-        setPageNumber(1);
-      } else {
-        setPageNumber(0);
-      }
-    });
-    return () => {};
-  }, [scrollYProgress]);
+    scrollYProgress.onChange(
+      throttle(() => {
+        console.log("scroll", scrollYProgress.get());
+        if (scrollYProgress.get() > 0) {
+          setPageNumber((p) => Math.min(p + 1, activeExhibitions.length));
+        } else {
+          setPageNumber((p) => Math.max(p - 1, 0));
+        }
+        window.scrollBy(0, -100);
+        window.scrollBy(0, 5);
+      }, 2000)
+    );
+    return () => {
+      scrollYProgress.clearListeners();
+    };
+  }, [activeExhibitions.length, scrollYProgress]);
 
   return (
     <>
@@ -151,10 +164,11 @@ export default function Home({
       <div className="container">
         <div className="home-holder">
           <AnimatePresence>
-            {pageNumber === 0 && (
+            {pageNumber === 0 ? (
               <motion.div
+                key="start"
                 initial={{ opacity: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                transition={{ duration: 0.9, ease: "easeInOut" }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
@@ -169,33 +183,26 @@ export default function Home({
                   </div>
                 </Plane>
               </motion.div>
+            ) : (
+              <ExhibitionComp
+                key={"thing" + pageNumber}
+                title={exhibitionShowing.title}
+                start={
+                  exhibitionShowing.start_date &&
+                  new Date(exhibitionShowing.start_date)
+                }
+                end={
+                  exhibitionShowing.end_date &&
+                  new Date(exhibitionShowing.end_date)
+                }
+              />
             )}
           </AnimatePresence>
-          <AnimatePresence>
-            {exhibitionShowing && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <div className="scroll-up">
-                  <Chevron up />
-                </div>
-                <ExhibitionComp
-                  title={exhibitionShowing.title}
-                  start={
-                    exhibitionShowing.start_date &&
-                    new Date(exhibitionShowing.start_date)
-                  }
-                  end={
-                    exhibitionShowing.end_date &&
-                    new Date(exhibitionShowing.end_date)
-                  }
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {exhibitionShowing && (
+            <div className="scroll-up">
+              <Chevron up />
+            </div>
+          )}
 
           <Spotlights
             images={activeExhibitions.map(
@@ -277,6 +284,7 @@ const ImageSpotlight = ({
         position: fixed;
         height: 100%;
         width: 100%;
+        background: none;
         clip-path: circle(
           ${imgR || 0}px at ${imgX ? `${imgX}px` : "center"}
             ${imgY ? `${imgY}px` : "center"}
@@ -293,22 +301,20 @@ const Spotlights = ({
   images: string[];
   activeImage: number;
 }) => {
-  const ref = useRef();
+  const ref = useRef(null);
   const { docX, docY } = useMouse(ref);
   const { width } = useWindowSize();
 
   return (
-    <>
+    <AnimatePresence>
       {images.map((image, index) => (
         <motion.div
-          style={{
-            display: index === activeImage ? undefined : "none",
-          }}
           animate={index === activeImage ? "visible" : "hidden"}
+          initial="hidden"
           variants={{
             visible: {
               opacity: 1,
-              transition: { duration: 2, delay: 1.5, ease: "easeIn" },
+              transition: { duration: 1, delay: 0.75, ease: "easeIn" },
             },
             hidden: { opacity: 0 },
           }}
@@ -326,7 +332,7 @@ const Spotlights = ({
           </div>
         </motion.div>
       ))}
-    </>
+    </AnimatePresence>
   );
 };
 

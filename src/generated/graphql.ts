@@ -126,9 +126,7 @@ export type ExhibitionConnectionEdge = {
 
 export type Homepage = _Document & _Linkable & {
   __typename?: 'Homepage';
-  images?: Maybe<Array<HomepageImages>>;
   active_exhibitions?: Maybe<Array<HomepageActive_Exhibitions>>;
-  old_exhibitions?: Maybe<Array<HomepageOld_Exhibitions>>;
   _meta: Meta;
   _linkType?: Maybe<Scalars['String']>;
 };
@@ -155,16 +153,6 @@ export type HomepageConnectionEdge = {
   node: Homepage;
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
-};
-
-export type HomepageImages = {
-  __typename?: 'HomepageImages';
-  image?: Maybe<Scalars['Json']>;
-};
-
-export type HomepageOld_Exhibitions = {
-  __typename?: 'HomepageOld_exhibitions';
-  exhibition?: Maybe<_Linkable>;
 };
 
 
@@ -428,17 +416,8 @@ export type GetTitleQuery = (
       { __typename?: 'HomepageConnectionEdge' }
       & { node: (
         { __typename?: 'Homepage' }
-        & { images?: Maybe<Array<(
-          { __typename?: 'HomepageImages' }
-          & Pick<HomepageImages, 'image'>
-        )>>, active_exhibitions?: Maybe<Array<(
+        & { active_exhibitions?: Maybe<Array<(
           { __typename?: 'HomepageActive_exhibitions' }
-          & { exhibition?: Maybe<(
-            { __typename?: 'Exhibition' }
-            & Pick<Exhibition, 'title' | 'subtitle' | 'main_image' | 'secondary_image' | 'start_date' | 'end_date'>
-          ) | { __typename?: 'Homepage' } | { __typename?: '_ExternalLink' } | { __typename?: '_FileLink' } | { __typename?: '_ImageLink' }> }
-        )>>, old_exhibitions?: Maybe<Array<(
-          { __typename?: 'HomepageOld_exhibitions' }
           & { exhibition?: Maybe<(
             { __typename?: 'Exhibition' }
             & Pick<Exhibition, 'title' | 'subtitle' | 'main_image' | 'secondary_image' | 'start_date' | 'end_date'>
@@ -455,22 +434,7 @@ export const GetTitleDocument = gql`
   allHomepages {
     edges {
       node {
-        images {
-          image
-        }
         active_exhibitions {
-          exhibition {
-            ... on Exhibition {
-              title
-              subtitle
-              main_image
-              secondary_image
-              start_date
-              end_date
-            }
-          }
-        }
-        old_exhibitions {
           exhibition {
             ... on Exhibition {
               title

@@ -11,9 +11,9 @@ const Chevron = ({ up }: { up?: boolean }) => {
       <path
         d={up ? upPath : downPath}
         stroke="#FFFFFF"
-        stroke-width=".3"
+        strokeWidth=".3"
         fill="none"
-        stroke-linejoin="miter"
+        strokeLinejoin="miter"
       />
     </svg>
   );

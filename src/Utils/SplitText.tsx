@@ -16,6 +16,7 @@ const SplitText = ({ children, ...rest }: any) => {
               margin: 0,
               display: "inline-block",
               willChange: "transform",
+              mixBlendMode: "difference",
             }}
             custom={i}
           >
