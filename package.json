@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
+    "@danielkrajnak/use-scroll-threshold": "^0.0.3",
     "@prismicio/client": "^4.0.0",
     "antd": "^4.12.3",
     "apollo-link-prismic": "^1.0.8",
