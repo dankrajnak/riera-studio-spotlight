@@ -1,16 +1,16 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMemo, useRef, useState } from "react";
 import { useMouse, useWindowSize } from "react-use";
+import { useScrollThreshold } from "@danielkrajnak/use-scroll-threshold";
 import SEO from "../Utils/SEO";
 import { getPrismicRageImage, RageServiceReturn } from "../PrismicRage/shared";
 import indexQuery from "../PrismicRage/indexQuery";
 import CenterLayout from "../Layout/CenterLayout";
 import SplitText from "../Utils/SplitText";
 import Chevron from "../Utils/Chevron";
-import throttle from "../Utils/throttle";
 
 const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
   <>
@@ -128,8 +128,6 @@ export default function Home({
     return null;
   });
 
-  const { scrollYProgress } = useViewportScroll();
-
   const [pageNumber, setPageNumber] = useState(0);
 
   const exhibitionShowing = useMemo(() => {
@@ -140,23 +138,13 @@ export default function Home({
     return null;
   }, [activeExhibitions, pageNumber]);
 
-  useEffect(() => {
-    scrollYProgress.onChange(
-      throttle(() => {
-        console.log("scroll", scrollYProgress.get());
-        if (scrollYProgress.get() > 0) {
-          setPageNumber((p) => Math.min(p + 1, activeExhibitions.length));
-        } else {
-          setPageNumber((p) => Math.max(p - 1, 0));
-        }
-        window.scrollBy(0, -100);
-        window.scrollBy(0, 5);
-      }, 2000)
-    );
-    return () => {
-      scrollYProgress.clearListeners();
-    };
-  }, [activeExhibitions.length, scrollYProgress]);
+  useScrollThreshold((delta) => {
+    if (delta > 0) {
+      setPageNumber((p) => Math.min(p + 1, activeExhibitions.length));
+    } else {
+      setPageNumber((p) => Math.max(p - 1, 0));
+    }
+  });
 
   return (
     <>
@@ -215,7 +203,7 @@ export default function Home({
       <style jsx>
         {`
           .container {
-            height: calc(100vh + 10px);
+            height: 100vh;
             /* Hide scrollbar for IE, Edge and Firefox */
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none; /* Firefox */
