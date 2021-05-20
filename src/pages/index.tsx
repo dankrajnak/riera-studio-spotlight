@@ -69,9 +69,9 @@ const ExhibitionComp = ({
                   hidden: (i: number) => ({
                     y: "100%",
                     transition: {
-                      delay: i * 0.1,
+                      delay: i * 0.2,
                       ease: "easeOut",
-                      duration: 0.8,
+                      duration: 1,
                     },
                   }),
                 }}
