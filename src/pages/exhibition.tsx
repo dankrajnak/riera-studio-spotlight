@@ -10,9 +10,7 @@ const Exhibition = () => (
           backgroundColor: "#e1e1e1",
         }}
         layoutId="excard"
-      >
-        Hey.
-      </motion.div>
+      ></motion.div>
     </motion.div>
   </>
 );
