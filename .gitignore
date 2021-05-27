@@ -39,3 +39,6 @@ yarn-error.log*
 
 # styles dist
 src/Styles/dist.css
+
+# eslint cache
+.eslintcache
