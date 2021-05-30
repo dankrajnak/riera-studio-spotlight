@@ -5,6 +5,9 @@ query GetTitle {
         active_exhibitions {
           exhibition {
             ... on Exhibition {
+              _meta {
+                uid
+              }
               title
               subtitle
               main_image

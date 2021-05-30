@@ -48,6 +48,5 @@ export const imgixLoader: ImageLoader = ({ src, width, quality }) => {
   ).toString()}`;
 };
 
-export type RageServiceReturn<
-  T extends () => Promise<unknown>
-> = ReturnType<T> extends Promise<infer P> ? P : never;
+export type RageServiceReturn<T extends (any) => Promise<unknown>> =
+  ReturnType<T> extends Promise<infer P> ? P : never;

@@ -1,0 +1,18 @@
+query GetExhibition($uid: String!) {
+  exhibition(uid: $uid, lang: "en-us") {
+    main_image
+    body {
+      ... on ExhibitionBodyText {
+        primary {
+          text
+        }
+      }
+      ... on ExhibitionBodyQuote {
+        primary {
+          text
+          author
+        }
+      }
+    }
+  }
+}

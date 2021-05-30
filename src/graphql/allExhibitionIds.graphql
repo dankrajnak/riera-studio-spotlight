@@ -1,0 +1,11 @@
+query AllExhibitionIds {
+  allExhibitions {
+    edges {
+      node {
+        _meta {
+          uid
+        }
+      }
+    }
+  }
+}

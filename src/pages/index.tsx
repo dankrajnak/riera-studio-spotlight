@@ -11,6 +11,7 @@ import indexQuery from "../PrismicRage/indexQuery";
 import CenterLayout from "../Layout/CenterLayout";
 import SplitText from "../Utils/SplitText";
 import Chevron from "../Utils/Chevron";
+import LinkHelper from "../Utils/LinkHelper";
 
 const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
   <>
@@ -31,9 +32,11 @@ const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
 const ExhibitionComp = ({
   title,
   subtitle,
+  id,
   start,
   end,
 }: {
+  id: string;
   title: string;
   subtitle?: string | null;
   start?: Date | null;
@@ -49,7 +52,7 @@ const ExhibitionComp = ({
     >
       <Plane zIndex={2000}>
         <div className="text-container">
-          <Link href="/exhibition">
+          <Link href={LinkHelper.getExhibitionLink(id)}>
             <div className="text-holder">
               <SplitText
                 key="heading"
@@ -173,6 +176,7 @@ export default function Home({
               </motion.div>
             ) : (
               <ExhibitionComp
+                id={exhibitionShowing._meta.uid}
                 key={"thing" + pageNumber}
                 title={exhibitionShowing.title}
                 start={
