@@ -85,8 +85,7 @@ export type ExhibitionBodyQuote = {
 export type ExhibitionBodyQuotePrimary = {
   __typename?: "ExhibitionBodyQuotePrimary";
   text?: Maybe<Scalars["Json"]>;
-  author?: Maybe<Scalars["Json"]>;
-  something?: Maybe<Scalars["String"]>;
+  author?: Maybe<Scalars["String"]>;
 };
 
 export type ExhibitionBodySlider = {
@@ -433,7 +432,7 @@ export type GetExhibitionQueryVariables = Exact<{
 
 export type GetExhibitionQuery = { __typename?: "Query" } & {
   exhibition?: Maybe<
-    { __typename?: "Exhibition" } & Pick<Exhibition, "main_image"> & {
+    { __typename?: "Exhibition" } & Pick<Exhibition, "main_image" | "title"> & {
         body?: Maybe<
           Array<
             | ({ __typename?: "ExhibitionBodyQuote" } & {
@@ -567,6 +566,7 @@ export const GetExhibitionDocument = gql`
   query GetExhibition($uid: String!) {
     exhibition(uid: $uid, lang: "en-us") {
       main_image
+      title
       body {
         ... on ExhibitionBodyText {
           primary {

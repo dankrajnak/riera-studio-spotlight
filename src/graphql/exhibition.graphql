@@ -1,6 +1,7 @@
 query GetExhibition($uid: String!) {
   exhibition(uid: $uid, lang: "en-us") {
     main_image
+    title
     body {
       ... on ExhibitionBodyText {
         primary {
