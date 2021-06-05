@@ -12,6 +12,7 @@ import CenterLayout from "../Layout/CenterLayout";
 import SplitText from "../Utils/SplitText";
 import Chevron from "../Utils/Chevron";
 import LinkHelper from "../Utils/LinkHelper";
+import A11y from "../Utils/A11y";
 
 const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
   <>
@@ -141,11 +142,15 @@ export default function Home({
     return null;
   }, [activeExhibitions, pageNumber]);
 
+  const incrementPage = () =>
+    setPageNumber((p) => Math.min(p + 1, activeExhibitions.length));
+  const decrementPage = () => setPageNumber((p) => Math.max(p - 1, 0));
+
   useScrollThreshold((delta) => {
     if (delta > 0) {
-      setPageNumber((p) => Math.min(p + 1, activeExhibitions.length));
+      incrementPage();
     } else {
-      setPageNumber((p) => Math.max(p - 1, 0));
+      decrementPage();
     }
   });
 
@@ -168,11 +173,6 @@ export default function Home({
                     <h3 style={{ marginBottom: 0 }}>RIERA STUDIO SPOTLIGHT</h3>
                   </CenterLayout>
                 </Plane>
-                <Plane>
-                  <div className="scroll-down">
-                    <Chevron />
-                  </div>
-                </Plane>
               </motion.div>
             ) : (
               <ExhibitionComp
@@ -190,8 +190,26 @@ export default function Home({
               />
             )}
           </AnimatePresence>
-          {exhibitionShowing && (
-            <div className="scroll-up">
+
+          {pageNumber < activeExhibitions.length && (
+            <div
+              className="scroll-down"
+              role="button"
+              aria-label="Next Page"
+              {...A11y.clickOrKeyboard(() => incrementPage())}
+              tabIndex={0}
+            >
+              <Chevron />
+            </div>
+          )}
+          {pageNumber > 0 && (
+            <div
+              className="scroll-up"
+              role="button"
+              aria-label="Previous Page"
+              {...A11y.clickOrKeyboard(() => decrementPage())}
+              tabIndex={0}
+            >
               <Chevron up />
             </div>
           )}
@@ -220,7 +238,7 @@ export default function Home({
           .scroll-down,
           .scroll-up {
             position: absolute;
-            z-index: 3000;
+            z-index: 10000;
             width: 100%;
             text-align: center;
           }
