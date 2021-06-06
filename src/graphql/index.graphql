@@ -1,4 +1,4 @@
-query GetTitle {
+query Homepage {
   allHomepages {
     edges {
       node {

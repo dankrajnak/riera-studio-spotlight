@@ -1,12 +1,13 @@
-import { GetTitleDocument, GetTitleQuery } from "../generated/graphql";
+import { HomepageQuery, HomepageDocument } from "../generated/graphql";
 import cms from "../Lib/cms";
 
-type ExhibitionType = GetTitleQuery["allHomepages"]["edges"][0]["node"]["active_exhibitions"][0]["exhibition"];
+type ExhibitionType =
+  HomepageQuery["allHomepages"]["edges"][0]["node"]["active_exhibitions"][0]["exhibition"];
 
 const indexQuery = async (): Promise<{
   activeExhibitions: ExhibitionType[];
 }> => {
-  const resp = await cms.query<GetTitleQuery>({ query: GetTitleDocument });
+  const resp = await cms.query<HomepageQuery>({ query: HomepageDocument });
   const exhibitions = resp.data.allHomepages.edges?.map((edge) => ({
     activeExhibitions: edge.node.active_exhibitions?.map(
       (someShit) => someShit.exhibition

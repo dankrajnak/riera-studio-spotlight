@@ -459,9 +459,9 @@ export type GetExhibitionQuery = { __typename?: "Query" } & {
   >;
 };
 
-export type GetTitleQueryVariables = Exact<{ [key: string]: never }>;
+export type HomepageQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetTitleQuery = { __typename?: "Query" } & {
+export type HomepageQuery = { __typename?: "Query" } & {
   allHomepages: { __typename?: "HomepageConnectionConnection" } & {
     edges?: Maybe<
       Array<
@@ -634,8 +634,8 @@ export type GetExhibitionQueryResult = Apollo.QueryResult<
   GetExhibitionQuery,
   GetExhibitionQueryVariables
 >;
-export const GetTitleDocument = gql`
-  query GetTitle {
+export const HomepageDocument = gql`
+  query Homepage {
     allHomepages {
       edges {
         node {
@@ -661,46 +661,46 @@ export const GetTitleDocument = gql`
 `;
 
 /**
- * __useGetTitleQuery__
+ * __useHomepageQuery__
  *
- * To run a query within a React component, call `useGetTitleQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useHomepageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHomepageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetTitleQuery({
+ * const { data, loading, error } = useHomepageQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetTitleQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetTitleQuery, GetTitleQueryVariables>
+export function useHomepageQuery(
+  baseOptions?: Apollo.QueryHookOptions<HomepageQuery, HomepageQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetTitleQuery, GetTitleQueryVariables>(
-    GetTitleDocument,
+  return Apollo.useQuery<HomepageQuery, HomepageQueryVariables>(
+    HomepageDocument,
     options
   );
 }
-export function useGetTitleLazyQuery(
+export function useHomepageLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    GetTitleQuery,
-    GetTitleQueryVariables
+    HomepageQuery,
+    HomepageQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetTitleQuery, GetTitleQueryVariables>(
-    GetTitleDocument,
+  return Apollo.useLazyQuery<HomepageQuery, HomepageQueryVariables>(
+    HomepageDocument,
     options
   );
 }
-export type GetTitleQueryHookResult = ReturnType<typeof useGetTitleQuery>;
-export type GetTitleLazyQueryHookResult = ReturnType<
-  typeof useGetTitleLazyQuery
+export type HomepageQueryHookResult = ReturnType<typeof useHomepageQuery>;
+export type HomepageLazyQueryHookResult = ReturnType<
+  typeof useHomepageLazyQuery
 >;
-export type GetTitleQueryResult = Apollo.QueryResult<
-  GetTitleQuery,
-  GetTitleQueryVariables
+export type HomepageQueryResult = Apollo.QueryResult<
+  HomepageQuery,
+  HomepageQueryVariables
 >;
