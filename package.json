@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
-    "@danielkrajnak/use-scroll-threshold": "^0.0.3",
+    "@danielkrajnak/use-scroll-threshold": "^0.0.8",
     "@prismicio/client": "^4.0.0",
     "antd": "^4.12.3",
     "apollo-link-prismic": "^1.0.8",
@@ -25,6 +25,7 @@
     "less": "^4.1.1",
     "next": "^10.0.6",
     "prismic-reactjs": "^1.3.3",
+    "query-string": "^7.0.0",
     "react": "17.0.1",
     "react-div-100vh": "^0.6.0",
     "react-dom": "17.0.1",

@@ -1,9 +1,8 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useMemo, useRef, useState } from "react";
-import { useMouse, useWindowSize } from "react-use";
+import { useMemo } from "react";
 import { useScrollThreshold } from "@danielkrajnak/use-scroll-threshold";
 import SEO from "../Utils/SEO";
 import { getPrismicRageImage, RageServiceReturn } from "../PrismicRage/shared";
@@ -13,22 +12,8 @@ import SplitText from "../Utils/SplitText";
 import Chevron from "../Utils/Chevron";
 import LinkHelper from "../Utils/LinkHelper";
 import A11y from "../Utils/A11y";
-
-const Plane: React.FC<{ zIndex?: number }> = ({ zIndex = 0, children }) => (
-  <>
-    <div>{children}</div>
-    <style jsx>
-      {`
-        div {
-          z-index: ${zIndex};
-          position: absolute;
-          width: 100%;
-          height: 100%;
-        }
-      `}
-    </style>
-  </>
-);
+import Plane from "../Layout/Plane";
+import Spotlights from "../Components/Spotlights";
 
 const ExhibitionComp = ({
   title,
@@ -132,7 +117,16 @@ export default function Home({
     return null;
   });
 
-  const [pageNumber, setPageNumber] = useState(0);
+  const exhibitionNames = activeExhibitions.map((ex) => ex._meta.uid);
+  const router = useRouter();
+  const { p } = router.query;
+
+  const pageNumber =
+    exhibitionNames.findIndex(
+      (name) => name === (Array.isArray(p) ? p[0] : p)
+    ) + 1;
+
+  const isLastPage = pageNumber === exhibitionNames.length;
 
   const exhibitionShowing = useMemo(() => {
     if (pageNumber > 0) {
@@ -142,17 +136,36 @@ export default function Home({
     return null;
   }, [activeExhibitions, pageNumber]);
 
-  const incrementPage = () =>
-    setPageNumber((p) => Math.min(p + 1, activeExhibitions.length));
-  const decrementPage = () => setPageNumber((p) => Math.max(p - 1, 0));
-
-  useScrollThreshold((delta) => {
-    if (delta > 0) {
-      incrementPage();
-    } else {
-      decrementPage();
+  const incrementPage = () => {
+    if (!isLastPage) {
+      LinkHelper.replaceQueryParams({ p: exhibitionNames[pageNumber] }, router);
     }
-  });
+  };
+
+  const decrementPage = () => {
+    if (pageNumber === 0) {
+      return;
+    }
+    if (pageNumber === 1) {
+      LinkHelper.replaceQueryParams({ p: null }, router);
+    }
+    LinkHelper.replaceQueryParams(
+      { p: exhibitionNames[pageNumber - 2] },
+      router
+    );
+  };
+
+  useScrollThreshold(
+    (delta) => {
+      if (delta > 0) {
+        incrementPage();
+      } else {
+        decrementPage();
+      }
+    },
+    0.5,
+    1000
+  );
 
   return (
     <>
@@ -191,7 +204,7 @@ export default function Home({
             )}
           </AnimatePresence>
 
-          {pageNumber < activeExhibitions.length && (
+          {!isLastPage && (
             <div
               className="scroll-down"
               role="button"
@@ -261,90 +274,6 @@ export default function Home({
     </>
   );
 }
-
-const ImageSpotlight = ({
-  src,
-  priority,
-  zIndex,
-  imgX,
-  imgY,
-  imgR,
-}: {
-  src: string;
-  priority?: boolean | null;
-  zIndex?: number | null;
-  imgX?: number | null;
-  imgY?: number | null;
-  imgR?: number | null;
-}) => (
-  <>
-    <Plane zIndex={zIndex}>
-      <div className="image-container">
-        <Image
-          src={src}
-          className="image"
-          layout="fill"
-          objectFit="cover"
-          priority={priority}
-        />
-      </div>
-    </Plane>
-    <style jsx>{`
-      .image-container {
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        background: none;
-        clip-path: circle(
-          ${imgR || 0}px at ${imgX ? `${imgX}px` : "center"}
-            ${imgY ? `${imgY}px` : "center"}
-        );
-      }
-    `}</style>
-  </>
-);
-
-const Spotlights = ({
-  images,
-  activeImage,
-}: {
-  images: string[];
-  activeImage: number;
-}) => {
-  const ref = useRef(null);
-  const { docX, docY } = useMouse(ref);
-  const { width } = useWindowSize();
-
-  return (
-    <AnimatePresence>
-      {images.map((image, index) => (
-        <motion.div
-          animate={index === activeImage ? "visible" : "hidden"}
-          initial="hidden"
-          variants={{
-            visible: {
-              opacity: 1,
-              transition: { duration: 1, delay: 0.75, ease: "easeIn" },
-            },
-            hidden: { opacity: 0 },
-          }}
-          key={index}
-        >
-          <div ref={ref}>
-            <ImageSpotlight
-              src={image}
-              imgX={docX}
-              imgY={docY}
-              imgR={(1 - docX / width) * 600 + 100}
-              zIndex={1000}
-              priority={index === 0}
-            ></ImageSpotlight>
-          </div>
-        </motion.div>
-      ))}
-    </AnimatePresence>
-  );
-};
 
 export const getStaticProps: GetStaticProps = async ({ preview, locale }) => ({
   props: {

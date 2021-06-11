@@ -569,17 +569,17 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
   integrity sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==
 
-"@danielkrajnak/throttle@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@danielkrajnak/throttle/-/throttle-0.0.3.tgz#b999a5cab2fc5c04206a1227567fc5aae87c8eee"
-  integrity sha512-oMYSUUySPcSvGDqjA/hPYC05yhlHd6ekGc+zS2Egul/U8ZtOg+2ub1H2BJR5Rby5a50k1w4yXMGx/JsbpKA3tg==
-
-"@danielkrajnak/use-scroll-threshold@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@danielkrajnak/use-scroll-threshold/-/use-scroll-threshold-0.0.3.tgz#f01518c3237427cd2e7bc052f06459584b79edc4"
-  integrity sha512-CXhJs6q+vQIg8wNv2mnMyhG7bFyPlDW9B+EX2CMqBsw1vecXbr2YyUB2tnbp2pWGl77eqkSwp+qvY8mbYos1TA==
+"@danielkrajnak/use-scroll-threshold@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@danielkrajnak/use-scroll-threshold/-/use-scroll-threshold-0.0.8.tgz#59f8b80923914276baa6c4556efbee1495e2d70c"
+  integrity sha512-8uxdB7HLGQ9Au9hOTDzuBbYCfoV87ntN01yQbRw2BKt9Vc2jyNEpVU8yPlRnKDUYmaY2z2OD9J15qTaV4+lGqA==
   dependencies:
-    "@danielkrajnak/throttle" "^0.0.3"
+    "@danielkrajnak/use-throttle" "^0.0.6"
+
+"@danielkrajnak/use-throttle@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@danielkrajnak/use-throttle/-/use-throttle-0.0.6.tgz#7c971f698b51728c50076a4a3641a2aeb6521fc9"
+  integrity sha512-JVxbFapCy72Zxvms5w+cMyVrtXuvjbLDe12o/UcB0SCAtxMnuTnO4h0PRrojXBxj3rvYrcvgpfY3Ky1Qx0GlDg==
 
 "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
@@ -2627,6 +2627,11 @@ decamelize@^1.2.0:
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
 
+decode-uri-component@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
+  integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
+
 decompress-response@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/decompress-response/-/decompress-response-3.3.0.tgz#80a4dd323748384bfa248083622aedec982adff3"
@@ -3282,6 +3287,11 @@ fill-range@^7.0.1:
   integrity sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
   dependencies:
     to-regex-range "^5.0.1"
+
+filter-obj@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/filter-obj/-/filter-obj-1.1.0.tgz#9b311112bc6c6127a16e016c6c5d7f19e0805c5b"
+  integrity sha1-mzERErxsYSehbgFsbF1/GeCAXFs=
 
 find-cache-dir@3.3.1:
   version "3.3.1"
@@ -5503,6 +5513,16 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+query-string@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.0.0.tgz#aaad2c8d5c6a6d0c6afada877fecbd56af79e609"
+  integrity sha512-Iy7moLybliR5ZgrK/1R3vjrXq03S13Vz4Rbm5Jg3EFq1LUmQppto0qtXz4vqZ386MSRjZgnTSZ9QC+NZOSd/XA==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    filter-obj "^1.1.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
+
 querystring-es3@0.2.1, querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -6474,6 +6494,11 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.9.tgz#8a595135def9592bda69709474f1cbeea7c2467f"
   integrity sha512-Ki212dKK4ogX+xDo4CtOZBVIwhsKBEfsEEcwmJfLQzirgc2jIWdzg40Unxz/HzEUqM1WFzVlQSMF9kZZ2HboLQ==
 
+split-on-first@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/split-on-first/-/split-on-first-1.1.0.tgz#f610afeee3b12bce1d0c30425e76398b78249a5f"
+  integrity sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw==
+
 sponge-case@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/sponge-case/-/sponge-case-1.0.1.tgz#260833b86453883d974f84854cdb63aecc5aef4c"
@@ -6580,6 +6605,11 @@ streamsearch@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-0.1.2.tgz#808b9d0e56fc273d809ba57338e929919a1a9f1a"
   integrity sha1-gIudDlb8Jz2Am6VzOOkpkZoanxo=
+
+strict-uri-encode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
+  integrity sha1-ucczDHBChi9rFC3CdLvMWGbONUY=
 
 string-argv@0.3.1:
   version "0.3.1"
