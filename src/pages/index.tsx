@@ -39,7 +39,7 @@ const ExhibitionComp = ({
       <Plane zIndex={2000}>
         <div className="text-container">
           <Link href={LinkHelper.getExhibitionLink(id)}>
-            <div className="text-holder">
+            <a className="text-holder">
               <SplitText
                 key="heading"
                 className="title"
@@ -68,7 +68,7 @@ const ExhibitionComp = ({
                 {title}
               </SplitText>
               {subtitle && <div>{subtitle}</div>}
-            </div>
+            </a>
           </Link>
         </div>
       </Plane>
