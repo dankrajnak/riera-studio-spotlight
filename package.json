@@ -29,6 +29,7 @@
     "react": "17.0.2",
     "react-div-100vh": "^0.6.0",
     "react-dom": "17.0.2",
+    "react-hamburger-menu": "^1.2.1",
     "react-use": "^17.1.1"
   },
   "devDependencies": {
@@ -41,6 +42,7 @@
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
+    "@types/react-hamburger-menu": "^0.0.3",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "babel-eslint": "^10.1.0",

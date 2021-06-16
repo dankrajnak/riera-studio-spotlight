@@ -9,28 +9,31 @@ import {
   getPrismicRageImage,
   RageServiceReturn,
 } from "../../PrismicRage/shared";
+import MenuLayout from "../../Layout/MenuLayout";
+import getMenu from "../../PrismicRage/getMenu";
 
-const Exhibition = ({
-  data,
-}: {
-  data: RageServiceReturn<typeof exhibitionQuery>;
-}) => {
-  if (!data) {
+type Props = {
+  exhibition: RageServiceReturn<typeof exhibitionQuery>;
+  menu: RageServiceReturn<typeof getMenu>;
+};
+
+const Exhibition = ({ exhibition, menu }: Props) => {
+  if (!exhibition) {
     return null;
   }
 
   return (
-    <>
+    <MenuLayout exhibitions={menu}>
       <div className="title-image">
         <Image
-          src={getPrismicRageImage(data.main_image).url}
+          src={getPrismicRageImage(exhibition.main_image).url}
           layout="fill"
           objectFit="cover"
         />
       </div>
       <div className="container">
-        <h1 className="title">{data.title}</h1>
-        <ExhibitionSliceZone slices={data.body} />
+        <h1 className="title">{exhibition.title}</h1>
+        <ExhibitionSliceZone slices={exhibition.body} />
       </div>
       <style jsx>
         {`
@@ -57,10 +60,11 @@ const Exhibition = ({
           body {
             color: #222;
             background-color: #efefef !important;
-          }
+          }import getMenu from '../../PrismicRage/menuQuery';
+
         `}
       </style>
-    </>
+    </MenuLayout>
   );
 };
 
@@ -113,7 +117,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => ({
   props: {
-    data: await exhibitionQuery(params.id),
+    exhibition: await exhibitionQuery(params.id),
+    menu: await getMenu(),
   },
   revalidate: 1,
 });

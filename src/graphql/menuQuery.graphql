@@ -1,0 +1,19 @@
+query Menu {
+  allHomepages {
+    edges {
+      node {
+        active_exhibitions {
+          exhibition {
+            ... on Exhibition {
+              _meta {
+                uid
+              }
+              title
+              main_image
+            }
+          }
+        }
+      }
+    }
+  }
+}
