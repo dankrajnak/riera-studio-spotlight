@@ -9,7 +9,6 @@ import {
   getPrismicRageImage,
   RageServiceReturn,
 } from "../../PrismicRage/shared";
-import MenuLayout from "../../Layout/MenuLayout";
 import getMenu from "../../PrismicRage/getMenu";
 
 type Props = {
@@ -23,12 +22,13 @@ const Exhibition = ({ exhibition, menu }: Props) => {
   }
 
   return (
-    <MenuLayout exhibitions={menu}>
+    <>
       <div className="title-image">
         <Image
           src={getPrismicRageImage(exhibition.main_image).url}
           layout="fill"
           objectFit="cover"
+          alt=""
         />
       </div>
       <div className="container">
@@ -64,7 +64,7 @@ const Exhibition = ({ exhibition, menu }: Props) => {
 
         `}
       </style>
-    </MenuLayout>
+    </>
   );
 };
 
@@ -118,7 +118,6 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
 }) => ({
   props: {
     exhibition: await exhibitionQuery(params.id),
-    menu: await getMenu(),
   },
   revalidate: 1,
 });

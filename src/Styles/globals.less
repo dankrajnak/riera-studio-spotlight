@@ -19,3 +19,28 @@ body {
 button:hover {
   cursor: pointer;
 }
+
+.title-link {
+  font-family: "EB Garamond";
+  color: white;
+  margin-bottom: 0;
+  border-bottom: 2px solid;
+  border-color: rgba(18, 18, 18, 0);
+  transition: border-color ease 0.5s;
+  &:hover {
+    border-color: white;
+  }
+}
+
+.title-holder:hover .title-link {
+  border-color: white;
+}
+
+.title-holder:hover, .title-link:hover {
+  cursor: pointer;
+}
+
+
+.title-holder {
+  text-decoration: none;
+}

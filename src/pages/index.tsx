@@ -19,8 +19,6 @@ const ExhibitionComp = ({
   title,
   subtitle,
   id,
-  start,
-  end,
 }: {
   id: string;
   title: string;
@@ -39,10 +37,10 @@ const ExhibitionComp = ({
       <Plane zIndex={2000}>
         <div className="text-container">
           <Link href={LinkHelper.getExhibitionLink(id)}>
-            <a className="text-holder">
+            <a className="title-holder">
               <SplitText
                 key="heading"
-                className="title"
+                className="title-link"
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
@@ -83,22 +81,9 @@ const ExhibitionComp = ({
         justify-content: center;
         align-items: center;
       }
-
-      .title {
+      .title-link {
         font-weight: 200;
         font-size: 5rem;
-        font-family: "EB Garamond";
-        color: white;
-        margin-bottom: 0;
-        border-bottom: 2px solid;
-        border-color: rgba(18, 18, 18, 0);
-        transition: border-color ease 0.5s;
-      }
-      .text-holder:hover .title {
-        border-color: white;
-      }
-      .text-holder:hover {
-        cursor: pointer;
       }
     `}</style>
   </>
