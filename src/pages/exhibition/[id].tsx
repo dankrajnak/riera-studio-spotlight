@@ -5,18 +5,13 @@ import Image from "next/image";
 import exhibitionQuery, {
   allExhibitionIdsQuery,
 } from "../../PrismicRage/exhibitionQuery";
-import {
-  getPrismicRageImage,
-  RageServiceReturn,
-} from "../../PrismicRage/shared";
-import getMenu from "../../PrismicRage/getMenu";
+import { RageServiceReturn } from "../../PrismicRage/shared";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
-  menu: RageServiceReturn<typeof getMenu>;
 };
 
-const Exhibition = ({ exhibition, menu }: Props) => {
+const Exhibition = ({ exhibition }: Props) => {
   if (!exhibition) {
     return null;
   }
@@ -25,7 +20,9 @@ const Exhibition = ({ exhibition, menu }: Props) => {
     <>
       <div className="title-image">
         <Image
-          src={getPrismicRageImage(exhibition.main_image).url}
+          src={exhibition.main_image.url}
+          placeholder="blur"
+          blurDataURL={exhibition.main_image.blurDataURL}
           layout="fill"
           objectFit="cover"
           alt=""

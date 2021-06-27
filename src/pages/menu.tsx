@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Plane from "../Layout/Plane";
-import { imgixLoader } from "../PrismicRage/shared";
+import { imgixLoader, RageServiceReturn } from "../PrismicRage/shared";
 import Colors from "../Utils/Colors";
 import LinkHelper from "../Utils/LinkHelper";
 import getMenu from "../PrismicRage/getMenu";
@@ -13,12 +13,9 @@ import {
 export const MENU_PATH = "/menu";
 
 const MenuContent: React.FC<{
-  exhibitions: { title: string; slug: string; image: string }[];
+  exhibitions: RageServiceReturn<typeof getMenu>;
 }> = ({ exhibitions }) => (
   <>
-    <div className="tab-holder">
-      <div className="tab">Exhibitions</div>
-    </div>
     <div>
       {exhibitions.map((exhibition, i) => (
         <Link href={LinkHelper.getExhibitionLink(exhibition.slug)} key={i}>
@@ -34,10 +31,12 @@ const MenuContent: React.FC<{
             <Plane>
               <div className="image-holder">
                 <Image
-                  src={exhibition.image + "?con=60&sat=-80&exp=-5&vib=50"}
+                  src={exhibition.image.url + "?con=60&sat=-80&exp=-5&vib=50"}
                   layout="fill"
                   objectFit="cover"
                   loader={imgixLoader}
+                  placeholder="blur"
+                  blurDataURL={exhibition.image.blurDataURL}
                   alt=""
                 />
               </div>
@@ -75,18 +74,6 @@ const MenuContent: React.FC<{
       .image-holder {
         opacity: 0.5;
       }
-
-      .tab-holder {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 40px;
-      }
-      .tab {
-        color: ${Colors.white};
-        font-family: "EB Garamond";
-      }
     `}</style>
   </>
 );
@@ -94,7 +81,7 @@ const MenuContent: React.FC<{
 const Menu = ({
   exhibitions,
 }: {
-  exhibitions: { title: string; slug: string; image: string }[];
+  exhibitions: RageServiceReturn<typeof getMenu>;
 }) => {
   return (
     <>
@@ -123,7 +110,7 @@ const Menu = ({
 };
 
 export const getStaticProps = async () => ({
-  props: { exhibitions: await getMenu(), dontShowMenu: true },
+  props: { exhibitions: await getMenu() },
   revalidate: 1,
 });
 
