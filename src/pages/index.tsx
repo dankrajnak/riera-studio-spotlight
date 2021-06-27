@@ -14,6 +14,7 @@ import LinkHelper from "../Utils/LinkHelper";
 import A11y from "../Utils/A11y";
 import Plane from "../Layout/Plane";
 import Spotlights from "../Components/Spotlights";
+import { withDontShowMenuButton } from "./_app";
 
 const ExhibitionComp = ({
   title,
@@ -261,8 +262,8 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async ({ preview, locale }) => ({
-  props: {
+  props: withDontShowMenuButton({
     data: await indexQuery(),
-  },
+  }),
   revalidate: 1,
 });

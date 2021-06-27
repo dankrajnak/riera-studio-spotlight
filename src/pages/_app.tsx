@@ -5,13 +5,27 @@ import React from "react";
 import MenuLayout from "../Layout/MenuLayout";
 import { MENU_PATH } from "./menu";
 
+export function withDontShowMenuButton<T>(
+  props: T
+): T | { dontShowMenu: true } {
+  return {
+    ...props,
+    dontShowMenuButton: true,
+  };
+}
+
 function MyApp({ Component, pageProps, router }: AppProps) {
   const menuIsOpen = router.pathname === MENU_PATH;
+  const { dontShowMenuButton, ...otherPageProps } = pageProps;
   return (
     <AnimateSharedLayout>
-      <MenuLayout menuIsOpen={menuIsOpen}>
-        <Component {...pageProps} />
-      </MenuLayout>
+      {dontShowMenuButton ? (
+        <Component {...otherPageProps} />
+      ) : (
+        <MenuLayout menuIsOpen={menuIsOpen}>
+          <Component {...otherPageProps} />
+        </MenuLayout>
+      )}
     </AnimateSharedLayout>
   );
 }
