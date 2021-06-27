@@ -21,8 +21,6 @@ const Exhibition = ({ exhibition }: Props) => {
       <div className="title-image">
         <Image
           src={exhibition.main_image.url}
-          placeholder="blur"
-          blurDataURL={exhibition.main_image.blurDataURL}
           layout="fill"
           objectFit="cover"
           alt=""
