@@ -499,6 +499,41 @@ export type HomepageQuery = { __typename?: "Query" } & {
   };
 };
 
+export type MenuQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MenuQuery = { __typename?: "Query" } & {
+  allHomepages: { __typename?: "HomepageConnectionConnection" } & {
+    edges?: Maybe<
+      Array<
+        Maybe<
+          { __typename?: "HomepageConnectionEdge" } & {
+            node: { __typename?: "Homepage" } & {
+              active_exhibitions?: Maybe<
+                Array<
+                  { __typename?: "HomepageActive_exhibitions" } & {
+                    exhibition?: Maybe<
+                      | ({ __typename?: "Exhibition" } & Pick<
+                          Exhibition,
+                          "title" | "main_image"
+                        > & {
+                            _meta: { __typename?: "Meta" } & Pick<Meta, "uid">;
+                          })
+                      | { __typename?: "Homepage" }
+                      | { __typename?: "_ExternalLink" }
+                      | { __typename?: "_FileLink" }
+                      | { __typename?: "_ImageLink" }
+                    >;
+                  }
+                >
+              >;
+            };
+          }
+        >
+      >
+    >;
+  };
+};
+
 export const AllExhibitionIdsDocument = gql`
   query AllExhibitionIds {
     allExhibitions {
@@ -704,3 +739,58 @@ export type HomepageQueryResult = Apollo.QueryResult<
   HomepageQuery,
   HomepageQueryVariables
 >;
+export const MenuDocument = gql`
+  query Menu {
+    allHomepages {
+      edges {
+        node {
+          active_exhibitions {
+            exhibition {
+              ... on Exhibition {
+                _meta {
+                  uid
+                }
+                title
+                main_image
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useMenuQuery__
+ *
+ * To run a query within a React component, call `useMenuQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMenuQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMenuQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMenuQuery(
+  baseOptions?: Apollo.QueryHookOptions<MenuQuery, MenuQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<MenuQuery, MenuQueryVariables>(MenuDocument, options);
+}
+export function useMenuLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<MenuQuery, MenuQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<MenuQuery, MenuQueryVariables>(
+    MenuDocument,
+    options
+  );
+}
+export type MenuQueryHookResult = ReturnType<typeof useMenuQuery>;
+export type MenuLazyQueryHookResult = ReturnType<typeof useMenuLazyQuery>;
+export type MenuQueryResult = Apollo.QueryResult<MenuQuery, MenuQueryVariables>;

@@ -1,11 +1,14 @@
 import { ImageLoader } from "next/image";
 
-export type PrismicRageImage = {
+export interface PrismicRageImage {
   alt: string | null;
   copyright: string | null;
   dimensions: { width: number; height: number };
   url: string;
-};
+}
+export interface PrismicRageImageWithBlur extends PrismicRageImage {
+  blurDataURL: string;
+}
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getPrismicRageImage = (img: any): PrismicRageImage => {
@@ -19,6 +22,7 @@ export const getPrismicRageImage = (img: any): PrismicRageImage => {
   if (questionIndex !== -1) {
     url = url.substr(0, questionIndex);
   }
+
   return {
     ...img,
     url,
@@ -48,5 +52,5 @@ export const imgixLoader: ImageLoader = ({ src, width, quality }) => {
   ).toString()}`;
 };
 
-export type RageServiceReturn<T extends (any) => Promise<unknown>> =
+export type RageServiceReturn<T extends (...arg0: any) => Promise<unknown>> =
   ReturnType<T> extends Promise<infer P> ? P : never;

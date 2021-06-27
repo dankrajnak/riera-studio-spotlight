@@ -6,16 +6,28 @@ import {
   GetExhibitionDocument,
 } from "../generated/graphql";
 import cms from "../Lib/cms";
+import {
+  getPrismicRageImageWithPlaceholder,
+  PrismicRageImageWithBlur,
+} from "./placeholder";
 
-type ExhibitionType = GetExhibitionQuery["exhibition"];
+type ExhibitionType = GetExhibitionQuery["exhibition"] & {
+  main_image: PrismicRageImageWithBlur;
+};
 
 const exhibitionQuery = async (uid: string): Promise<ExhibitionType> => {
   const resp = await cms.query<GetExhibitionQuery, GetExhibitionQueryVariables>(
     { query: GetExhibitionDocument, variables: { uid } }
   );
+
   const exhibitions = resp.data.exhibition;
 
-  return exhibitions;
+  return {
+    ...exhibitions,
+    main_image: await getPrismicRageImageWithPlaceholder(
+      exhibitions.main_image
+    ),
+  };
 };
 
 export const allExhibitionIdsQuery = async (): Promise<string[]> => {

@@ -11,7 +11,7 @@ module.exports = {
   rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
-    "arrow-body-style": ["error", "as-needed"],
+    "arrow-body-style": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "typescript/no-unused-expression": 0,
     "@typescript-eslint/ban-ts-comment": 0,

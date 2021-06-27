@@ -5,17 +5,14 @@ import Image from "next/image";
 import exhibitionQuery, {
   allExhibitionIdsQuery,
 } from "../../PrismicRage/exhibitionQuery";
-import {
-  getPrismicRageImage,
-  RageServiceReturn,
-} from "../../PrismicRage/shared";
+import { RageServiceReturn } from "../../PrismicRage/shared";
 
-const Exhibition = ({
-  data,
-}: {
-  data: RageServiceReturn<typeof exhibitionQuery>;
-}) => {
-  if (!data) {
+type Props = {
+  exhibition: RageServiceReturn<typeof exhibitionQuery>;
+};
+
+const Exhibition = ({ exhibition }: Props) => {
+  if (!exhibition) {
     return null;
   }
 
@@ -23,14 +20,15 @@ const Exhibition = ({
     <>
       <div className="title-image">
         <Image
-          src={getPrismicRageImage(data.main_image).url}
+          src={exhibition.main_image.url}
           layout="fill"
           objectFit="cover"
+          alt=""
         />
       </div>
       <div className="container">
-        <h1 className="title">{data.title}</h1>
-        <ExhibitionSliceZone slices={data.body} />
+        <h1 className="title">{exhibition.title}</h1>
+        <ExhibitionSliceZone slices={exhibition.body} />
       </div>
       <style jsx>
         {`
@@ -57,7 +55,8 @@ const Exhibition = ({
           body {
             color: #222;
             background-color: #efefef !important;
-          }
+          }import getMenu from '../../PrismicRage/menuQuery';
+
         `}
       </style>
     </>
@@ -113,7 +112,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
 }) => ({
   props: {
-    data: await exhibitionQuery(params.id),
+    exhibition: await exhibitionQuery(params.id),
   },
   revalidate: 1,
 });
