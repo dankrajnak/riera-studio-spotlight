@@ -43,7 +43,10 @@ const MenuContent: React.FC<{
             </Plane>
             <Plane>
               <div>
-                <Link href={LinkHelper.getExhibitionLink(exhibition.slug)}>
+                <Link
+                  href={LinkHelper.getExhibitionLink(exhibition.slug)}
+                  replace
+                >
                   <a className="title-holder">
                     <h1 className="title-link">{exhibition.title}</h1>
                   </a>
