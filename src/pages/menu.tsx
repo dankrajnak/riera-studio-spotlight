@@ -9,6 +9,7 @@ import {
   MENU_BUTTON_DIMENSIONS,
   MENU_BUTTON_OFFSET,
 } from "../Layout/MenuLayout";
+import SEO from "../Utils/SEO";
 
 export const MENU_PATH = "/menu";
 
@@ -85,6 +86,7 @@ const Menu = ({
 }) => {
   return (
     <>
+      <SEO title="Menu" />
       <div className="menu-container">
         <MenuContent exhibitions={exhibitions} />
       </div>
