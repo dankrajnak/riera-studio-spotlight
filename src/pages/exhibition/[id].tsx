@@ -6,6 +6,7 @@ import exhibitionQuery, {
   allExhibitionIdsQuery,
 } from "../../PrismicRage/exhibitionQuery";
 import { RageServiceReturn } from "../../PrismicRage/shared";
+import SEO from "../../Utils/SEO";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -18,6 +19,7 @@ const Exhibition = ({ exhibition }: Props) => {
 
   return (
     <>
+      <SEO title={exhibition.title} />
       <div className="title-image">
         <Image
           src={exhibition.main_image.url}
