@@ -36,7 +36,6 @@ const MenuButton: React.FC<{ isOpen: boolean; backLink?: string | null }> = ({
   return (
     <>
       <Link
-        replace
         href={isOpen ? backLink || "/" : getMenuLink(router)}
         as={isOpen ? undefined : MENU_PATH}
       >

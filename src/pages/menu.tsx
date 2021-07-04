@@ -18,7 +18,11 @@ const MenuContent: React.FC<{
   <>
     <div>
       {exhibitions.map((exhibition, i) => (
-        <Link href={LinkHelper.getExhibitionLink(exhibition.slug)} key={i}>
+        <Link
+          href={LinkHelper.getExhibitionLink(exhibition.slug)}
+          key={i}
+          replace
+        >
           <a
             style={{
               width: "100%",
@@ -42,15 +46,8 @@ const MenuContent: React.FC<{
               </div>
             </Plane>
             <Plane>
-              <div>
-                <Link
-                  href={LinkHelper.getExhibitionLink(exhibition.slug)}
-                  replace
-                >
-                  <a className="title-holder">
-                    <h1 className="title-link">{exhibition.title}</h1>
-                  </a>
-                </Link>
+              <div className="title-holder">
+                <h1 className="title-link">{exhibition.title}</h1>
               </div>
             </Plane>
           </a>

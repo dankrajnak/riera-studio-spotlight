@@ -261,7 +261,7 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ preview, locale }) => ({
+export const getStaticProps: GetStaticProps = async () => ({
   props: withDontShowMenuButton({
     data: await indexQuery(),
   }),
