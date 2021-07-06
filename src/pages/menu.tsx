@@ -91,7 +91,7 @@ const Menu = ({
       <SEO title="Menu" />
       <motion.div style={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div className="home-container">
-          <Link href="/">
+          <Link href="/" replace>
             <a className="home-holder">
               <Image src={homeIcon} alt="Home" width={25} height={30} />
             </a>
