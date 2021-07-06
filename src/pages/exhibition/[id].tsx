@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import { RichText } from "prismic-reactjs";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import exhibitionQuery, {
   allExhibitionIdsQuery,
@@ -28,10 +29,16 @@ const Exhibition = ({ exhibition }: Props) => {
           alt=""
         />
       </div>
-      <div className="container">
-        <h1 className="title">{exhibition.title}</h1>
-        <ExhibitionSliceZone slices={exhibition.body} />
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <div className="container">
+          <h1 className="title">{exhibition.title}</h1>
+          <ExhibitionSliceZone slices={exhibition.body} />
+        </div>
+      </motion.div>
       <style jsx>
         {`
           .title {

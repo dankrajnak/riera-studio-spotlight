@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import homeIcon from "../../public/homeIcon.svg";
 import Plane from "../Layout/Plane";
 import { imgixLoader, RageServiceReturn } from "../PrismicRage/shared";
 import Colors from "../Utils/Colors";
@@ -87,11 +89,33 @@ const Menu = ({
   return (
     <>
       <SEO title="Menu" />
-      <div className="menu-container">
-        <MenuContent exhibitions={exhibitions} />
-      </div>
+      <motion.div style={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <div className="home-container">
+          <Link href="/">
+            <a className="home-holder">
+              <Image src={homeIcon} alt="Home" width={25} height={30} />
+            </a>
+          </Link>
+        </div>
+        <div className="menu-container">
+          <MenuContent exhibitions={exhibitions} />
+        </div>
+      </motion.div>
 
-      <style jsx>{`
+      <style global jsx>{`
+        .home-container {
+          top: ${MENU_BUTTON_OFFSET.top}px;
+          position: absolute;
+          z-index: 9100;
+          width: ${MENU_BUTTON_DIMENSIONS.width};
+          height: ${MENU_BUTTON_DIMENSIONS.height - 2}px;
+          left: ${MENU_BUTTON_OFFSET.left + MENU_BUTTON_DIMENSIONS.width}px;
+        }
+        .home-holder {
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
         .menu-container {
           top: 0;
           left: 0;
@@ -102,7 +126,7 @@ const Menu = ({
           overflow-y: auto;
           padding: ${MENU_BUTTON_OFFSET.top +
             MENU_BUTTON_DIMENSIONS.height +
-            10}px
+            20}px
             30px 0px 30px;
           background: ${Colors.black};
         }
