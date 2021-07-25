@@ -2,8 +2,6 @@ import { GetStaticProps } from "next";
 import { RichText } from "prismic-reactjs";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
-import { useMeasure } from "react-use";
 import exhibitionQuery, {
   allExhibitionIdsQuery,
 } from "../../PrismicRage/exhibitionQuery";
@@ -12,7 +10,8 @@ import {
   RageServiceReturn,
 } from "../../PrismicRage/shared";
 import SEO from "../../Utils/SEO";
-import { ColorsA } from "../../Utils/Colors";
+import LabelledImage from "../../Components/LabelledImage";
+import AnimateOnScroll, { Transitions } from "../../Components/AnimateOnScroll";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -48,6 +47,7 @@ const Exhibition = ({ exhibition }: Props) => {
         {`
           .title {
             font-family: "EB Garamond";
+            word-break: break-word;
           }
           .title-image {
             position: relative;
@@ -69,7 +69,8 @@ const Exhibition = ({ exhibition }: Props) => {
           body {
             color: #222;
             background-color: #efefef !important;
-          }
+          }import LabelledImage from '../../Components/LabelledImage';
+
         `}
       </style>
     </>
@@ -81,7 +82,6 @@ const ExhibitionSliceZone = ({
 }: {
   slices: RageServiceReturn<typeof exhibitionQuery>["body"];
 }) => {
-  const [ref, { width }] = useMeasure();
   return (
     <>
       {slices.map((slice) => {
@@ -109,55 +109,12 @@ const ExhibitionSliceZone = ({
               </>
             );
           case "ExhibitionBodyImage": {
-            const altPaddingX = 10;
             return (
-              <div
-                ref={ref}
-                className="margin-bottom"
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                {width && (
-                  <Image
-                    src={getPrismicRageImage(slice.primary.image).url}
-                    width={width}
-                    height={
-                      slice.primary.image.dimensions.width >
-                      slice.primary.image.dimensions.height
-                        ? (slice.primary.image.dimensions.height /
-                            slice.primary.image.dimensions.width) *
-                          width
-                        : width
-                    }
-                    objectFit="contain"
-                    alt={slice.primary.image.alt}
-                  />
-                )}
-                {slice.primary.image.alt && (
-                  <div
-                    style={{
-                      backgroundColor: ColorsA.black(0.1),
-                      marginTop: 0,
-                      padding: `5px ${altPaddingX}px`,
-                      maxWidth:
-                        slice.primary.image.dimensions.height >
-                        slice.primary.image.dimensions.width
-                          ? (slice.primary.image.dimensions.width /
-                              slice.primary.image.dimensions.height) *
-                              width -
-                            altPaddingX * 2
-                          : null,
-                      width: `calc(100% - ${altPaddingX * 2}px)`,
-                    }}
-                  >
-                    <small>{slice.primary.image.alt}</small>
-                  </div>
-                )}
-              </div>
+              <AnimateOnScroll>
+                <LabelledImage
+                  image={getPrismicRageImage(slice.primary.image)}
+                />
+              </AnimateOnScroll>
             );
           }
           case "ExhibitionBodySlider":
