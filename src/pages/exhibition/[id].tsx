@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import { RichText } from "prismic-reactjs";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox";
 import exhibitionQuery, {
   allExhibitionIdsQuery,
 } from "../../PrismicRage/exhibitionQuery";
@@ -69,8 +70,7 @@ const Exhibition = ({ exhibition }: Props) => {
           body {
             color: #222;
             background-color: #efefef !important;
-          }import LabelledImage from '../../Components/LabelledImage';
-
+          }
         `}
       </style>
     </>
@@ -110,11 +110,32 @@ const ExhibitionSliceZone = ({
             );
           case "ExhibitionBodyImage": {
             return (
-              <AnimateOnScroll>
-                <LabelledImage
-                  image={getPrismicRageImage(slice.primary.image)}
-                />
-              </AnimateOnScroll>
+              <SRLWrapper
+                options={{
+                  autoplaySpeed: 0,
+                  disableKeyboardControls: true,
+                  buttons: {
+                    showDownloadButton: false,
+                    showAutoplayButton: false,
+                    showFullscreenButton: true,
+                    showNextButton: false,
+                    showPrevButton: false,
+                    showThumbnailsButton: false,
+                  },
+                  thumbnails: {
+                    showThumbnails: false,
+                  },
+                  showProgressBar: false,
+                }}
+              >
+                <AnimateOnScroll>
+                  <div className="clickable">
+                    <LabelledImage
+                      image={getPrismicRageImage(slice.primary.image)}
+                    />
+                  </div>
+                </AnimateOnScroll>
+              </SRLWrapper>
             );
           }
           case "ExhibitionBodySlider":

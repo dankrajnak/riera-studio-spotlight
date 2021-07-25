@@ -33,7 +33,8 @@
     "react-hamburger-menu": "^1.2.1",
     "react-intersection-observer": "^8.32.0",
     "react-use": "^17.1.1",
-    "sharp": "^0.28.3"
+    "sharp": "^0.28.3",
+    "simple-react-lightbox": "^3.6.6"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.5",
