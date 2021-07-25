@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import { RichText } from "prismic-reactjs";
 import Image from "next/image";
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox";
 import exhibitionQuery, {
@@ -12,7 +13,7 @@ import {
 } from "../../PrismicRage/shared";
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
-import AnimateOnScroll, { Transitions } from "../../Components/AnimateOnScroll";
+import AnimateOnScroll from "../../Components/AnimateOnScroll";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -24,7 +25,7 @@ const Exhibition = ({ exhibition }: Props) => {
   }
 
   return (
-    <>
+    <SimpleReactLightbox>
       <SEO title={exhibition.title} />
       <div className="title-image">
         <Image
@@ -73,7 +74,7 @@ const Exhibition = ({ exhibition }: Props) => {
           }
         `}
       </style>
-    </>
+    </SimpleReactLightbox>
   );
 };
 
@@ -84,13 +85,13 @@ const ExhibitionSliceZone = ({
 }) => {
   return (
     <>
-      {slices.map((slice) => {
+      {slices.map((slice, i) => {
         switch (slice.__typename) {
           case "ExhibitionBodyText":
-            return <RichText render={slice.primary.text} />;
+            return <RichText key={i} render={slice.primary.text} />;
           case "ExhibitionBodyQuote":
             return (
-              <>
+              <Fragment key={i}>
                 <div
                   className="margin-bottom"
                   style={{
@@ -106,11 +107,12 @@ const ExhibitionSliceZone = ({
                     &mdash;{slice.primary.author}
                   </small>
                 </div>
-              </>
+              </Fragment>
             );
           case "ExhibitionBodyImage": {
             return (
               <SRLWrapper
+                key={i}
                 options={{
                   autoplaySpeed: 0,
                   disableKeyboardControls: true,
