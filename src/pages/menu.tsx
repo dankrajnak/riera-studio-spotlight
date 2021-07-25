@@ -65,6 +65,11 @@ const MenuContent: React.FC<{
         overflow: hidden;
         white-space: nowrap;
       }
+      @media screen and (max-width: 800px) {
+        .title-link {
+          font-size: 2rem;
+        }
+      }
       .title-holder,
       .image-holder {
         width: 100%;
@@ -105,7 +110,7 @@ const Menu = ({
       <style global jsx>{`
         .home-container {
           top: ${MENU_BUTTON_OFFSET.top}px;
-          position: absolute;
+          position: fixed;
           z-index: 9100;
           width: ${MENU_BUTTON_DIMENSIONS.width};
           height: ${MENU_BUTTON_DIMENSIONS.height - 2}px;
