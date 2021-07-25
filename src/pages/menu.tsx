@@ -66,6 +66,9 @@ const MenuContent: React.FC<{
         white-space: nowrap;
       }
       @media screen and (max-width: 800px) {
+        .title-holder {
+          padding: 0px 10px;
+        }
         .title-link {
           font-size: 2rem;
           overflow: visible;
