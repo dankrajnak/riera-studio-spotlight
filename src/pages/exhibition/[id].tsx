@@ -108,6 +108,12 @@ const Exhibition = ({ exhibition }: Props) => {
             padding: 10px;
             margin-top: 20px;
           }
+          .container {
+            margin: auto;
+            width: 70%;
+            margin-bottom: 50px;
+            line-height: 1.5;
+          }
         `}
       </style>
       <style jsx global>
