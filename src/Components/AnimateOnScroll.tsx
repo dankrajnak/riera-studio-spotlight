@@ -26,7 +26,7 @@ export const Transitions = {
     hidden: {
       opacity: 0,
       y: 10,
-      scale: 0.8,
+      scale: 0.85,
     },
     options: {},
   },
