@@ -11,22 +11,38 @@ import {
   PrismicRageImageWithBlur,
 } from "./placeholder";
 
-type ExhibitionType = GetExhibitionQuery["exhibition"] & {
-  main_image: PrismicRageImageWithBlur;
-};
+type GalleryImage = { image: PrismicRageImageWithBlur; title: string };
+
+type ExhibitionType = Omit<
+  GetExhibitionQuery["exhibition"] & {
+    main_image: PrismicRageImageWithBlur;
+    galleryImages: GalleryImage[];
+  },
+  "body1"
+>;
 
 const exhibitionQuery = async (uid: string): Promise<ExhibitionType> => {
   const resp = await cms.query<GetExhibitionQuery, GetExhibitionQueryVariables>(
     { query: GetExhibitionDocument, variables: { uid } }
   );
 
-  const exhibitions = resp.data.exhibition;
+  const { body1, ...exhibitions } = resp.data.exhibition;
+
+  const getGalleryImages = (): Promise<GalleryImage[]> => {
+    return Promise.all(
+      (resp.data.exhibition.body1 || []).map(async ({ primary }) => ({
+        image: await getPrismicRageImageWithPlaceholder(primary.image),
+        title: primary.work_title,
+      }))
+    );
+  };
 
   return {
     ...exhibitions,
     main_image: await getPrismicRageImageWithPlaceholder(
       exhibitions.main_image
     ),
+    galleryImages: await getGalleryImages(),
   };
 };
 

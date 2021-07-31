@@ -3,7 +3,15 @@ import Image from "next/image";
 import { PrismicRageImage } from "../PrismicRage/shared";
 import { ColorsA } from "../Utils/Colors";
 
-const LabelledImage = ({ image }: { image: PrismicRageImage }) => {
+const LabelledImage = ({
+  image,
+  label,
+  blurDataURL,
+}: {
+  image: PrismicRageImage;
+  label?: string | null;
+  blurDataURL?: string | null;
+}) => {
   const altPaddingX = 10;
   const [ref, { width }] = useMeasure();
 
@@ -18,20 +26,35 @@ const LabelledImage = ({ image }: { image: PrismicRageImage }) => {
         alignItems: "center",
       }}
     >
-      {width && (
-        <Image
-          src={image.url}
-          width={width}
-          height={
-            image.dimensions.width > image.dimensions.height
-              ? (image.dimensions.height / image.dimensions.width) * width
-              : width
-          }
-          objectFit="contain"
-          alt={image.alt}
-        />
-      )}
-      {image.alt && (
+      {width &&
+        (blurDataURL ? (
+          <Image
+            src={image.url}
+            width={width}
+            height={
+              image.dimensions.width > image.dimensions.height
+                ? (image.dimensions.height / image.dimensions.width) * width
+                : width
+            }
+            placeholder={"blur"}
+            blurDataURL={blurDataURL}
+            objectFit="contain"
+            alt={image.alt}
+          />
+        ) : (
+          <Image
+            src={image.url}
+            width={width}
+            height={
+              image.dimensions.width > image.dimensions.height
+                ? (image.dimensions.height / image.dimensions.width) * width
+                : width
+            }
+            objectFit="contain"
+            alt={image.alt}
+          />
+        ))}
+      {label && (
         <div
           style={{
             backgroundColor: ColorsA.black(0.1),
@@ -45,7 +68,7 @@ const LabelledImage = ({ image }: { image: PrismicRageImage }) => {
             width: `calc(100% - ${altPaddingX * 2}px)`,
           }}
         >
-          <small>{image.alt}</small>
+          <small>{label}</small>
         </div>
       )}
     </div>

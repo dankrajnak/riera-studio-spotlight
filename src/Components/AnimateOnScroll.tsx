@@ -1,7 +1,6 @@
 import { IntersectionOptions, useInView } from "react-intersection-observer";
 import { motion, useAnimation, Variant } from "framer-motion";
 import { useEffect, FunctionComponent } from "react";
-import SimpleReactLightbox from "simple-react-lightbox";
 
 type AnimationConfig = {
   visible: Variant;

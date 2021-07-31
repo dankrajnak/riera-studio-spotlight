@@ -20,5 +20,13 @@ query GetExhibition($uid: String!) {
         }
       }
     }
+    body1 {
+      ... on ExhibitionBody1Gallery_image {
+        primary {
+          image
+          work_title
+        }
+      }
+    }
   }
 }

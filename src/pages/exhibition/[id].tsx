@@ -14,6 +14,7 @@ import {
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
 import AnimateOnScroll from "../../Components/AnimateOnScroll";
+import { PrismicRageImageWithBlur } from "../../PrismicRage/placeholder";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -44,6 +45,44 @@ const Exhibition = ({ exhibition }: Props) => {
           <h1 className="title">{exhibition.title}</h1>
           <ExhibitionSliceZone slices={exhibition.body} />
         </div>
+        {exhibition.galleryImages.length > 0 && (
+          <div className="gallery-container">
+            <hr />
+            <h1>Gallery</h1>
+
+            <div className="gallery-grid">
+              {exhibition.galleryImages.map((image, i) => (
+                <div className="gallery-item" key={i}>
+                  <SRLWrapper
+                    key={i}
+                    options={{
+                      autoplaySpeed: 0,
+                      disableKeyboardControls: true,
+                      buttons: {
+                        showDownloadButton: false,
+                        showAutoplayButton: false,
+                        showFullscreenButton: true,
+                        showNextButton: false,
+                        showPrevButton: false,
+                        showThumbnailsButton: false,
+                      },
+                      thumbnails: {
+                        showThumbnails: false,
+                      },
+                      showProgressBar: false,
+                    }}
+                  >
+                    <LabelledImage
+                      image={image.image}
+                      label={image.title}
+                      key={i}
+                    />
+                  </SRLWrapper>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </motion.div>
       <style jsx>
         {`
@@ -57,11 +96,17 @@ const Exhibition = ({ exhibition }: Props) => {
             height: 400px;
             overflow-y: hidden;
           }
-          .container {
-            margin: auto;
-            width: 70%;
-            margin-bottom: 50px;
-            line-height: 1.5;
+          .gallery-container {
+            margin: 0 40px 40px 40px;
+          }
+
+          .gallery-grid {
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+          }
+          .gallery-item {
+            padding: 10px;
+            margin-top: 20px;
           }
         `}
       </style>
@@ -133,6 +178,7 @@ const ExhibitionSliceZone = ({
                 <AnimateOnScroll>
                   <div className="clickable">
                     <LabelledImage
+                      label={slice.primary.image?.alt}
                       image={getPrismicRageImage(slice.primary.image)}
                     />
                   </div>

@@ -464,6 +464,18 @@ export type GetExhibitionQuery = { __typename?: "Query" } & {
               })
           >
         >;
+        body1?: Maybe<
+          Array<
+            { __typename?: "ExhibitionBody1Gallery_image" } & {
+              primary?: Maybe<
+                { __typename?: "ExhibitionBody1Gallery_imagePrimary" } & Pick<
+                  ExhibitionBody1Gallery_ImagePrimary,
+                  "image" | "work_title"
+                >
+              >;
+            }
+          >
+        >;
       }
   >;
 };
@@ -625,6 +637,14 @@ export const GetExhibitionDocument = gql`
         ... on ExhibitionBodyImage {
           primary {
             image
+          }
+        }
+      }
+      body1 {
+        ... on ExhibitionBody1Gallery_image {
+          primary {
+            image
+            work_title
           }
         }
       }
