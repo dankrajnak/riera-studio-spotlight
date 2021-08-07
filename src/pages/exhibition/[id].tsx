@@ -14,7 +14,6 @@ import {
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
 import AnimateOnScroll from "../../Components/AnimateOnScroll";
-import { PrismicRageImageWithBlur } from "../../PrismicRage/placeholder";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
