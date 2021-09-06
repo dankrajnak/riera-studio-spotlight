@@ -13,7 +13,6 @@ import {
 } from "../../PrismicRage/shared";
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
-import AnimateOnScroll from "../../Components/AnimateOnScroll";
 import { PreviewProp } from "../api/preview";
 
 type Props = {
@@ -73,6 +72,7 @@ const Exhibition = ({ exhibition }: Props) => {
                     }}
                   >
                     <LabelledImage
+                      blurDataURL={image.image.blurDataURL}
                       image={image.image}
                       label={image.title}
                       key={i}
@@ -181,14 +181,13 @@ const ExhibitionSliceZone = ({
                   showProgressBar: false,
                 }}
               >
-                <AnimateOnScroll>
-                  <div className="clickable">
-                    <LabelledImage
-                      label={slice.primary.image?.alt}
-                      image={getPrismicRageImage(slice.primary.image)}
-                    />
-                  </div>
-                </AnimateOnScroll>
+                <div className="clickable">
+                  <LabelledImage
+                    label={slice.primary.image?.alt}
+                    image={getPrismicRageImage(slice.primary.image)}
+                    blurDataURL={slice.primary.image.blurDataURL}
+                  />
+                </div>
               </SRLWrapper>
             );
           }

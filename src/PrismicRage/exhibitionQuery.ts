@@ -39,15 +39,32 @@ const exhibitionQuery = async (
 
   const getGalleryImages = (): Promise<GalleryImage[]> => {
     return Promise.all(
-      (resp.data.exhibition.body1 || []).map(async ({ primary }) => ({
+      (body1 || []).map(async ({ primary }) => ({
         image: await getPrismicRageImageWithPlaceholder(primary.image),
         title: primary.work_title,
       }))
     );
   };
-
   return {
     ...exhibitions,
+    body: await Promise.all(
+      exhibitions.body.map(async (el) => {
+        switch (el.__typename) {
+          case "ExhibitionBodyImage":
+            return {
+              ...el,
+              primary: {
+                ...el.primary,
+                image: await getPrismicRageImageWithPlaceholder(
+                  el.primary.image
+                ),
+              },
+            };
+          default:
+            return el;
+        }
+      })
+    ),
     main_image: await getPrismicRageImageWithPlaceholder(
       exhibitions.main_image
     ),

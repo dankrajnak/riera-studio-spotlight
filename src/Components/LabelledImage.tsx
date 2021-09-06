@@ -1,5 +1,6 @@
 import { useMeasure } from "react-use";
 import Image from "next/image";
+import { useState } from "react";
 import { PrismicRageImage } from "../PrismicRage/shared";
 import { ColorsA } from "../Utils/Colors";
 
@@ -14,6 +15,7 @@ const LabelledImage = ({
 }) => {
   const altPaddingX = 10;
   const [ref, { width }] = useMeasure();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <div
@@ -29,6 +31,7 @@ const LabelledImage = ({
       {width &&
         (blurDataURL ? (
           <Image
+            onLoadingComplete={() => setImageLoaded(true)}
             src={image.url}
             width={width}
             height={
@@ -36,13 +39,14 @@ const LabelledImage = ({
                 ? (image.dimensions.height / image.dimensions.width) * width
                 : width
             }
-            placeholder={"blur"}
+            placeholder="blur"
             blurDataURL={blurDataURL}
             objectFit="contain"
             alt={image.alt}
           />
         ) : (
           <Image
+            onLoadingComplete={() => setImageLoaded(true)}
             src={image.url}
             width={width}
             height={
@@ -66,9 +70,13 @@ const LabelledImage = ({
                   altPaddingX * 2
                 : null,
             width: `calc(100% - ${altPaddingX * 2}px)`,
+            opacity: imageLoaded ? 1 : 0,
+            transition: "opacity .5s ease",
           }}
         >
-          <small>{label}</small>
+          <small>
+            {label} {image.dimensions.width} x {image.dimensions.height}
+          </small>
         </div>
       )}
     </div>
