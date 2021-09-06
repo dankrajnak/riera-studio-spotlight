@@ -1,12 +1,16 @@
 import { MenuDocument, MenuQuery } from "../generated/graphql";
-import cms from "../Lib/cms";
+import cms, { withPreview } from "../Lib/cms";
 import { getPrismicRageImageWithPlaceholder } from "./placeholder";
 import { PrismicRageImageWithBlur } from "./shared";
 
-const getMenu = async (): Promise<
+const getMenu = async (
+  previewRef?: unknown
+): Promise<
   { title: string; image: PrismicRageImageWithBlur; slug: string }[]
 > => {
-  const resp = await cms.query<MenuQuery>({ query: MenuDocument });
+  const resp = await cms.query<MenuQuery>(
+    withPreview({ query: MenuDocument }, previewRef)
+  );
   const exhibitions = resp.data.allHomepages.edges?.map((edge) => ({
     activeExhibitions: edge.node.active_exhibitions?.map(
       (someShit) => someShit.exhibition

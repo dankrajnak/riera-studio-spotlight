@@ -5,7 +5,7 @@ import {
   GetExhibitionQueryVariables,
   GetExhibitionDocument,
 } from "../generated/graphql";
-import cms from "../Lib/cms";
+import cms, { withPreview } from "../Lib/cms";
 import {
   getPrismicRageImageWithPlaceholder,
   PrismicRageImageWithBlur,
@@ -21,9 +21,18 @@ type ExhibitionType = Omit<
   "body1"
 >;
 
-const exhibitionQuery = async (uid: string): Promise<ExhibitionType> => {
+const exhibitionQuery = async (
+  uid: string,
+  previewRef?: unknown
+): Promise<ExhibitionType> => {
   const resp = await cms.query<GetExhibitionQuery, GetExhibitionQueryVariables>(
-    { query: GetExhibitionDocument, variables: { uid } }
+    withPreview(
+      {
+        query: GetExhibitionDocument,
+        variables: { uid },
+      },
+      previewRef
+    )
   );
 
   const { body1, ...exhibitions } = resp.data.exhibition;

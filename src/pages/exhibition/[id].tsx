@@ -14,6 +14,7 @@ import {
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
 import AnimateOnScroll from "../../Components/AnimateOnScroll";
+import { PreviewProp } from "../api/preview";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -212,11 +213,17 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
-}) => ({
-  props: {
-    exhibition: await exhibitionQuery(params.id),
-  },
-  revalidate: 1,
-});
+  preview,
+  previewData,
+}) => {
+  return {
+    props: {
+      exhibition: preview
+        ? await exhibitionQuery(params.id, (previewData as PreviewProp)?.ref)
+        : await exhibitionQuery(params.id),
+    },
+    revalidate: 1,
+  };
+};
 
 export default Exhibition;

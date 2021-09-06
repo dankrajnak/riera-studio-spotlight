@@ -145,8 +145,8 @@ const Menu = ({
   );
 };
 
-export const getStaticProps = async () => ({
-  props: { exhibitions: await getMenu() },
+export const getStaticProps = async ({ preview, previewData }) => ({
+  props: { exhibitions: await getMenu(preview ? previewData : null) },
   revalidate: 1,
 });
 

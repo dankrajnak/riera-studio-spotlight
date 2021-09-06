@@ -3,6 +3,7 @@ import "../Styles/dist.css";
 import { AnimateSharedLayout } from "framer-motion";
 import React from "react";
 import MenuLayout from "../Layout/MenuLayout";
+import ExitPreviewButton from "../Components/ExitPreview";
 import { MENU_PATH } from "./menu";
 
 export function withDontShowMenuButton<T>(
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           <Component {...otherPageProps} />
         </MenuLayout>
       )}
+      <ExitPreviewButton />
     </AnimateSharedLayout>
   );
 }
