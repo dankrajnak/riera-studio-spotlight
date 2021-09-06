@@ -74,9 +74,7 @@ const LabelledImage = ({
             transition: "opacity .5s ease",
           }}
         >
-          <small>
-            {label} {image.dimensions.width} x {image.dimensions.height}
-          </small>
+          <small>{label}</small>
         </div>
       )}
     </div>
