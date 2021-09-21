@@ -1,3 +1,4 @@
+import * as queryString from "query-string";
 import { ImageLoader } from "next/image";
 
 export interface PrismicRageImage {
@@ -25,7 +26,7 @@ export const getPrismicRageImage = (img: any): PrismicRageImage => {
 
   return {
     ...img,
-    url,
+    // url: queryString.parseUrl(img.url).url,
   };
 };
 

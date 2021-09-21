@@ -14,6 +14,7 @@ import {
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
 import { PreviewProp } from "../api/preview";
+import SVGBlur from "../../Components/SVGBlur";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -72,11 +73,15 @@ const Exhibition = ({ exhibition }: Props) => {
                     }}
                   >
                     <LabelledImage
+                      image={image.image}
+                      alt={image.image.img.alt}
+                    />
+                    {/* <LabelledImage
                       blurDataURL={image.image.blurDataURL}
                       image={image.image}
                       label={image.title}
                       key={i}
-                    />
+                    /> */}
                   </SRLWrapper>
                 </div>
               ))}
@@ -183,9 +188,8 @@ const ExhibitionSliceZone = ({
               >
                 <div className="clickable">
                   <LabelledImage
-                    label={slice.primary.image?.alt}
-                    image={getPrismicRageImage(slice.primary.image)}
-                    blurDataURL={slice.primary.image.blurDataURL}
+                    label={slice.primary.image?.img.alt}
+                    image={slice.primary.image}
                   />
                 </div>
               </SRLWrapper>

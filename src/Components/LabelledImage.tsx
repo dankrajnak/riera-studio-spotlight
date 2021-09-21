@@ -1,17 +1,17 @@
 import { useMeasure } from "react-use";
 import Image from "next/image";
-import { useState } from "react";
+import React, { useState } from "react";
 import { PrismicRageImage } from "../PrismicRage/shared";
 import { ColorsA } from "../Utils/Colors";
+import { ImageWithBlur } from "../PrismicRage/placeholder";
+import SVGBlur from "./SVGBlur";
 
 const LabelledImage = ({
   image,
   label,
-  blurDataURL,
 }: {
-  image: PrismicRageImage;
+  image: ImageWithBlur;
   label?: string | null;
-  blurDataURL?: string | null;
 }) => {
   const altPaddingX = 10;
   const [ref, { width }] = useMeasure();
@@ -29,33 +29,34 @@ const LabelledImage = ({
       }}
     >
       {width &&
-        (blurDataURL ? (
-          <Image
+        (true ? (
+          <SVGBlur
             onLoadingComplete={() => setImageLoaded(true)}
-            src={image.url}
+            img={image.blurs.img}
+            svg={image.blurs.svg}
             width={width}
             height={
-              image.dimensions.width > image.dimensions.height
-                ? (image.dimensions.height / image.dimensions.width) * width
+              image.img.dimensions.width > image.img.dimensions.height
+                ? (image.img.dimensions.height / image.img.dimensions.width) *
+                  width
                 : width
             }
-            placeholder="blur"
-            blurDataURL={blurDataURL}
             objectFit="contain"
-            alt={image.alt}
+            alt={image.img.alt}
           />
         ) : (
           <Image
             onLoadingComplete={() => setImageLoaded(true)}
-            src={image.url}
+            src={image.img.url}
             width={width}
             height={
-              image.dimensions.width > image.dimensions.height
-                ? (image.dimensions.height / image.dimensions.width) * width
+              image.img.dimensions.width > image.img.dimensions.height
+                ? (image.img.dimensions.height / image.img.dimensions.width) *
+                  width
                 : width
             }
             objectFit="contain"
-            alt={image.alt}
+            alt={image.img.alt}
           />
         ))}
       {label && (
@@ -65,8 +66,9 @@ const LabelledImage = ({
             marginTop: 0,
             padding: `5px ${altPaddingX}px`,
             maxWidth:
-              image.dimensions.height > image.dimensions.width
-                ? (image.dimensions.width / image.dimensions.height) * width -
+              image.img.dimensions.height > image.img.dimensions.width
+                ? (image.img.dimensions.width / image.img.dimensions.height) *
+                    width -
                   altPaddingX * 2
                 : null,
             width: `calc(100% - ${altPaddingX * 2}px)`,

@@ -6,16 +6,17 @@ import {
   GetExhibitionDocument,
 } from "../generated/graphql";
 import cms, { withPreview } from "../Lib/cms";
+import { getPrismicRageImage } from "./shared";
 import {
   getPrismicRageImageWithPlaceholder,
-  PrismicRageImageWithBlur,
+  ImageWithBlur,
 } from "./placeholder";
 
-type GalleryImage = { image: PrismicRageImageWithBlur; title: string };
+type GalleryImage = { image: ImageWithBlur; title: string };
 
 type ExhibitionType = Omit<
   GetExhibitionQuery["exhibition"] & {
-    main_image: PrismicRageImageWithBlur;
+    main_image: PrismicRageImage;
     galleryImages: GalleryImage[];
   },
   "body1"
@@ -40,7 +41,7 @@ const exhibitionQuery = async (
   const getGalleryImages = (): Promise<GalleryImage[]> => {
     return Promise.all(
       (body1 || []).map(async ({ primary }) => ({
-        image: await getPrismicRageImageWithPlaceholder(primary.image),
+        image: await getPrismicRageImageWithPlaceholder(primary.image, 590),
         title: primary.work_title,
       }))
     );
@@ -65,9 +66,7 @@ const exhibitionQuery = async (
         }
       })
     ),
-    main_image: await getPrismicRageImageWithPlaceholder(
-      exhibitions.main_image
-    ),
+    main_image: await getPrismicRageImage(exhibitions.main_image),
     galleryImages: await getGalleryImages(),
   };
 };
