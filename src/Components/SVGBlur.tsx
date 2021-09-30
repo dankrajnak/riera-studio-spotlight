@@ -4,17 +4,14 @@ import { createElement } from "react";
 import Image from "next/image";
 import { useMeasure } from "react-use";
 
-export const SVGBlur = ({
-  svg,
-  img,
-  alt,
-  ...otherImageProps
-}: {
+interface Props extends Partial<ImageProps> {
   svg: IGetPlaiceholderReturn["svg"];
   img: IGetPlaiceholderReturn["img"];
   alt: string;
-  otherImageProps: Partial<ImageProps>;
-}) => {
+  fill?: boolean | null;
+}
+
+export const SVGBlur = ({ svg, img, alt, fill, ...otherImageProps }: Props) => {
   // If the image is "contained", we need to do some extra work to figure out how big the blur should be.
   let svgWidth = img.width;
   const [ref, { width }] = useMeasure();
@@ -29,6 +26,7 @@ export const SVGBlur = ({
         position: "relative",
         display: "block",
         overflow: "hidden",
+        ...(fill ? { width: "100%", height: "100%" } : {}),
       }}
     >
       {createElement(

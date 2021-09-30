@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import queryString, { Stringifiable } from "query-string";
 import homeIcon from "../../public/homeIcon.svg";
 import Plane from "../Layout/Plane";
 import { imgixLoader, RageServiceReturn } from "../PrismicRage/shared";
@@ -12,6 +13,15 @@ import {
   MENU_BUTTON_OFFSET,
 } from "../Layout/MenuLayout";
 import SEO from "../Utils/SEO";
+import SVGBlur from "../Components/SVGBlur";
+
+const addParams = (url: string, params: Record<string, Stringifiable>) => {
+  const parsedUrl = queryString.parseUrl(url);
+  return queryString.stringifyUrl({
+    ...parsedUrl,
+    query: { ...parsedUrl.query, ...params },
+  });
+};
 
 export const MENU_PATH = "/menu";
 
@@ -37,14 +47,21 @@ const MenuContent: React.FC<{
           >
             <Plane>
               <div className="image-holder">
-                <Image
-                  src={exhibition.image.url + "?con=60&sat=-80&exp=-5&vib=50"}
+                <SVGBlur
+                  svg={exhibition.image.blurs.svg}
+                  img={{
+                    ...exhibition.image.blurs.img,
+                    src: addParams(exhibition.image.blurs.img.src, {
+                      con: 60,
+                      sat: -80,
+                      exp: -5,
+                      vib: 50,
+                    }),
+                  }}
                   layout="fill"
                   objectFit="cover"
-                  loader={imgixLoader}
-                  placeholder="blur"
-                  blurDataURL={exhibition.image.blurDataURL}
                   alt=""
+                  fill
                 />
               </div>
             </Plane>

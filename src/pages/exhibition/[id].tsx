@@ -14,7 +14,6 @@ import {
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
 import { PreviewProp } from "../api/preview";
-import SVGBlur from "../../Components/SVGBlur";
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -74,7 +73,7 @@ const Exhibition = ({ exhibition }: Props) => {
                   >
                     <LabelledImage
                       image={image.image}
-                      alt={image.image.img.alt}
+                      label={image.image.img.alt}
                     />
                     {/* <LabelledImage
                       blurDataURL={image.image.blurDataURL}

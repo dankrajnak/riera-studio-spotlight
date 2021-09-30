@@ -1,13 +1,13 @@
 import { MenuDocument, MenuQuery } from "../generated/graphql";
 import cms, { withPreview } from "../Lib/cms";
-import { getPrismicRageImageWithPlaceholder } from "./placeholder";
-import { PrismicRageImageWithBlur } from "./shared";
+import {
+  getPrismicRageImageWithPlaceholder,
+  ImageWithBlur,
+} from "./placeholder";
 
 const getMenu = async (
   previewRef?: unknown
-): Promise<
-  { title: string; image: PrismicRageImageWithBlur; slug: string }[]
-> => {
+): Promise<{ title: string; image: ImageWithBlur; slug: string }[]> => {
   const resp = await cms.query<MenuQuery>(
     withPreview({ query: MenuDocument }, previewRef)
   );
