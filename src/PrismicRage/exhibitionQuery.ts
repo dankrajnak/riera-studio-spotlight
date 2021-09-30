@@ -6,7 +6,7 @@ import {
   GetExhibitionDocument,
 } from "../generated/graphql";
 import cms, { withPreview } from "../Lib/cms";
-import { getPrismicRageImage } from "./shared";
+import { getPrismicRageImage, PrismicRageImage } from "./shared";
 import {
   getPrismicRageImageWithPlaceholder,
   ImageWithBlur,
@@ -41,7 +41,7 @@ const exhibitionQuery = async (
   const getGalleryImages = (): Promise<GalleryImage[]> => {
     return Promise.all(
       (body1 || []).map(async ({ primary }) => ({
-        image: await getPrismicRageImageWithPlaceholder(primary.image, 590),
+        image: await getPrismicRageImageWithPlaceholder(primary.image),
         title: primary.work_title,
       }))
     );

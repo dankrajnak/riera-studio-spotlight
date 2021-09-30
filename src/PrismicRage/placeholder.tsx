@@ -1,6 +1,4 @@
 import { getPlaiceholder, IGetPlaiceholderReturn } from "plaiceholder";
-import { createElement } from "react";
-import Image, { ImageProps } from "next/image";
 import { getPrismicRageImage, PrismicRageImage } from "./shared";
 
 export interface PrismicRageImageWithBlur extends PrismicRageImage {
@@ -21,10 +19,6 @@ export const getPrismicRageImageWithPlaceholder = async (
 
   const blurs = await getPlaiceholder(rageImage.url);
 
-  // return {
-  //   ...rageImage,
-  //   blurDataURL: (await getPlaiceholder(rageImage.url)).base64,
-  // };
   return {
     img: rageImage,
     blurs,
