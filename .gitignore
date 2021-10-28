@@ -42,3 +42,5 @@ src/Styles/dist.css
 
 # eslint cache
 .eslintcache
+
+.idea
