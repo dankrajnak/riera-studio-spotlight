@@ -6,7 +6,7 @@ module.exports = {
     "next",
     "prettier",
   ],
-  plugins: ["@typescript-eslint", "react", "jsx-a11y", "react-hooks", "import"],
+  plugins: ["@typescript-eslint", "jsx-a11y", "react-hooks"],
   parser: `@typescript-eslint/parser`,
   rules: {
     "react-hooks/rules-of-hooks": "error",
