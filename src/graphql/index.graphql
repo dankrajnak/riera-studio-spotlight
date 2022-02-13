@@ -9,10 +9,7 @@ query Homepage {
                 uid
               }
               title
-              subtitle
               main_image
-              start_date
-              end_date
             }
           }
         }

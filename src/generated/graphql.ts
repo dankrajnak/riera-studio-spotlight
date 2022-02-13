@@ -4,10 +4,12 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -16,8 +18,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** Date */
-  Date: any;
   /** DateTime */
   DateTime: any;
   /** Raw JSON value */
@@ -29,30 +29,26 @@ export type Scalars = {
 export type Exhibition = _Document &
   _Linkable & {
     __typename?: "Exhibition";
-    title?: Maybe<Scalars["String"]>;
-    subtitle?: Maybe<Scalars["Json"]>;
-    main_image?: Maybe<Scalars["Json"]>;
-    start_date?: Maybe<Scalars["Date"]>;
-    end_date?: Maybe<Scalars["Date"]>;
+    _linkType?: Maybe<Scalars["String"]>;
+    _meta: Meta;
     body?: Maybe<Array<ExhibitionBody>>;
     body1?: Maybe<Array<ExhibitionBody1>>;
-    _meta: Meta;
-    _linkType?: Maybe<Scalars["String"]>;
+    main_image?: Maybe<Scalars["Json"]>;
+    title?: Maybe<Scalars["String"]>;
   };
 
 export type ExhibitionBody =
+  | ExhibitionBodyImage
   | ExhibitionBodyQuote
-  | ExhibitionBodyText
-  | ExhibitionBodySlider
-  | ExhibitionBodyImage;
+  | ExhibitionBodyText;
 
 export type ExhibitionBody1 = ExhibitionBody1Gallery_Image;
 
 export type ExhibitionBody1Gallery_Image = {
   __typename?: "ExhibitionBody1Gallery_image";
-  type?: Maybe<Scalars["String"]>;
   label?: Maybe<Scalars["String"]>;
   primary?: Maybe<ExhibitionBody1Gallery_ImagePrimary>;
+  type?: Maybe<Scalars["String"]>;
 };
 
 export type ExhibitionBody1Gallery_ImagePrimary = {
@@ -63,9 +59,9 @@ export type ExhibitionBody1Gallery_ImagePrimary = {
 
 export type ExhibitionBodyImage = {
   __typename?: "ExhibitionBodyImage";
-  type?: Maybe<Scalars["String"]>;
   label?: Maybe<Scalars["String"]>;
   primary?: Maybe<ExhibitionBodyImagePrimary>;
+  type?: Maybe<Scalars["String"]>;
 };
 
 export type ExhibitionBodyImagePrimary = {
@@ -75,35 +71,22 @@ export type ExhibitionBodyImagePrimary = {
 
 export type ExhibitionBodyQuote = {
   __typename?: "ExhibitionBodyQuote";
-  type?: Maybe<Scalars["String"]>;
   label?: Maybe<Scalars["String"]>;
   primary?: Maybe<ExhibitionBodyQuotePrimary>;
+  type?: Maybe<Scalars["String"]>;
 };
 
 export type ExhibitionBodyQuotePrimary = {
   __typename?: "ExhibitionBodyQuotePrimary";
-  text?: Maybe<Scalars["Json"]>;
   author?: Maybe<Scalars["String"]>;
-};
-
-export type ExhibitionBodySlider = {
-  __typename?: "ExhibitionBodySlider";
-  type?: Maybe<Scalars["String"]>;
-  label?: Maybe<Scalars["String"]>;
-  fields?: Maybe<Array<ExhibitionBodySliderFields>>;
-};
-
-export type ExhibitionBodySliderFields = {
-  __typename?: "ExhibitionBodySliderFields";
-  image?: Maybe<Scalars["Json"]>;
-  description?: Maybe<Scalars["String"]>;
+  text?: Maybe<Scalars["Json"]>;
 };
 
 export type ExhibitionBodyText = {
   __typename?: "ExhibitionBodyText";
-  type?: Maybe<Scalars["String"]>;
   label?: Maybe<Scalars["String"]>;
   primary?: Maybe<ExhibitionBodyTextPrimary>;
+  type?: Maybe<Scalars["String"]>;
 };
 
 export type ExhibitionBodyTextPrimary = {
@@ -114,28 +97,28 @@ export type ExhibitionBodyTextPrimary = {
 /** A connection to a list of items. */
 export type ExhibitionConnectionConnection = {
   __typename?: "ExhibitionConnectionConnection";
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<ExhibitionConnectionEdge>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
   totalCount: Scalars["Long"];
 };
 
 /** An edge in a connection. */
 export type ExhibitionConnectionEdge = {
   __typename?: "ExhibitionConnectionEdge";
-  /** The item at the end of the edge. */
-  node: Exhibition;
   /** A cursor for use in pagination. */
   cursor: Scalars["String"];
+  /** The item at the end of the edge. */
+  node: Exhibition;
 };
 
 export type Homepage = _Document &
   _Linkable & {
     __typename?: "Homepage";
-    active_exhibitions?: Maybe<Array<HomepageActive_Exhibitions>>;
-    _meta: Meta;
     _linkType?: Maybe<Scalars["String"]>;
+    _meta: Meta;
+    active_exhibitions?: Maybe<Array<HomepageActive_Exhibitions>>;
   };
 
 export type HomepageActive_Exhibitions = {
@@ -146,149 +129,149 @@ export type HomepageActive_Exhibitions = {
 /** A connection to a list of items. */
 export type HomepageConnectionConnection = {
   __typename?: "HomepageConnectionConnection";
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<HomepageConnectionEdge>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
   totalCount: Scalars["Long"];
 };
 
 /** An edge in a connection. */
 export type HomepageConnectionEdge = {
   __typename?: "HomepageConnectionEdge";
-  /** The item at the end of the edge. */
-  node: Homepage;
   /** A cursor for use in pagination. */
   cursor: Scalars["String"];
+  /** The item at the end of the edge. */
+  node: Homepage;
 };
 
 export type Meta = {
   __typename?: "Meta";
-  /** The id of the document. */
-  id: Scalars["String"];
-  /** The uid of the document. */
-  uid?: Maybe<Scalars["String"]>;
-  /** The type of the document. */
-  type: Scalars["String"];
-  /** The tags of the document. */
-  tags: Array<Scalars["String"]>;
-  /** The language of the document. */
-  lang: Scalars["String"];
   /** Alternate languages the document. */
   alternateLanguages: Array<RelatedDocument>;
   /** The first publication date of the document. */
   firstPublicationDate?: Maybe<Scalars["DateTime"]>;
+  /** The id of the document. */
+  id: Scalars["String"];
+  /** The language of the document. */
+  lang: Scalars["String"];
   /** The last publication date of the document. */
   lastPublicationDate?: Maybe<Scalars["DateTime"]>;
+  /** The tags of the document. */
+  tags: Array<Scalars["String"]>;
+  /** The type of the document. */
+  type: Scalars["String"];
+  /** The uid of the document. */
+  uid?: Maybe<Scalars["String"]>;
 };
 
 /** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: "PageInfo";
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars["String"]>;
   /** When paginating forwards, are there more items? */
   hasNextPage: Scalars["Boolean"];
   /** When paginating backwards, are there more items? */
   hasPreviousPage: Scalars["Boolean"];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars["String"]>;
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars["String"]>;
 };
 
 export type Query = {
   __typename?: "Query";
   _allDocuments: _DocumentConnection;
+  allExhibitions: ExhibitionConnectionConnection;
   allHomepages: HomepageConnectionConnection;
   exhibition?: Maybe<Exhibition>;
-  allExhibitions: ExhibitionConnectionConnection;
 };
 
 export type Query_AllDocumentsArgs = {
+  after?: Maybe<Scalars["String"]>;
+  before?: Maybe<Scalars["String"]>;
+  first?: Maybe<Scalars["Int"]>;
+  firstPublicationDate?: Maybe<Scalars["DateTime"]>;
+  firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
+  firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
+  fulltext?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["String"]>;
+  id_in?: Maybe<Array<Scalars["String"]>>;
+  lang?: Maybe<Scalars["String"]>;
+  last?: Maybe<Scalars["Int"]>;
+  lastPublicationDate?: Maybe<Scalars["DateTime"]>;
+  lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
+  lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
+  similar?: Maybe<Similar>;
   sortBy?: Maybe<SortDocumentsBy>;
+  tags?: Maybe<Array<Scalars["String"]>>;
+  tags_in?: Maybe<Array<Scalars["String"]>>;
   type?: Maybe<Scalars["String"]>;
   type_in?: Maybe<Array<Scalars["String"]>>;
-  id?: Maybe<Scalars["String"]>;
-  id_in?: Maybe<Array<Scalars["String"]>>;
-  lang?: Maybe<Scalars["String"]>;
-  tags?: Maybe<Array<Scalars["String"]>>;
-  tags_in?: Maybe<Array<Scalars["String"]>>;
-  firstPublicationDate?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  fulltext?: Maybe<Scalars["String"]>;
-  similar?: Maybe<Similar>;
-  before?: Maybe<Scalars["String"]>;
-  after?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-};
-
-export type QueryAllHomepagesArgs = {
-  sortBy?: Maybe<SortHomepagey>;
-  uid?: Maybe<Scalars["String"]>;
-  uid_in?: Maybe<Array<Scalars["String"]>>;
-  id?: Maybe<Scalars["String"]>;
-  id_in?: Maybe<Array<Scalars["String"]>>;
-  lang?: Maybe<Scalars["String"]>;
-  tags?: Maybe<Array<Scalars["String"]>>;
-  tags_in?: Maybe<Array<Scalars["String"]>>;
-  firstPublicationDate?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  fulltext?: Maybe<Scalars["String"]>;
-  similar?: Maybe<Similar>;
-  where?: Maybe<WhereHomepage>;
-  before?: Maybe<Scalars["String"]>;
-  after?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-};
-
-export type QueryExhibitionArgs = {
-  uid: Scalars["String"];
-  lang: Scalars["String"];
 };
 
 export type QueryAllExhibitionsArgs = {
-  sortBy?: Maybe<SortExhibitiony>;
-  uid?: Maybe<Scalars["String"]>;
-  uid_in?: Maybe<Array<Scalars["String"]>>;
-  id?: Maybe<Scalars["String"]>;
-  id_in?: Maybe<Array<Scalars["String"]>>;
-  lang?: Maybe<Scalars["String"]>;
-  tags?: Maybe<Array<Scalars["String"]>>;
-  tags_in?: Maybe<Array<Scalars["String"]>>;
+  after?: Maybe<Scalars["String"]>;
+  before?: Maybe<Scalars["String"]>;
+  first?: Maybe<Scalars["Int"]>;
   firstPublicationDate?: Maybe<Scalars["DateTime"]>;
   firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
   firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
+  fulltext?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["String"]>;
+  id_in?: Maybe<Array<Scalars["String"]>>;
+  lang?: Maybe<Scalars["String"]>;
+  last?: Maybe<Scalars["Int"]>;
   lastPublicationDate?: Maybe<Scalars["DateTime"]>;
   lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
   lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  fulltext?: Maybe<Scalars["String"]>;
   similar?: Maybe<Similar>;
+  sortBy?: Maybe<SortExhibitiony>;
+  tags?: Maybe<Array<Scalars["String"]>>;
+  tags_in?: Maybe<Array<Scalars["String"]>>;
+  uid?: Maybe<Scalars["String"]>;
+  uid_in?: Maybe<Array<Scalars["String"]>>;
   where?: Maybe<WhereExhibition>;
-  before?: Maybe<Scalars["String"]>;
+};
+
+export type QueryAllHomepagesArgs = {
   after?: Maybe<Scalars["String"]>;
+  before?: Maybe<Scalars["String"]>;
   first?: Maybe<Scalars["Int"]>;
+  firstPublicationDate?: Maybe<Scalars["DateTime"]>;
+  firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
+  firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
+  fulltext?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["String"]>;
+  id_in?: Maybe<Array<Scalars["String"]>>;
+  lang?: Maybe<Scalars["String"]>;
   last?: Maybe<Scalars["Int"]>;
+  lastPublicationDate?: Maybe<Scalars["DateTime"]>;
+  lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
+  lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
+  similar?: Maybe<Similar>;
+  sortBy?: Maybe<SortHomepagey>;
+  tags?: Maybe<Array<Scalars["String"]>>;
+  tags_in?: Maybe<Array<Scalars["String"]>>;
+  uid?: Maybe<Scalars["String"]>;
+  uid_in?: Maybe<Array<Scalars["String"]>>;
+  where?: Maybe<WhereHomepage>;
+};
+
+export type QueryExhibitionArgs = {
+  lang: Scalars["String"];
+  uid: Scalars["String"];
 };
 
 export type RelatedDocument = {
   __typename?: "RelatedDocument";
   /** The id of the document. */
   id: Scalars["String"];
-  /** The uid of the document. */
-  uid?: Maybe<Scalars["String"]>;
-  /** The type of the document. */
-  type: Scalars["String"];
   /** The language of the document. */
   lang: Scalars["String"];
+  /** The type of the document. */
+  type: Scalars["String"];
+  /** The uid of the document. */
+  uid?: Maybe<Scalars["String"]>;
 };
 
 export enum SortDocumentsBy {
@@ -305,12 +288,6 @@ export enum SortExhibitiony {
   MetaLastPublicationDateDesc = "meta_lastPublicationDate_DESC",
   TitleAsc = "title_ASC",
   TitleDesc = "title_DESC",
-  SubtitleAsc = "subtitle_ASC",
-  SubtitleDesc = "subtitle_DESC",
-  StartDateAsc = "start_date_ASC",
-  StartDateDesc = "start_date_DESC",
-  EndDateAsc = "end_date_ASC",
-  EndDateDesc = "end_date_DESC",
 }
 
 export enum SortHomepagey {
@@ -323,20 +300,6 @@ export enum SortHomepagey {
 export type WhereExhibition = {
   title?: Maybe<Scalars["String"]>;
   title_fulltext?: Maybe<Scalars["String"]>;
-  /** subtitle */
-  subtitle_fulltext?: Maybe<Scalars["String"]>;
-  /** start_date */
-  start_date?: Maybe<Scalars["Date"]>;
-  /** start_date */
-  start_date_before?: Maybe<Scalars["Date"]>;
-  /** start_date */
-  start_date_after?: Maybe<Scalars["Date"]>;
-  /** end_date */
-  end_date?: Maybe<Scalars["Date"]>;
-  /** end_date */
-  end_date_before?: Maybe<Scalars["Date"]>;
-  /** end_date */
-  end_date_after?: Maybe<Scalars["Date"]>;
 };
 
 export type WhereHomepage = {
@@ -356,48 +319,48 @@ export type _Document = {
 /** A connection to a list of items. */
 export type _DocumentConnection = {
   __typename?: "_DocumentConnection";
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
   /** A list of edges. */
   edges?: Maybe<Array<Maybe<_DocumentEdge>>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
   totalCount: Scalars["Long"];
 };
 
 /** An edge in a connection. */
 export type _DocumentEdge = {
   __typename?: "_DocumentEdge";
-  /** The item at the end of the edge. */
-  node: _Document;
   /** A cursor for use in pagination. */
   cursor: Scalars["String"];
+  /** The item at the end of the edge. */
+  node: _Document;
 };
 
 /** An external link */
 export type _ExternalLink = _Linkable & {
   __typename?: "_ExternalLink";
-  url: Scalars["String"];
-  target?: Maybe<Scalars["String"]>;
   _linkType?: Maybe<Scalars["String"]>;
+  target?: Maybe<Scalars["String"]>;
+  url: Scalars["String"];
 };
 
 /** A linked file */
 export type _FileLink = _Linkable & {
   __typename?: "_FileLink";
-  name: Scalars["String"];
-  url: Scalars["String"];
-  size: Scalars["Long"];
   _linkType?: Maybe<Scalars["String"]>;
+  name: Scalars["String"];
+  size: Scalars["Long"];
+  url: Scalars["String"];
 };
 
 /** A linked image */
 export type _ImageLink = _Linkable & {
   __typename?: "_ImageLink";
-  name: Scalars["String"];
-  url: Scalars["String"];
-  size: Scalars["Long"];
-  height: Scalars["Int"];
-  width: Scalars["Int"];
   _linkType?: Maybe<Scalars["String"]>;
+  height: Scalars["Int"];
+  name: Scalars["String"];
+  size: Scalars["Long"];
+  url: Scalars["String"];
+  width: Scalars["Int"];
 };
 
 /** A prismic link */
@@ -412,19 +375,24 @@ export type Similar = {
 
 export type AllExhibitionIdsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type AllExhibitionIdsQuery = { __typename?: "Query" } & {
-  allExhibitions: { __typename?: "ExhibitionConnectionConnection" } & {
-    edges?: Maybe<
-      Array<
-        Maybe<
-          { __typename?: "ExhibitionConnectionEdge" } & {
-            node: { __typename?: "Exhibition" } & {
-              _meta: { __typename?: "Meta" } & Pick<Meta, "uid">;
-            };
-          }
+export type AllExhibitionIdsQuery = {
+  __typename?: "Query";
+  allExhibitions: {
+    __typename?: "ExhibitionConnectionConnection";
+    edges?:
+      | Array<
+          | {
+              __typename?: "ExhibitionConnectionEdge";
+              node: {
+                __typename?: "Exhibition";
+                _meta: { __typename?: "Meta"; uid?: string | null | undefined };
+              };
+            }
+          | null
+          | undefined
         >
-      >
-    >;
+      | null
+      | undefined;
   };
 };
 
@@ -432,125 +400,153 @@ export type GetExhibitionQueryVariables = Exact<{
   uid: Scalars["String"];
 }>;
 
-export type GetExhibitionQuery = { __typename?: "Query" } & {
-  exhibition?: Maybe<
-    { __typename?: "Exhibition" } & Pick<Exhibition, "main_image" | "title"> & {
-        body?: Maybe<
-          Array<
-            | ({ __typename?: "ExhibitionBodyQuote" } & {
-                primary?: Maybe<
-                  { __typename?: "ExhibitionBodyQuotePrimary" } & Pick<
-                    ExhibitionBodyQuotePrimary,
-                    "text" | "author"
-                  >
-                >;
-              })
-            | ({ __typename?: "ExhibitionBodyText" } & {
-                primary?: Maybe<
-                  { __typename?: "ExhibitionBodyTextPrimary" } & Pick<
-                    ExhibitionBodyTextPrimary,
-                    "text"
-                  >
-                >;
-              })
-            | { __typename?: "ExhibitionBodySlider" }
-            | ({ __typename?: "ExhibitionBodyImage" } & {
-                primary?: Maybe<
-                  { __typename?: "ExhibitionBodyImagePrimary" } & Pick<
-                    ExhibitionBodyImagePrimary,
-                    "image"
-                  >
-                >;
-              })
-          >
-        >;
-        body1?: Maybe<
-          Array<
-            { __typename?: "ExhibitionBody1Gallery_image" } & {
-              primary?: Maybe<
-                { __typename?: "ExhibitionBody1Gallery_imagePrimary" } & Pick<
-                  ExhibitionBody1Gallery_ImagePrimary,
-                  "image" | "work_title"
-                >
-              >;
-            }
-          >
-        >;
+export type GetExhibitionQuery = {
+  __typename?: "Query";
+  exhibition?:
+    | {
+        __typename?: "Exhibition";
+        main_image?: any | null | undefined;
+        title?: string | null | undefined;
+        body?:
+          | Array<
+              | {
+                  __typename?: "ExhibitionBodyImage";
+                  primary?:
+                    | {
+                        __typename?: "ExhibitionBodyImagePrimary";
+                        image?: any | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
+                  __typename?: "ExhibitionBodyQuote";
+                  primary?:
+                    | {
+                        __typename?: "ExhibitionBodyQuotePrimary";
+                        text?: any | null | undefined;
+                        author?: string | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
+                  __typename?: "ExhibitionBodyText";
+                  primary?:
+                    | {
+                        __typename?: "ExhibitionBodyTextPrimary";
+                        text?: any | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+            >
+          | null
+          | undefined;
+        body1?:
+          | Array<{
+              __typename?: "ExhibitionBody1Gallery_image";
+              primary?:
+                | {
+                    __typename?: "ExhibitionBody1Gallery_imagePrimary";
+                    image?: any | null | undefined;
+                    work_title?: string | null | undefined;
+                  }
+                | null
+                | undefined;
+            }>
+          | null
+          | undefined;
       }
-  >;
+    | null
+    | undefined;
 };
 
 export type HomepageQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HomepageQuery = { __typename?: "Query" } & {
-  allHomepages: { __typename?: "HomepageConnectionConnection" } & {
-    edges?: Maybe<
-      Array<
-        Maybe<
-          { __typename?: "HomepageConnectionEdge" } & {
-            node: { __typename?: "Homepage" } & {
-              active_exhibitions?: Maybe<
-                Array<
-                  { __typename?: "HomepageActive_exhibitions" } & {
-                    exhibition?: Maybe<
-                      | ({ __typename?: "Exhibition" } & Pick<
-                          Exhibition,
-                          | "title"
-                          | "subtitle"
-                          | "main_image"
-                          | "start_date"
-                          | "end_date"
-                        > & {
-                            _meta: { __typename?: "Meta" } & Pick<Meta, "uid">;
-                          })
-                      | { __typename?: "Homepage" }
-                      | { __typename?: "_ExternalLink" }
-                      | { __typename?: "_FileLink" }
-                      | { __typename?: "_ImageLink" }
-                    >;
-                  }
-                >
-              >;
-            };
-          }
+export type HomepageQuery = {
+  __typename?: "Query";
+  allHomepages: {
+    __typename?: "HomepageConnectionConnection";
+    edges?:
+      | Array<
+          | {
+              __typename?: "HomepageConnectionEdge";
+              node: {
+                __typename?: "Homepage";
+                active_exhibitions?:
+                  | Array<{
+                      __typename?: "HomepageActive_exhibitions";
+                      exhibition?:
+                        | {
+                            __typename?: "Exhibition";
+                            title?: string | null | undefined;
+                            main_image?: any | null | undefined;
+                            _meta: {
+                              __typename?: "Meta";
+                              uid?: string | null | undefined;
+                            };
+                          }
+                        | { __typename?: "Homepage" }
+                        | { __typename?: "_ExternalLink" }
+                        | { __typename?: "_FileLink" }
+                        | { __typename?: "_ImageLink" }
+                        | null
+                        | undefined;
+                    }>
+                  | null
+                  | undefined;
+              };
+            }
+          | null
+          | undefined
         >
-      >
-    >;
+      | null
+      | undefined;
   };
 };
 
 export type MenuQueryVariables = Exact<{ [key: string]: never }>;
 
-export type MenuQuery = { __typename?: "Query" } & {
-  allHomepages: { __typename?: "HomepageConnectionConnection" } & {
-    edges?: Maybe<
-      Array<
-        Maybe<
-          { __typename?: "HomepageConnectionEdge" } & {
-            node: { __typename?: "Homepage" } & {
-              active_exhibitions?: Maybe<
-                Array<
-                  { __typename?: "HomepageActive_exhibitions" } & {
-                    exhibition?: Maybe<
-                      | ({ __typename?: "Exhibition" } & Pick<
-                          Exhibition,
-                          "title" | "main_image"
-                        > & {
-                            _meta: { __typename?: "Meta" } & Pick<Meta, "uid">;
-                          })
-                      | { __typename?: "Homepage" }
-                      | { __typename?: "_ExternalLink" }
-                      | { __typename?: "_FileLink" }
-                      | { __typename?: "_ImageLink" }
-                    >;
-                  }
-                >
-              >;
-            };
-          }
+export type MenuQuery = {
+  __typename?: "Query";
+  allHomepages: {
+    __typename?: "HomepageConnectionConnection";
+    edges?:
+      | Array<
+          | {
+              __typename?: "HomepageConnectionEdge";
+              node: {
+                __typename?: "Homepage";
+                active_exhibitions?:
+                  | Array<{
+                      __typename?: "HomepageActive_exhibitions";
+                      exhibition?:
+                        | {
+                            __typename?: "Exhibition";
+                            title?: string | null | undefined;
+                            main_image?: any | null | undefined;
+                            _meta: {
+                              __typename?: "Meta";
+                              uid?: string | null | undefined;
+                            };
+                          }
+                        | { __typename?: "Homepage" }
+                        | { __typename?: "_ExternalLink" }
+                        | { __typename?: "_FileLink" }
+                        | { __typename?: "_ImageLink" }
+                        | null
+                        | undefined;
+                    }>
+                  | null
+                  | undefined;
+              };
+            }
+          | null
+          | undefined
         >
-      >
-    >;
+      | null
+      | undefined;
   };
 };
 
@@ -714,10 +710,7 @@ export const HomepageDocument = gql`
                   uid
                 }
                 title
-                subtitle
                 main_image
-                start_date
-                end_date
               }
             }
           }

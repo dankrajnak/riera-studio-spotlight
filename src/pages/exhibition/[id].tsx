@@ -7,10 +7,7 @@ import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox";
 import exhibitionQuery, {
   allExhibitionIdsQuery,
 } from "../../PrismicRage/exhibitionQuery";
-import {
-  getPrismicRageImage,
-  RageServiceReturn,
-} from "../../PrismicRage/shared";
+import { RageServiceReturn } from "../../PrismicRage/shared";
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
 import { PreviewProp } from "../api/preview";
@@ -194,8 +191,6 @@ const ExhibitionSliceZone = ({
               </SRLWrapper>
             );
           }
-          case "ExhibitionBodySlider":
-            return "Slider";
           default:
             return null;
         }

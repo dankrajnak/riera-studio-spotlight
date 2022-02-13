@@ -178,14 +178,6 @@ export default function Home({
                 id={exhibitionShowing._meta.uid}
                 key={"thing" + pageNumber}
                 title={exhibitionShowing.title}
-                start={
-                  exhibitionShowing.start_date &&
-                  new Date(exhibitionShowing.start_date)
-                }
-                end={
-                  exhibitionShowing.end_date &&
-                  new Date(exhibitionShowing.end_date)
-                }
               />
             )}
           </AnimatePresence>
