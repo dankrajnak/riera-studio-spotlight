@@ -1,0 +1,29 @@
+{
+  "id": "homepage",
+  "label": "Homepage",
+  "repeatable": false,
+  "json": {
+    "Main": {
+      "active_exhibitions": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "exhibition": {
+              "type": "Link",
+              "config": {
+                "select": "document",
+                "customtypes": [
+                  "exhibition"
+                ],
+                "label": "Exhibition"
+              }
+            }
+          },
+          "label": "Active Exhibitions"
+        }
+      }
+    }
+  },
+  "hash": "51a566bfe7148217a9c9e9feac17ea3b",
+  "status": true
+}
