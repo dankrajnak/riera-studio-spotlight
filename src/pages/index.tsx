@@ -36,7 +36,7 @@ const ExhibitionComp = ({
       exit={{ opacity: 0 }}
     >
       <Plane zIndex={2000}>
-        <div className="text-container">
+        <div className=" w-full h-full flex px-52  items-center">
           <Link href={LinkHelper.getExhibitionLink(id)}>
             <a className="title-holder">
               <SplitText
@@ -184,7 +184,7 @@ export default function Home({
 
           {!isLastPage && (
             <div
-              className="scroll-down"
+              className="scroll-down flex justify-center"
               role="button"
               aria-label="Next Page"
               {...A11y.clickOrKeyboard(() => incrementPage())}
@@ -195,7 +195,7 @@ export default function Home({
           )}
           {pageNumber > 0 && (
             <div
-              className="scroll-up"
+              className="scroll-up flex justify-center"
               role="button"
               aria-label="Previous Page"
               {...A11y.clickOrKeyboard(() => decrementPage())}

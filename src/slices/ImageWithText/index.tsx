@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { RichText } from "prismic-reactjs";
 import LabelledImage from "../../Components/LabelledImage";
 import { ExhibitionSlice } from "../../PrismicRage/shared";
@@ -15,12 +14,7 @@ const ImageWithText = ({ slice }: { slice: Props }) => {
           <h2>Template slice, update me!</h2>
         )}
       </span>
-      {slice.primary.image && (
-        <LabelledImage
-          image={slice.primary.image.img}
-          blurs={slice.primary.image.blurs}
-        />
-      )}
+      {slice.primary.image && <LabelledImage image={slice.primary.image} />}
       <style jsx>{`
         section {
           max-width: 600px;
