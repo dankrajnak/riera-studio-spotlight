@@ -1,5 +1,7 @@
-import * as queryString from "query-string";
+import { ApolloQueryResult } from "@apollo/client";
 import { ImageLoader } from "next/image";
+import { GetExhibitionQuery } from "../generated/graphql";
+import { ExhibitionType } from "./exhibitionQuery";
 
 export interface PrismicRageImage {
   alt: string | null;
@@ -29,6 +31,13 @@ export const getPrismicRageImage = (img: any): PrismicRageImage => {
     // url: queryString.parseUrl(img.url).url,
   };
 };
+
+type ExhibitionSliceTypeNames = ExhibitionType["body"][0]["__typename"];
+
+export type ExhibitionSlice<T extends ExhibitionSliceTypeNames> = Extract<
+  Partial<ExhibitionType["body"][0]>,
+  { __typename?: T }
+>;
 
 export const imgixLoader: ImageLoader = ({ src, width, quality }) => {
   // Demo: https://static.imgix.net/daisy.png?format=auto&fit=max&w=300

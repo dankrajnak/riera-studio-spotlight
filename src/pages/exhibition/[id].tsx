@@ -69,7 +69,8 @@ const Exhibition = ({ exhibition }: Props) => {
                     }}
                   >
                     <LabelledImage
-                      image={image.image}
+                      image={image.image.img}
+                      blurs={image.image.blurs}
                       label={image.image.img.alt}
                     />
                     {/* <LabelledImage
@@ -185,7 +186,8 @@ const ExhibitionSliceZone = ({
                 <div className="clickable">
                   <LabelledImage
                     label={slice.primary.image?.img.alt}
-                    image={slice.primary.image}
+                    image={slice.primary.image.img}
+                    blurs={slice.primary.image.blurs}
                   />
                 </div>
               </SRLWrapper>

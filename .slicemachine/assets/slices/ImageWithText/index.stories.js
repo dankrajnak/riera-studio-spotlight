@@ -1,0 +1,61 @@
+import MyComponent from "../../../../slices/ImageWithText";
+
+export default {
+  title: "slices/ImageWithText",
+};
+
+export const _DefaultSlice = () => (
+  <MyComponent
+    slice={{
+      variation: "default-slice",
+      name: "Default slice",
+      slice_type: "image_with_text",
+      items: [],
+      primary: {
+        description: [
+          {
+            type: "paragraph",
+            text: "Cupidatat incididunt ea minim aute sit enim consequat voluptate dolor veniam commodo amet. Aute ex et sunt ipsum occaecat adipisicing occaecat enim sint occaecat exercitation. Commodo ipsum voluptate quis incididunt non reprehenderit sit voluptate exercitation velit dolore quis commodo nulla.",
+            spans: [],
+          },
+        ],
+        image: {
+          dimensions: { width: 900, height: 500 },
+          alt: "Placeholder image",
+          copyright: null,
+          url: "https://images.unsplash.com/photo-1491975474562-1f4e30bc9468?w=900&h=500&fit=crop",
+        },
+      },
+      id: "_DefaultSlice",
+    }}
+  />
+);
+_DefaultSlice.storyName = "Default slice";
+
+export const _ImageLeft = () => (
+  <MyComponent
+    slice={{
+      variation: "imageLeft",
+      name: "image-left",
+      slice_type: "image_with_text",
+      items: [],
+      primary: {
+        description: [
+          {
+            type: "paragraph",
+            text: "Ut mollit ut nostrud id tempor magna proident anim deserunt excepteur sint mollit. Adipisicing incididunt cillum nostrud nulla tempor commodo. Occaecat est adipisicing ut cupidatat cupidatat sunt in eiusmod sunt nostrud et sit ipsum.",
+            spans: [],
+          },
+        ],
+        image: {
+          dimensions: { width: 900, height: 500 },
+          alt: "Placeholder image",
+          copyright: null,
+          url: "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?w=900&h=500&fit=crop",
+        },
+      },
+      id: "_ImageLeft",
+    }}
+  />
+);
+_ImageLeft.storyName = "image-left";

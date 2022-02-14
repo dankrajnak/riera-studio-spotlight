@@ -19,6 +19,23 @@ query GetExhibition($uid: String!) {
           image
         }
       }
+      ... on ExhibitionBodyImage_with_text {
+        type
+        variation {
+          ... on ExhibitionBodyImage_with_textDefaultSlice {
+            primary {
+              image
+              description
+            }
+          }
+          ... on ExhibitionBodyImage_with_textImageleft {
+            primary {
+              image
+              description
+            }
+          }
+        }
+      }
     }
     body1 {
       ... on ExhibitionBody1Gallery_image {

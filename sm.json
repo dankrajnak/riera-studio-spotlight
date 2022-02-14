@@ -2,7 +2,7 @@
   "apiEndpoint": "https://riera-studio-spotlight.prismic.io/api/v2",
   "localSliceSimulatorURL": "http://localhost:3000/slice-simulator",
   "libraries": [
-    "@/slices"
+    "@/src/slices"
   ],
   "_latest": "0.1.0"
 }

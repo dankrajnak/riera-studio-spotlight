@@ -14,7 +14,7 @@ import {
 
 type GalleryImage = { image: ImageWithBlur; title: string };
 
-type ExhibitionType = Omit<
+export type ExhibitionType = Omit<
   GetExhibitionQuery["exhibition"] & {
     main_image: PrismicRageImage;
     galleryImages: GalleryImage[];

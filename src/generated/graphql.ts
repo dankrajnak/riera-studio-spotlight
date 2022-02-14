@@ -10,7 +10,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
-const defaultOptions = {};
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -39,6 +39,7 @@ export type Exhibition = _Document &
 
 export type ExhibitionBody =
   | ExhibitionBodyImage
+  | ExhibitionBodyImage_With_Text
   | ExhibitionBodyQuote
   | ExhibitionBodyText;
 
@@ -68,6 +69,39 @@ export type ExhibitionBodyImagePrimary = {
   __typename?: "ExhibitionBodyImagePrimary";
   image?: Maybe<Scalars["Json"]>;
 };
+
+export type ExhibitionBodyImage_With_Text = {
+  __typename?: "ExhibitionBodyImage_with_text";
+  label?: Maybe<Scalars["String"]>;
+  type?: Maybe<Scalars["String"]>;
+  variation?: Maybe<ExhibitionBodyImage_With_TextVariation>;
+};
+
+export type ExhibitionBodyImage_With_TextDefaultSlice = {
+  __typename?: "ExhibitionBodyImage_with_textDefaultSlice";
+  primary?: Maybe<ExhibitionBodyImage_With_TextDefaultSlicePrimary>;
+};
+
+export type ExhibitionBodyImage_With_TextDefaultSlicePrimary = {
+  __typename?: "ExhibitionBodyImage_with_textDefaultSlicePrimary";
+  description?: Maybe<Scalars["Json"]>;
+  image?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyImage_With_TextImageleft = {
+  __typename?: "ExhibitionBodyImage_with_textImageleft";
+  primary?: Maybe<ExhibitionBodyImage_With_TextImageleftPrimary>;
+};
+
+export type ExhibitionBodyImage_With_TextImageleftPrimary = {
+  __typename?: "ExhibitionBodyImage_with_textImageleftPrimary";
+  description?: Maybe<Scalars["Json"]>;
+  image?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyImage_With_TextVariation =
+  | ExhibitionBodyImage_With_TextDefaultSlice
+  | ExhibitionBodyImage_With_TextImageleft;
 
 export type ExhibitionBodyQuote = {
   __typename?: "ExhibitionBodyQuote";
@@ -420,6 +454,35 @@ export type GetExhibitionQuery = {
                     | undefined;
                 }
               | {
+                  __typename?: "ExhibitionBodyImage_with_text";
+                  type?: string | null | undefined;
+                  variation?:
+                    | {
+                        __typename?: "ExhibitionBodyImage_with_textDefaultSlice";
+                        primary?:
+                          | {
+                              __typename?: "ExhibitionBodyImage_with_textDefaultSlicePrimary";
+                              image?: any | null | undefined;
+                              description?: any | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | {
+                        __typename?: "ExhibitionBodyImage_with_textImageleft";
+                        primary?:
+                          | {
+                              __typename?: "ExhibitionBodyImage_with_textImageleftPrimary";
+                              image?: any | null | undefined;
+                              description?: any | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
                   __typename?: "ExhibitionBodyQuote";
                   primary?:
                     | {
@@ -633,6 +696,23 @@ export const GetExhibitionDocument = gql`
         ... on ExhibitionBodyImage {
           primary {
             image
+          }
+        }
+        ... on ExhibitionBodyImage_with_text {
+          type
+          variation {
+            ... on ExhibitionBodyImage_with_textDefaultSlice {
+              primary {
+                image
+                description
+              }
+            }
+            ... on ExhibitionBodyImage_with_textImageleft {
+              primary {
+                image
+                description
+              }
+            }
           }
         }
       }
