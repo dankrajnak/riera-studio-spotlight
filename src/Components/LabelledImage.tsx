@@ -2,6 +2,8 @@ import { useMeasure } from "react-use";
 import Image from "next/image";
 import React, { useState } from "react";
 import { IGetPlaiceholderReturn } from "plaiceholder";
+import lgZoom from "lightgallery/plugins/zoom";
+import LightGallery from "lightgallery/react";
 import { PrismicRageImage } from "../PrismicRage/shared";
 import SVGBlur from "./SVGBlur";
 
@@ -29,7 +31,7 @@ const LabelledImage = ({
       }}
     >
       {width &&
-        (blurs ? (
+        (false ? (
           <SVGBlur
             onLoadingComplete={() => setImageLoaded(true)}
             img={blurs.img}
@@ -44,18 +46,22 @@ const LabelledImage = ({
             alt={image.alt}
           />
         ) : (
-          <Image
-            onLoadingComplete={() => setImageLoaded(true)}
-            src={image.url}
-            width={width}
-            height={
-              image.dimensions.width > image.dimensions.height
-                ? (image.dimensions.height / image.dimensions.width) * width
-                : width
-            }
-            objectFit="contain"
-            alt={image.alt}
-          />
+          <LightGallery speed={100} plugins={[lgZoom]} counter={false}>
+            <a data-src={image.url}>
+              <Image
+                onLoadingComplete={() => setImageLoaded(true)}
+                src={image.url}
+                width={width}
+                height={
+                  image.dimensions.width > image.dimensions.height
+                    ? (image.dimensions.height / image.dimensions.width) * width
+                    : width
+                }
+                objectFit="contain"
+                alt={image.alt}
+              />
+            </a>
+          </LightGallery>
         ))}
       {label && (
         <div

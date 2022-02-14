@@ -169,7 +169,9 @@ export default function Home({
               >
                 <Plane zIndex={5000}>
                   <CenterLayout>
-                    <h3 style={{ marginBottom: 0 }}>RIERA STUDIO SPOTLIGHT</h3>
+                    <h3 className="mb-0 text-lg font-bold">
+                      RIERA STUDIO SPOTLIGHT
+                    </h3>
                   </CenterLayout>
                 </Plane>
               </motion.div>

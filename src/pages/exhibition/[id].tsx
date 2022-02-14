@@ -3,7 +3,7 @@ import { RichText } from "prismic-reactjs";
 import Image from "next/image";
 import { Fragment } from "react";
 import { motion } from "framer-motion";
-import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox";
+
 import exhibitionQuery, {
   allExhibitionIdsQuery,
 } from "../../PrismicRage/exhibitionQuery";
@@ -11,6 +11,12 @@ import { RageServiceReturn } from "../../PrismicRage/shared";
 import SEO from "../../Utils/SEO";
 import LabelledImage from "../../Components/LabelledImage";
 import { PreviewProp } from "../api/preview";
+
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+
+// import plugins if you need
 
 type Props = {
   exhibition: RageServiceReturn<typeof exhibitionQuery>;
@@ -22,7 +28,7 @@ const Exhibition = ({ exhibition }: Props) => {
   }
 
   return (
-    <SimpleReactLightbox>
+    <>
       <SEO title={exhibition.title} />
       <div className="title-image">
         <Image
@@ -49,37 +55,17 @@ const Exhibition = ({ exhibition }: Props) => {
             <div className="gallery-grid">
               {exhibition.galleryImages.map((image, i) => (
                 <div className="gallery-item" key={i}>
-                  <SRLWrapper
-                    key={i}
-                    options={{
-                      autoplaySpeed: 0,
-                      disableKeyboardControls: true,
-                      buttons: {
-                        showDownloadButton: false,
-                        showAutoplayButton: false,
-                        showFullscreenButton: true,
-                        showNextButton: false,
-                        showPrevButton: false,
-                        showThumbnailsButton: false,
-                      },
-                      thumbnails: {
-                        showThumbnails: false,
-                      },
-                      showProgressBar: false,
-                    }}
-                  >
-                    <LabelledImage
-                      image={image.image.img}
-                      blurs={image.image.blurs}
-                      label={image.image.img.alt}
-                    />
-                    {/* <LabelledImage
+                  <LabelledImage
+                    image={image.image.img}
+                    blurs={image.image.blurs}
+                    label={image.image.img.alt}
+                  />
+                  {/* <LabelledImage
                       blurDataURL={image.image.blurDataURL}
                       image={image.image}
                       label={image.title}
                       key={i}
                     /> */}
-                  </SRLWrapper>
                 </div>
               ))}
             </div>
@@ -127,7 +113,7 @@ const Exhibition = ({ exhibition }: Props) => {
           }
         `}
       </style>
-    </SimpleReactLightbox>
+    </>
   );
 };
 
@@ -164,36 +150,13 @@ const ExhibitionSliceZone = ({
             );
           case "ExhibitionBodyImage": {
             return (
-              <SRLWrapper
-                key={i}
-                options={{
-                  autoplaySpeed: 0,
-                  disableKeyboardControls: true,
-                  buttons: {
-                    showDownloadButton: false,
-                    showAutoplayButton: false,
-                    showFullscreenButton: true,
-                    showNextButton: false,
-                    showPrevButton: false,
-                    showThumbnailsButton: false,
-                  },
-                  caption: {
-                    showCaption: false,
-                  },
-                  thumbnails: {
-                    showThumbnails: false,
-                  },
-                  showProgressBar: false,
-                }}
-              >
-                <div className="clickable my-5">
-                  <LabelledImage
-                    label={slice.primary.image?.img.alt}
-                    image={slice.primary.image.img}
-                    blurs={slice.primary.image.blurs}
-                  />
-                </div>
-              </SRLWrapper>
+              <div className="clickable my-5">
+                <LabelledImage
+                  label={slice.primary.image?.img.alt}
+                  image={slice.primary.image.img}
+                  blurs={slice.primary.image.blurs}
+                />
+              </div>
             );
           }
           default:

@@ -25,6 +25,7 @@
     "graphql": "^16.0.0",
     "graphql-request": "^3.5.0",
     "less": "^4.1.1",
+    "lightgallery": "^2.4.0",
     "next": "^12.0.9",
     "next-slicezone": "^0.2.0",
     "plaiceholder": "^2.0.1",

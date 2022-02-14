@@ -3,6 +3,8 @@ import { IGetPlaiceholderReturn } from "plaiceholder";
 import { createElement } from "react";
 import Image from "next/image";
 import { useMeasure } from "react-use";
+import lgZoom from "lightgallery/plugins/zoom";
+import LightGallery from "lightgallery/react";
 
 interface Props extends Partial<ImageProps> {
   svg: IGetPlaiceholderReturn["svg"];
@@ -47,8 +49,11 @@ export const SVGBlur = ({ svg, img, alt, fill, ...otherImageProps }: Props) => {
           })
         )
       )}
-
-      <Image {...img} alt={alt} {...otherImageProps} />
+      <LightGallery speed={100} plugins={[lgZoom]} counter={false}>
+        <a data-src={img.src}>
+          <Image {...img} alt={alt} {...otherImageProps} />
+        </a>
+      </LightGallery>
     </div>
   );
 };
