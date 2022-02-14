@@ -31,7 +31,7 @@ const LabelledImage = ({
       }}
     >
       {width &&
-        (false ? (
+        (blurs ? (
           <SVGBlur
             onLoadingComplete={() => setImageLoaded(true)}
             img={blurs.img}
