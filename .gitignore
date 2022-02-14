@@ -44,3 +44,5 @@ src/Styles/dist.css
 .eslintcache
 
 .idea
+
+*.tsbuildinfo

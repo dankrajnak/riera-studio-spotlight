@@ -177,13 +177,16 @@ const ExhibitionSliceZone = ({
                     showPrevButton: false,
                     showThumbnailsButton: false,
                   },
+                  caption: {
+                    showCaption: false,
+                  },
                   thumbnails: {
                     showThumbnails: false,
                   },
                   showProgressBar: false,
                 }}
               >
-                <div className="clickable">
+                <div className="clickable my-5">
                   <LabelledImage
                     label={slice.primary.image?.img.alt}
                     image={slice.primary.image.img}

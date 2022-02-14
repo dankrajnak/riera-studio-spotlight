@@ -26,6 +26,7 @@ export const SVGBlur = ({ svg, img, alt, fill, ...otherImageProps }: Props) => {
         position: "relative",
         display: "block",
         overflow: "hidden",
+        lineHeight: 0,
         ...(fill ? { width: "100%", height: "100%" } : {}),
       }}
     >
