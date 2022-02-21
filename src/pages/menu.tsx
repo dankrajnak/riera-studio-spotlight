@@ -70,7 +70,7 @@ const MenuContent: React.FC<{
               <div className="flex items-center justify-start overflow-visible w-full h-full p-4">
                 <TitleText
                   text={exhibition.title}
-                  className="lg:whitespace-nowrap overflow-hidden overflow-ellipsis"
+                  className="lg:whitespace-nowrap overflow-x-hidden overflow-ellipsis"
                 />
               </div>
             </Plane>

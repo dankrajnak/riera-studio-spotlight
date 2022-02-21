@@ -51,7 +51,13 @@ export const SVGBlur = ({ svg, img, alt, fill, ...otherImageProps }: Props) => {
       )}
       <LightGallery speed={100} plugins={[lgZoom]} counter={false}>
         <a data-src={img.src}>
-          <Image {...img} alt={alt} {...otherImageProps} />
+          <Image
+            src={img.src}
+            width={otherImageProps.layout === "fill" ? undefined : img.width}
+            height={otherImageProps.layout === "fill" ? undefined : img.height}
+            alt={alt}
+            {...otherImageProps}
+          />
         </a>
       </LightGallery>
     </div>
