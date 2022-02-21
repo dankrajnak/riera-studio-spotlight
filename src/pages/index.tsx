@@ -14,6 +14,7 @@ import LinkHelper from "../Utils/LinkHelper";
 import A11y from "../Utils/A11y";
 import Plane from "../Layout/Plane";
 import Spotlights from "../Components/Spotlights";
+import TitleText from "../Components/TitleText";
 import { withDontShowMenuButton } from "./_app";
 
 const ExhibitionComp = ({
@@ -36,57 +37,19 @@ const ExhibitionComp = ({
       exit={{ opacity: 0 }}
     >
       <Plane zIndex={2000}>
-        <div className=" w-full h-full flex px-52  items-center">
+        <div className="w-full lg:w-2/3 h-full flex md:px-52 px-10  items-center">
           <Link href={LinkHelper.getExhibitionLink(id)}>
             <a className="title-holder">
               <SplitText
-                key="heading"
-                className="title-link"
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={{
-                  visible: (i: number) => ({
-                    y: 0,
-                    transition: {
-                      delay: i * 0.2,
-                      ease: "easeOut",
-                      duration: 1,
-                    },
-                  }),
-                  hidden: (i: number) => ({
-                    y: "100%",
-                    transition: {
-                      delay: i * 0.2,
-                      ease: "easeOut",
-                      duration: 1,
-                    },
-                  }),
-                }}
-              >
-                {title}
-              </SplitText>
+                title={title}
+                display={(word) => <TitleText text={word} />}
+              />
               {subtitle && <div>{subtitle}</div>}
             </a>
           </Link>
         </div>
       </Plane>
     </motion.div>
-
-    <style jsx global>{`
-      .text-container {
-        width: 50%;
-        height: 100%;
-        display: flex;
-        padding: 0px 80px;
-        justify-content: center;
-        align-items: center;
-      }
-      .title-link {
-        font-weight: 200;
-        font-size: 5rem;
-      }
-    `}</style>
   </>
 );
 

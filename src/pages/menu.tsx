@@ -4,7 +4,7 @@ import Image from "next/image";
 import queryString, { Stringifiable } from "query-string";
 import homeIcon from "../../public/homeIcon.svg";
 import Plane from "../Layout/Plane";
-import { imgixLoader, RageServiceReturn } from "../PrismicRage/shared";
+import { RageServiceReturn } from "../PrismicRage/shared";
 import Colors from "../Utils/Colors";
 import LinkHelper from "../Utils/LinkHelper";
 import getMenu from "../PrismicRage/getMenu";
@@ -14,6 +14,7 @@ import {
 } from "../Layout/MenuLayout";
 import SEO from "../Utils/SEO";
 import SVGBlur from "../Components/SVGBlur";
+import TitleText from "../Components/TitleText";
 
 const addParams = (url: string, params: Record<string, Stringifiable>) => {
   const parsedUrl = queryString.parseUrl(url);
@@ -46,7 +47,7 @@ const MenuContent: React.FC<{
             }}
           >
             <Plane>
-              <div className="image-holder">
+              <div className="w-full h-full opacity-50">
                 <SVGBlur
                   svg={exhibition.image.blurs.svg}
                   img={{
@@ -66,45 +67,17 @@ const MenuContent: React.FC<{
               </div>
             </Plane>
             <Plane>
-              <div className="title-holder">
-                <h1 className="title-link">{exhibition.title}</h1>
+              <div className="flex items-center justify-start overflow-visible w-full h-full p-4">
+                <TitleText
+                  text={exhibition.title}
+                  className="lg:whitespace-nowrap overflow-hidden overflow-ellipsis"
+                />
               </div>
             </Plane>
           </a>
         </Link>
       ))}
     </div>
-    <style jsx>{`
-      .title-link {
-        font-size: 6rem;
-        font-family: "EB Garamond";
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-      @media screen and (max-width: 800px) {
-        .title-holder {
-          padding: 0px 10px;
-        }
-        .title-link {
-          font-size: 2rem;
-          overflow: visible;
-          white-space: normal;
-        }
-      }
-      .title-holder,
-      .image-holder {
-        width: 100%;
-        height: 100%;
-      }
-      .title-holder {
-        display: flex;
-        align-items: center;
-      }
-      .image-holder {
-        opacity: 0.5;
-      }
-    `}</style>
   </>
 );
 
