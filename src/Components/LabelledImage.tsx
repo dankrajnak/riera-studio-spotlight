@@ -47,7 +47,7 @@ const LabelledImage = ({
           />
         ) : (
           <LightGallery speed={100} plugins={[lgZoom]} counter={false}>
-            <a data-src={image.url}>
+            <a data-src={image.url} className="cursor-pointer">
               <Image
                 onLoadingComplete={() => setImageLoaded(true)}
                 src={image.url}

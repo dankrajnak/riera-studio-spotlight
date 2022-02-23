@@ -50,7 +50,7 @@ export const SVGBlur = ({ svg, img, alt, fill, ...otherImageProps }: Props) => {
         )
       )}
       <LightGallery speed={100} plugins={[lgZoom]} counter={false}>
-        <a data-src={img.src}>
+        <a data-src={img.src} className="cursor-pointer">
           <Image
             src={img.src}
             width={otherImageProps.layout === "fill" ? undefined : img.width}
