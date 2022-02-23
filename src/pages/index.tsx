@@ -214,6 +214,15 @@ export default function Home({
           }
         `}
       </style>
+      <style jsx global>
+        {`
+          html,
+          body {
+            color: #efefef;
+            background-color: #121212;
+          }
+        `}
+      </style>
     </>
   );
 }

@@ -121,7 +121,18 @@
           "isDirectory": true,
           "extension": "tsx"
         },
-        "screenshotPaths": {}
+        "screenshotPaths": {
+          "default-slice": {
+            "path": "/Users/danielkrajnak/Code/riera-studio-spotlight/.slicemachine/assets/src/slices/ImageWithText/default-slice/preview.png",
+            "width": 800,
+            "height": 144
+          },
+          "imageLeft": {
+            "path": "/Users/danielkrajnak/Code/riera-studio-spotlight/.slicemachine/assets/src/slices/ImageWithText/imageLeft/preview.png",
+            "width": 800,
+            "height": 194
+          }
+        }
       }
     }
   }
