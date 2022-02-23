@@ -50,24 +50,18 @@ const Exhibition = ({ exhibition }: Props) => {
           <ExhibitionSliceZone slices={exhibition.body} />
         </div>
         {exhibition.galleryImages.length > 0 && (
-          <div className="gallery-container">
-            <hr />
-            <h1>Gallery</h1>
+          <div className="lg:mx-10 sm:mx-6 mx-2 mb-10">
+            <hr className=" border-black mb-3" />
+            <h1 className="font-serifDisplay text-3xl mb-8">Gallery</h1>
 
-            <div className="gallery-grid">
+            <div className="columns-xs space-y-8 gap-8">
               {exhibition.galleryImages.map((image, i) => (
-                <div className="gallery-item" key={i}>
+                <div className=" break-inside-avoid-column" key={i}>
                   <LabelledImage
                     image={image.image.img}
                     blurs={image.image.blurs}
                     label={image.image.img.alt}
                   />
-                  {/* <LabelledImage
-                      blurDataURL={image.image.blurDataURL}
-                      image={image.image}
-                      label={image.title}
-                      key={i}
-                    /> */}
                 </div>
               ))}
             </div>
@@ -82,18 +76,7 @@ const Exhibition = ({ exhibition }: Props) => {
             height: 400px;
             overflow-y: hidden;
           }
-          .gallery-container {
-            margin: 0 40px 40px 40px;
-          }
 
-          .gallery-grid {
-            display: grid;
-            grid-template-columns: 33% 33% 33%;
-          }
-          .gallery-item {
-            padding: 10px;
-            margin-top: 20px;
-          }
           .container {
             margin: auto;
             width: 70%;
