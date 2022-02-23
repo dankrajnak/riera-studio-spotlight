@@ -44,7 +44,9 @@ const Exhibition = ({ exhibition }: Props) => {
         exit={{ opacity: 0 }}
       >
         <div className="container article">
-          <h1 className="title">{exhibition.title}</h1>
+          <h1 className="title font-serifDisplay break-words">
+            {exhibition.title}
+          </h1>
           <ExhibitionSliceZone slices={exhibition.body} />
         </div>
         {exhibition.galleryImages.length > 0 && (
@@ -74,10 +76,6 @@ const Exhibition = ({ exhibition }: Props) => {
       </motion.div>
       <style jsx>
         {`
-          .title {
-            font-family: "EB Garamond";
-            word-break: break-word;
-          }
           .title-image {
             position: relative;
             width: 100%;

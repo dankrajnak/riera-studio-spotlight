@@ -10,8 +10,10 @@ const TitleText = ({
     text-5xl 
     font-thin 
     font-serifDisplay
+    leading-tight
     text-white 
     underline 
+    underline-offset-4
     decoration-transparent
     transition
     duration-500
