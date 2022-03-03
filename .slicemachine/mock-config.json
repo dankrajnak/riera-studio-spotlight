@@ -5,5 +5,19 @@
         "primary": {}
       }
     }
+  },
+  "src/slices": {
+    "ImageWithText": {
+      "default-slice": {
+        "primary": {
+          "description": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        }
+      }
+    }
   }
 }
