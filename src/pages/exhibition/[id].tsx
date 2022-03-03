@@ -15,6 +15,7 @@ import { PreviewProp } from "../api/preview";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
+import { ImageWithText } from "../../slices";
 
 // import plugins if you need
 
@@ -139,6 +140,9 @@ const ExhibitionSliceZone = ({
                 />
               </div>
             );
+          }
+          case "ExhibitionBodyImage_with_text": {
+            return <ImageWithText slice={slice.variation} />;
           }
           default:
             return null;
