@@ -13,8 +13,7 @@ const ImageWithText = ({ slice }: { slice: Props }) => {
   );
   return (
     <section className="columns-lg gap-8 space-y-8">
-      {/* @ts-ignore fuck prismic. */}
-      {slice.variation === "imageLeft" ? (
+      {slice.__typename === "ExhibitionBodyImage_with_textImageleft" ? (
         <>
           {image}
           {text}
