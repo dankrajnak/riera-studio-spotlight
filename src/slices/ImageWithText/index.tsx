@@ -1,30 +1,36 @@
 import { RichText } from "prismic-reactjs";
+import { useMeasure } from "react-use";
 import LabelledImage from "../../Components/LabelledImage";
 import { ExhibitionSlice } from "../../PrismicRage/shared";
 
 type Props = ExhibitionSlice<"ExhibitionBodyImage_with_text">["variation"];
 
 const ImageWithText = ({ slice }: { slice: Props }) => {
+  const [textRef, { height: textHeight }] = useMeasure();
+
   const text = slice.primary.description && (
     <RichText render={slice.primary.description} />
   );
   const image = slice.primary.image && (
     <LabelledImage image={slice.primary.image} />
   );
+  const isLeft = slice.__typename === "ExhibitionBodyImage_with_textImageleft";
+
+  const [imageRef, { height: imageHeight }] = useMeasure();
+
   return (
-    <section className="columns-lg gap-8 space-y-8">
-      {slice.__typename === "ExhibitionBodyImage_with_textImageleft" ? (
-        <>
-          {image}
-          {text}
-        </>
-      ) : (
-        <>
-          {text}
-          {image}
-        </>
-      )}
-    </section>
+    <div>
+      <div
+        ref={imageRef}
+        className={`w-2/5 mb-3 mx-auto  ${
+          isLeft ? "md:float-left" : "md:float-right"
+        }`}
+      >
+        {image}
+      </div>
+      <div ref={textRef}>{text}</div>
+      <div style={{ height: Math.max(0, imageHeight - textHeight) }} />
+    </div>
   );
 };
 
