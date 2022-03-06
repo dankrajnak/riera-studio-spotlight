@@ -3553,7 +3553,7 @@ color-support@^1.1.2:
   resolved "https://registry.yarnpkg.com/color-support/-/color-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
   integrity sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==
 
-color@^4.0.1:
+color@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/color/-/color-4.2.1.tgz#498aee5fce7fc982606c8875cab080ac0547c884"
   integrity sha512-MFJr0uY4RvTQUKvPq7dh9grVOTYSFeXja2mBXioCGjnjJoXrAp9jJ1NQTDR73c9nwBSAQiNKloKl5zq9WB9UPw==
@@ -3891,7 +3891,7 @@ dayjs@^1.10.7:
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.8.tgz#267df4bc6276fcb33c04a6735287e3f429abec41"
   integrity sha512-wbNwDfBHHur9UOzNUjeKUOJ0fCb0a52Wx0xInmQ7Y8FstyajiV1NmK1e00cxsr9YrE9r7yAChE0VvpuY5Rnlow==
 
-debounce@^1.2.0, debounce@^1.2.1:
+debounce@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.1.tgz#38881d8f4166a5c5848020c11827b834bcb3e0a5"
   integrity sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==
@@ -4059,12 +4059,7 @@ detect-indent@^6.0.0:
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.1.0.tgz#592485ebbbf6b3b1ab2be175c8393d04ca0d57e6"
   integrity sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==
 
-detect-libc@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
-  integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
-
-detect-libc@^2.0.0:
+detect-libc@^2.0.0, detect-libc@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-2.0.1.tgz#e1897aa88fa6ad197862937fbc0441ef352ee0cd"
   integrity sha512-463v3ZeIrcWtdgIg6vI6XUncguvr2TnGl4SzDXinkt9mSLpBJKXT3mW6xT3VQdDN11+WVs29pgvivTc4Lp8v+w==
@@ -5021,16 +5016,14 @@ framer-motion@^4.1.17:
   optionalDependencies:
     "@emotion/is-prop-valid" "^0.8.2"
 
-framer-motion@^5.0.0:
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-5.6.0.tgz#8203b5bc4e172265d43dfe67c3c41346c67a3940"
-  integrity sha512-Y4FtwUU+LUWLKSzoT6Sq538qluvhpe6izdQK8/xZeVjQZ/ORKGfZzyhzcUxNfscqnfEa3dUOA47s+dwrSipdGA==
+framer-motion@^6.2.8:
+  version "6.2.8"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.2.8.tgz#02abb529191af7e2df444185fe27e932215b715d"
+  integrity sha512-4PtBWFJ6NqR350zYVt9AsFDtISTqsdqna79FvSYPfYDXuuqFmiKtZdkTnYPslnsOMedTW0pEvaQ7eqjD+sA+HA==
   dependencies:
     framesync "6.0.1"
     hey-listen "^1.0.8"
     popmotion "11.0.3"
-    react-merge-refs "^1.1.0"
-    react-use-measure "^2.1.1"
     style-value-types "5.0.0"
     tslib "^2.1.0"
   optionalDependencies:
@@ -5319,10 +5312,19 @@ graphql-executor@0.0.18:
   resolved "https://registry.yarnpkg.com/graphql-executor/-/graphql-executor-0.0.18.tgz#6aa4b39e1ca773e159c2a602621e90606df0109a"
   integrity sha512-upUSl7tfZCZ5dWG1XkOvpG70Yk3duZKcCoi/uJso4WxJVT6KIrcK4nZ4+2X/hzx46pL8wAukgYHY6iNmocRN+g==
 
-graphql-request@^3.3.0, graphql-request@^3.5.0:
+graphql-request@^3.3.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-3.7.0.tgz#c7406e537084f8b9788541e3e6704340ca13055b"
   integrity sha512-dw5PxHCgBneN2DDNqpWu8QkbbJ07oOziy8z+bK/TAXufsOLaETuVO4GkXrbs0WjhdKhBMN3BkpN/RIvUHkmNUQ==
+  dependencies:
+    cross-fetch "^3.0.6"
+    extract-files "^9.0.0"
+    form-data "^3.0.0"
+
+graphql-request@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-4.0.0.tgz#5e4361d33df1a95ccd7ad23a8ebb6bbca9d5622f"
+  integrity sha512-cdqQLCXlBGkaLdkLYRl4LtkwaZU6TfpE7/tnUQFl3wXfUPWN74Ov+Q61VuIh+AltS789YfGB6whghmCmeXLvTw==
   dependencies:
     cross-fetch "^3.0.6"
     extract-files "^9.0.0"
@@ -7170,7 +7172,7 @@ node-abi@^3.3.0:
   dependencies:
     semver "^7.3.5"
 
-node-addon-api@^4.2.0:
+node-addon-api@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-4.3.0.tgz#52a1a0b475193e0928e98e0426a0d1254782b77f"
   integrity sha512-73sE9+3UaLYYFmDsFZnqCInzPyh3MqIwZO9cw58yIqAZhONrrabrYyYe3TuIqtIiOuTXVhsGau8hcrhhwSsDIQ==
@@ -7905,7 +7907,7 @@ postcss@^8.4.6:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-prebuild-install@^7.0.0:
+prebuild-install@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-7.0.1.tgz#c10075727c318efe72412f333e0ef625beaf3870"
   integrity sha512-QBSab31WqkyxpnMWQxubYAHR5S9B2+r81ucocew34Fkl98FhvKIF50jIJnNOBmAZfyNV7vE5T6gd3hTVWgY6tg==
@@ -8234,10 +8236,10 @@ rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-div-100vh@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/react-div-100vh/-/react-div-100vh-0.6.0.tgz#577972d8ac17693edcd44061c1a4b5a7578e49ec"
-  integrity sha512-ErV0VTNXUd8jZqofC0ExZr5u+XDD2kN2te4SbwtqsyTm0UOjVYu53kP+FalGQrTe+DoMG8VYR2dITcAFu7c/5w==
+react-div-100vh@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/react-div-100vh/-/react-div-100vh-0.7.0.tgz#b3bec03a833fa40e406f36ed2e23a35a59d1068f"
+  integrity sha512-I3d77tQyaSlOx/6vurDDLk7upb5GA2ldEtVXkk7Kn5cy+tLlS0KlqDK14xUxlxh7jz4StjgKcwFyrpymsPpomA==
 
 react-dom@17.0.2:
   version "17.0.2"
@@ -8263,11 +8265,6 @@ react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-merge-refs@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
-  integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
-
 react-swipeable@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-6.2.0.tgz#057271cb7a6fb4af9d2a3f6d80ccdf33e2f64d47"
@@ -8277,13 +8274,6 @@ react-universal-interface@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"
   integrity sha512-dg8yXdcQmvgR13RIlZbTRQOoUrDciFVoSBZILwjE2LFISxZZ8loVJKAkuzswl5js8BHda79bIb2b84ehU8IjXw==
-
-react-use-measure@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-use-measure/-/react-use-measure-2.1.1.tgz#5824537f4ee01c9469c45d5f7a8446177c6cc4ba"
-  integrity sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==
-  dependencies:
-    debounce "^1.2.1"
 
 react-use@^17.2.4, react-use@^17.3.1:
   version "17.3.2"
@@ -8897,17 +8887,17 @@ shallow-clone@^3.0.0:
   dependencies:
     kind-of "^6.0.2"
 
-sharp@^0.29.1:
-  version "0.29.3"
-  resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.29.3.tgz#0da183d626094c974516a48fab9b3e4ba92eb5c2"
-  integrity sha512-fKWUuOw77E4nhpyzCCJR1ayrttHoFHBT2U/kR/qEMRhvPEcluG4BKj324+SCO1e84+knXHwhJ1HHJGnUt4ElGA==
+sharp@^0.30.2:
+  version "0.30.2"
+  resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.30.2.tgz#95b309b2740424702dc19b62a62595dd34a458b1"
+  integrity sha512-mrMeKI5ECTdYhslPlA2TbBtU3nZXMEBcQwI6qYXjPlu1LpW4HBZLFm6xshMI1HpIdEEJ3UcYp5AKifLT/fEHZQ==
   dependencies:
-    color "^4.0.1"
-    detect-libc "^1.0.3"
-    node-addon-api "^4.2.0"
-    prebuild-install "^7.0.0"
+    color "^4.2.1"
+    detect-libc "^2.0.1"
+    node-addon-api "^4.3.0"
+    prebuild-install "^7.0.1"
     semver "^7.3.5"
-    simple-get "^4.0.0"
+    simple-get "^4.0.1"
     tar-fs "^2.1.1"
     tunnel-agent "^0.6.0"
 
@@ -8947,7 +8937,7 @@ simple-concat@^1.0.0:
   resolved "https://registry.yarnpkg.com/simple-concat/-/simple-concat-1.0.1.tgz#f46976082ba35c2263f1c8ab5edfe26c41c9552f"
   integrity sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==
 
-simple-get@^4.0.0:
+simple-get@^4.0.0, simple-get@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/simple-get/-/simple-get-4.0.1.tgz#4a39db549287c979d352112fa03fd99fd6bc3543"
   integrity sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==
