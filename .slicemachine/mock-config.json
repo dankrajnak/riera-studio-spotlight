@@ -18,6 +18,25 @@
           }
         }
       }
+    },
+    "TextByText": {
+      "default-slice": {
+        "primary": {
+          "left": {
+            "config": {
+              "patternType": "STORY",
+              "blocks": 1
+            }
+          },
+          "right": {
+            "config": {
+              "patternType": "STORY",
+              "blocks": 1
+            }
+          }
+        },
+        "items": {}
+      }
     }
   }
 }

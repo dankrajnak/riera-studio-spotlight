@@ -41,7 +41,8 @@ export type ExhibitionBody =
   | ExhibitionBodyImage
   | ExhibitionBodyImage_With_Text
   | ExhibitionBodyQuote
-  | ExhibitionBodyText;
+  | ExhibitionBodyText
+  | ExhibitionBodyText_By_Text;
 
 export type ExhibitionBody1 = ExhibitionBody1Gallery_Image;
 
@@ -127,6 +128,27 @@ export type ExhibitionBodyTextPrimary = {
   __typename?: "ExhibitionBodyTextPrimary";
   text?: Maybe<Scalars["Json"]>;
 };
+
+export type ExhibitionBodyText_By_Text = {
+  __typename?: "ExhibitionBodyText_by_text";
+  label?: Maybe<Scalars["String"]>;
+  type?: Maybe<Scalars["String"]>;
+  variation?: Maybe<ExhibitionBodyText_By_TextVariation>;
+};
+
+export type ExhibitionBodyText_By_TextDefaultSlice = {
+  __typename?: "ExhibitionBodyText_by_textDefaultSlice";
+  primary?: Maybe<ExhibitionBodyText_By_TextDefaultSlicePrimary>;
+};
+
+export type ExhibitionBodyText_By_TextDefaultSlicePrimary = {
+  __typename?: "ExhibitionBodyText_by_textDefaultSlicePrimary";
+  left?: Maybe<Scalars["Json"]>;
+  right?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyText_By_TextVariation =
+  ExhibitionBodyText_By_TextDefaultSlice;
 
 /** A connection to a list of items. */
 export type ExhibitionConnectionConnection = {
@@ -503,6 +525,23 @@ export type GetExhibitionQuery = {
                     | null
                     | undefined;
                 }
+              | {
+                  __typename?: "ExhibitionBodyText_by_text";
+                  variation?:
+                    | {
+                        __typename?: "ExhibitionBodyText_by_textDefaultSlice";
+                        primary?:
+                          | {
+                              __typename?: "ExhibitionBodyText_by_textDefaultSlicePrimary";
+                              left?: any | null | undefined;
+                              right?: any | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
             >
           | null
           | undefined;
@@ -696,6 +735,16 @@ export const GetExhibitionDocument = gql`
         ... on ExhibitionBodyImage {
           primary {
             image
+          }
+        }
+        ... on ExhibitionBodyText_by_text {
+          variation {
+            ... on ExhibitionBodyText_by_textDefaultSlice {
+              primary {
+                left
+                right
+              }
+            }
           }
         }
         ... on ExhibitionBodyImage_with_text {

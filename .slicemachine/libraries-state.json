@@ -134,6 +134,88 @@
             "height": 530
           }
         }
+      },
+      "text_by_text": {
+        "library": "src/slices",
+        "id": "text_by_text",
+        "name": "TextByText",
+        "description": "TextByText",
+        "model": {
+          "id": "text_by_text",
+          "type": "SharedSlice",
+          "name": "TextByText",
+          "description": "TextByText",
+          "variations": [
+            {
+              "id": "default-slice",
+              "name": "Default slice",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "TextByText",
+              "primary": {
+                "left": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Left",
+                    "placeholder": "Left text",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl"
+                  }
+                },
+                "right": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Right",
+                    "placeholder": "Right text",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl"
+                  }
+                }
+              },
+              "items": {}
+            }
+          ]
+        },
+        "mocks": {
+          "default-slice": {
+            "variation": "default-slice",
+            "name": "Default slice",
+            "slice_type": "text_by_text",
+            "items": [],
+            "primary": {
+              "left": [
+                {
+                  "type": "heading1",
+                  "text": "Scale transparent infrastructures",
+                  "spans": []
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Incididunt cillum ad excepteur in sit elit cupidatat sit. Anim incididunt quis magna fugiat in eiusmod adipisicing. Cillum incididunt enim voluptate consequat labore qui dolore nulla.",
+                  "spans": []
+                }
+              ],
+              "right": [
+                {
+                  "type": "heading1",
+                  "text": "Recontextualize open-source channels",
+                  "spans": []
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Sit in nisi excepteur adipisicing.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "isDirectory": true,
+          "extension": "tsx"
+        },
+        "screenshotPaths": {}
       }
     }
   }
