@@ -1,0 +1,76 @@
+{
+  "id": "quote_by_image",
+  "type": "SharedSlice",
+  "name": "QuoteByImage",
+  "description": "QuoteByImage",
+  "variations": [
+    {
+      "id": "default-slice",
+      "name": "Default slice",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "QuoteByImage",
+      "primary": {
+        "quote-text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Quote text",
+            "placeholder": "Quote",
+            "allowTargetBlank": true,
+            "single": "strong,em"
+          }
+        },
+        "quote-author": {
+          "config": {
+            "label": "Quote Author",
+            "placeholder": "quote author"
+          },
+          "type": "Text"
+        },
+        "image": {
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          },
+          "type": "Image"
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "imageLeft",
+      "name": "Image Left",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "QuoteByImage",
+      "primary": {
+        "image": {
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          },
+          "type": "Image"
+        },
+        "quote-text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Quote Text",
+            "placeholder": "Quote",
+            "allowTargetBlank": true,
+            "single": "strong,em"
+          }
+        },
+        "quote-author": {
+          "config": {
+            "label": "Quote Author",
+            "placeholder": "quote author"
+          },
+          "type": "Text"
+        }
+      },
+      "items": {}
+    }
+  ]
+}

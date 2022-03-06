@@ -37,6 +37,28 @@
         },
         "items": {}
       }
+    },
+    "QuoteByImage": {
+      "default-slice": {
+        "primary": {
+          "quote-text": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        }
+      },
+      "imageLeft": {
+        "primary": {
+          "quote-text": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        }
+      }
     }
   }
 }

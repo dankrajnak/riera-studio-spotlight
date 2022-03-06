@@ -15,7 +15,8 @@ import { PreviewProp } from "../api/preview";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
-import { ImageWithText, TextByText } from "../../slices";
+import { ImageWithText, QuoteByImage, TextByText } from "../../slices";
+import Quote from "../../Components/Quote";
 
 // import plugins if you need
 
@@ -112,23 +113,11 @@ const ExhibitionSliceZone = ({
             return <RichText key={i} render={slice.primary.text} />;
           case "ExhibitionBodyQuote":
             return (
-              <Fragment key={i}>
-                <div
-                  className="margin-bottom"
-                  style={{
-                    borderLeft: "solid 3px #999",
-                    paddingLeft: 8,
-                    fontFamily: "EB Garamond",
-                    fontSize: "1.4rem",
-                    lineHeight: 1,
-                  }}
-                >
-                  <RichText render={slice.primary.text} />
-                  <small style={{ fontSize: "1rem", color: "#999" }}>
-                    &mdash;{slice.primary.author}
-                  </small>
-                </div>
-              </Fragment>
+              <Quote
+                key={i}
+                text={slice.primary.text}
+                author={slice.primary.author}
+              />
             );
           case "ExhibitionBodyImage": {
             return (
@@ -146,6 +135,9 @@ const ExhibitionSliceZone = ({
           }
           case "ExhibitionBodyText_by_text": {
             return <TextByText slice={slice.variation} />;
+          }
+          case "ExhibitionBodyQuote_by_image": {
+            return <QuoteByImage slice={slice.variation} />;
           }
           default:
             return null;

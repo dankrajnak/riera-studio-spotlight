@@ -46,6 +46,25 @@ query GetExhibition($uid: String!) {
           }
         }
       }
+      ... on ExhibitionBodyQuote_by_image {
+        type
+        variation {
+          ... on ExhibitionBodyQuote_by_imageDefaultSlice {
+            primary {
+              quoteText
+              quoteAuthor
+              image
+            }
+          }
+          ... on ExhibitionBodyQuote_by_imageImageleft {
+            primary {
+              quoteText
+              quoteAuthor
+              image
+            }
+          }
+        }
+      }
     }
     body1 {
       ... on ExhibitionBody1Gallery_image {

@@ -41,6 +41,7 @@ export type ExhibitionBody =
   | ExhibitionBodyImage
   | ExhibitionBodyImage_With_Text
   | ExhibitionBodyQuote
+  | ExhibitionBodyQuote_By_Image
   | ExhibitionBodyText
   | ExhibitionBodyText_By_Text;
 
@@ -116,6 +117,41 @@ export type ExhibitionBodyQuotePrimary = {
   author?: Maybe<Scalars["String"]>;
   text?: Maybe<Scalars["Json"]>;
 };
+
+export type ExhibitionBodyQuote_By_Image = {
+  __typename?: "ExhibitionBodyQuote_by_image";
+  label?: Maybe<Scalars["String"]>;
+  type?: Maybe<Scalars["String"]>;
+  variation?: Maybe<ExhibitionBodyQuote_By_ImageVariation>;
+};
+
+export type ExhibitionBodyQuote_By_ImageDefaultSlice = {
+  __typename?: "ExhibitionBodyQuote_by_imageDefaultSlice";
+  primary?: Maybe<ExhibitionBodyQuote_By_ImageDefaultSlicePrimary>;
+};
+
+export type ExhibitionBodyQuote_By_ImageDefaultSlicePrimary = {
+  __typename?: "ExhibitionBodyQuote_by_imageDefaultSlicePrimary";
+  image?: Maybe<Scalars["Json"]>;
+  quoteAuthor?: Maybe<Scalars["String"]>;
+  quoteText?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyQuote_By_ImageImageleft = {
+  __typename?: "ExhibitionBodyQuote_by_imageImageleft";
+  primary?: Maybe<ExhibitionBodyQuote_By_ImageImageleftPrimary>;
+};
+
+export type ExhibitionBodyQuote_By_ImageImageleftPrimary = {
+  __typename?: "ExhibitionBodyQuote_by_imageImageleftPrimary";
+  image?: Maybe<Scalars["Json"]>;
+  quoteAuthor?: Maybe<Scalars["String"]>;
+  quoteText?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyQuote_By_ImageVariation =
+  | ExhibitionBodyQuote_By_ImageDefaultSlice
+  | ExhibitionBodyQuote_By_ImageImageleft;
 
 export type ExhibitionBodyText = {
   __typename?: "ExhibitionBodyText";
@@ -516,6 +552,37 @@ export type GetExhibitionQuery = {
                     | undefined;
                 }
               | {
+                  __typename?: "ExhibitionBodyQuote_by_image";
+                  type?: string | null | undefined;
+                  variation?:
+                    | {
+                        __typename?: "ExhibitionBodyQuote_by_imageDefaultSlice";
+                        primary?:
+                          | {
+                              __typename?: "ExhibitionBodyQuote_by_imageDefaultSlicePrimary";
+                              quoteText?: any | null | undefined;
+                              quoteAuthor?: string | null | undefined;
+                              image?: any | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | {
+                        __typename?: "ExhibitionBodyQuote_by_imageImageleft";
+                        primary?:
+                          | {
+                              __typename?: "ExhibitionBodyQuote_by_imageImageleftPrimary";
+                              quoteText?: any | null | undefined;
+                              quoteAuthor?: string | null | undefined;
+                              image?: any | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
                   __typename?: "ExhibitionBodyText";
                   primary?:
                     | {
@@ -760,6 +827,25 @@ export const GetExhibitionDocument = gql`
               primary {
                 image
                 description
+              }
+            }
+          }
+        }
+        ... on ExhibitionBodyQuote_by_image {
+          type
+          variation {
+            ... on ExhibitionBodyQuote_by_imageDefaultSlice {
+              primary {
+                quoteText
+                quoteAuthor
+                image
+              }
+            }
+            ... on ExhibitionBodyQuote_by_imageImageleft {
+              primary {
+                quoteText
+                quoteAuthor
+                image
               }
             }
           }
