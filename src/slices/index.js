@@ -2,4 +2,5 @@
 
 export { default as ImageWithText } from "./ImageWithText";
 export { default as QuoteByImage } from "./QuoteByImage";
+export { default as QuoteByText } from "./QuoteByText";
 export { default as TextByText } from "./TextByText";

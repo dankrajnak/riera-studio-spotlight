@@ -17,6 +17,8 @@ import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
 import { ImageWithText, QuoteByImage, TextByText } from "../../slices";
 import Quote from "../../Components/Quote";
+import QuoteByText from "../../slices/QuoteByText";
+import { ArrayUtils } from "../../Utils/ArrayUtils";
 
 // import plugins if you need
 
@@ -107,42 +109,48 @@ const ExhibitionSliceZone = ({
 }) => {
   return (
     <>
-      {slices.map((slice, i) => {
-        switch (slice.__typename) {
-          case "ExhibitionBodyText":
-            return <RichText key={i} render={slice.primary.text} />;
-          case "ExhibitionBodyQuote":
-            return (
-              <Quote
-                key={i}
-                text={slice.primary.text}
-                author={slice.primary.author}
-              />
-            );
-          case "ExhibitionBodyImage": {
-            return (
-              <div className="clickable my-5">
-                <LabelledImage
-                  label={slice.primary.image?.img.alt}
-                  image={slice.primary.image.img}
-                  blurs={slice.primary.image.blurs}
+      {ArrayUtils.join(
+        slices.map((slice, i) => {
+          switch (slice.__typename) {
+            case "ExhibitionBodyText":
+              return <RichText key={i} render={slice.primary.text} />;
+            case "ExhibitionBodyQuote":
+              return (
+                <Quote
+                  key={i}
+                  text={slice.primary.text}
+                  author={slice.primary.author}
                 />
-              </div>
-            );
+              );
+            case "ExhibitionBodyImage": {
+              return (
+                <div className="clickable">
+                  <LabelledImage
+                    label={slice.primary.image?.img.alt}
+                    image={slice.primary.image.img}
+                    blurs={slice.primary.image.blurs}
+                  />
+                </div>
+              );
+            }
+            case "ExhibitionBodyImage_with_text": {
+              return <ImageWithText slice={slice.variation} />;
+            }
+            case "ExhibitionBodyText_by_text": {
+              return <TextByText slice={slice.variation} />;
+            }
+            case "ExhibitionBodyQuote_by_image": {
+              return <QuoteByImage slice={slice.variation} />;
+            }
+            case "ExhibitionBodyQuote_by_text": {
+              return <QuoteByText slice={slice.variation} />;
+            }
+            default:
+              return null;
           }
-          case "ExhibitionBodyImage_with_text": {
-            return <ImageWithText slice={slice.variation} />;
-          }
-          case "ExhibitionBodyText_by_text": {
-            return <TextByText slice={slice.variation} />;
-          }
-          case "ExhibitionBodyQuote_by_image": {
-            return <QuoteByImage slice={slice.variation} />;
-          }
-          default:
-            return null;
-        }
-      })}
+        }),
+        <div className=" mt-10" />
+      )}
     </>
   );
 };

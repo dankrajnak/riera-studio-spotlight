@@ -271,9 +271,194 @@
         "meta": {
           "fileName": "index",
           "isDirectory": true,
-          "extension": "js"
+          "extension": "tsx"
         },
-        "screenshotPaths": {}
+        "screenshotPaths": {
+          "default-slice": {
+            "path": "/Users/danielkrajnak/Code/riera-studio-spotlight/.slicemachine/assets/src/slices/QuoteByImage/default-slice/preview.png",
+            "width": 800,
+            "height": 48
+          },
+          "imageLeft": {
+            "path": "/Users/danielkrajnak/Code/riera-studio-spotlight/.slicemachine/assets/src/slices/QuoteByImage/imageLeft/preview.png",
+            "width": 800,
+            "height": 48
+          }
+        }
+      },
+      "quote_by_text": {
+        "library": "src/slices",
+        "id": "quote_by_text",
+        "name": "QuoteByText",
+        "description": "QuoteByText",
+        "model": {
+          "id": "quote_by_text",
+          "type": "SharedSlice",
+          "name": "QuoteByText",
+          "description": "QuoteByText",
+          "variations": [
+            {
+              "id": "default-slice",
+              "name": "Default slice",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "QuoteByText",
+              "primary": {
+                "quote-text": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Quote Text",
+                    "placeholder": "A nice description of your feature",
+                    "allowTargetBlank": true,
+                    "single": "strong,em"
+                  }
+                },
+                "quote-author": {
+                  "config": {
+                    "label": "Quote Author",
+                    "placeholder": "author"
+                  },
+                  "type": "Text"
+                },
+                "text": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Text",
+                    "placeholder": "Text",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl"
+                  }
+                }
+              },
+              "items": {}
+            },
+            {
+              "id": "textLeft",
+              "name": "Text Left",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "QuoteByText",
+              "primary": {
+                "text": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Text",
+                    "placeholder": "Text",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl"
+                  }
+                },
+                "quote-text": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Quote Text",
+                    "placeholder": "A nice description of your feature",
+                    "allowTargetBlank": true,
+                    "single": "strong,em"
+                  }
+                },
+                "quote-author": {
+                  "config": {
+                    "label": "Quote Author",
+                    "placeholder": "author"
+                  },
+                  "type": "Text"
+                }
+              },
+              "items": {}
+            }
+          ]
+        },
+        "mocks": {
+          "default-slice": {
+            "variation": "default-slice",
+            "name": "Default slice",
+            "slice_type": "quote_by_text",
+            "items": [],
+            "primary": {
+              "quote-text": [
+                {
+                  "type": "paragraph",
+                  "text": "Qui veniam do aute aliqua quis pariatur cupidatat nostrud occaecat aliquip irure pariatur. Cupidatat officia reprehenderit ut cillum sunt.",
+                  "spans": []
+                }
+              ],
+              "quote-author": "quote author",
+              "text": [
+                {
+                  "type": "heading1",
+                  "text": "Reintermediate front-end blockchains",
+                  "spans": []
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Consectetur deserunt minim velit aliqua elit proident laborum est commodo ad consectetur exercitation. Deserunt non commodo et nisi sunt deserunt do voluptate non mollit mollit. Ex deserunt ex sint ullamco irure consectetur eu adipisicing nisi non reprehenderit consequat veniam pariatur consectetur.",
+                  "spans": []
+                },
+                {
+                  "type": "heading1",
+                  "text": "Generate 24/7 schemas",
+                  "spans": []
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Aute enim culpa nostrud irure esse aliqua proident ullamco cillum. Veniam nisi aute occaecat est sunt officia officia et sunt dolore.",
+                  "spans": []
+                },
+                {
+                  "type": "heading1",
+                  "text": "Grow 24/7 e-tailers",
+                  "spans": []
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Incididunt consequat in laboris laborum ipsum tempor nisi ea aliqua. Non sint culpa eu commodo dolore velit commodo pariatur minim ipsum laborum laborum mollit. Pariatur nostrud ullamco commodo et excepteur.",
+                  "spans": []
+                }
+              ]
+            }
+          },
+          "textLeft": {
+            "variation": "textLeft",
+            "name": "Text Left",
+            "slice_type": "quote_by_text",
+            "items": [],
+            "primary": {
+              "text": [
+                {
+                  "type": "paragraph",
+                  "text": "Nisi consequat dolor incididunt ea magna occaecat irure nulla reprehenderit ex duis ullamco ut.",
+                  "spans": []
+                }
+              ],
+              "quote-text": [
+                {
+                  "type": "paragraph",
+                  "text": "Amet velit ut enim ipsum. Eiusmod mollit deserunt ad dolore ullamco.",
+                  "spans": []
+                }
+              ],
+              "quote-author": "iterate global schemas"
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "isDirectory": true,
+          "extension": "tsx"
+        },
+        "screenshotPaths": {
+          "default-slice": {
+            "path": "/Users/danielkrajnak/Code/riera-studio-spotlight/.slicemachine/assets/src/slices/QuoteByText/default-slice/preview.png",
+            "width": 800,
+            "height": 48
+          },
+          "textLeft": {
+            "path": "/Users/danielkrajnak/Code/riera-studio-spotlight/.slicemachine/assets/src/slices/QuoteByText/textLeft/preview.png",
+            "width": 800,
+            "height": 48
+          }
+        }
       },
       "text_by_text": {
         "library": "src/slices",

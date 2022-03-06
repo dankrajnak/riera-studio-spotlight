@@ -1,0 +1,78 @@
+{
+  "id": "quote_by_text",
+  "type": "SharedSlice",
+  "name": "QuoteByText",
+  "description": "QuoteByText",
+  "variations": [
+    {
+      "id": "default-slice",
+      "name": "Default slice",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "QuoteByText",
+      "primary": {
+        "quote-text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Quote Text",
+            "placeholder": "A nice description of your feature",
+            "allowTargetBlank": true,
+            "single": "strong,em"
+          }
+        },
+        "quote-author": {
+          "config": {
+            "label": "Quote Author",
+            "placeholder": "author"
+          },
+          "type": "Text"
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "Text",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "textLeft",
+      "name": "Text Left",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "QuoteByText",
+      "primary": {
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "Text",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "quote-text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Quote Text",
+            "placeholder": "A nice description of your feature",
+            "allowTargetBlank": true,
+            "single": "strong,em"
+          }
+        },
+        "quote-author": {
+          "config": {
+            "label": "Quote Author",
+            "placeholder": "author"
+          },
+          "type": "Text"
+        }
+      },
+      "items": {}
+    }
+  ]
+}

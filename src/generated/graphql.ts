@@ -42,6 +42,7 @@ export type ExhibitionBody =
   | ExhibitionBodyImage_With_Text
   | ExhibitionBodyQuote
   | ExhibitionBodyQuote_By_Image
+  | ExhibitionBodyQuote_By_Text
   | ExhibitionBodyText
   | ExhibitionBodyText_By_Text;
 
@@ -152,6 +153,41 @@ export type ExhibitionBodyQuote_By_ImageImageleftPrimary = {
 export type ExhibitionBodyQuote_By_ImageVariation =
   | ExhibitionBodyQuote_By_ImageDefaultSlice
   | ExhibitionBodyQuote_By_ImageImageleft;
+
+export type ExhibitionBodyQuote_By_Text = {
+  __typename?: "ExhibitionBodyQuote_by_text";
+  label?: Maybe<Scalars["String"]>;
+  type?: Maybe<Scalars["String"]>;
+  variation?: Maybe<ExhibitionBodyQuote_By_TextVariation>;
+};
+
+export type ExhibitionBodyQuote_By_TextDefaultSlice = {
+  __typename?: "ExhibitionBodyQuote_by_textDefaultSlice";
+  primary?: Maybe<ExhibitionBodyQuote_By_TextDefaultSlicePrimary>;
+};
+
+export type ExhibitionBodyQuote_By_TextDefaultSlicePrimary = {
+  __typename?: "ExhibitionBodyQuote_by_textDefaultSlicePrimary";
+  quoteAuthor?: Maybe<Scalars["String"]>;
+  quoteText?: Maybe<Scalars["Json"]>;
+  text?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyQuote_By_TextTextleft = {
+  __typename?: "ExhibitionBodyQuote_by_textTextleft";
+  primary?: Maybe<ExhibitionBodyQuote_By_TextTextleftPrimary>;
+};
+
+export type ExhibitionBodyQuote_By_TextTextleftPrimary = {
+  __typename?: "ExhibitionBodyQuote_by_textTextleftPrimary";
+  quoteAuthor?: Maybe<Scalars["String"]>;
+  quoteText?: Maybe<Scalars["Json"]>;
+  text?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyQuote_By_TextVariation =
+  | ExhibitionBodyQuote_By_TextDefaultSlice
+  | ExhibitionBodyQuote_By_TextTextleft;
 
 export type ExhibitionBodyText = {
   __typename?: "ExhibitionBodyText";
@@ -583,6 +619,37 @@ export type GetExhibitionQuery = {
                     | undefined;
                 }
               | {
+                  __typename?: "ExhibitionBodyQuote_by_text";
+                  type?: string | null | undefined;
+                  variation?:
+                    | {
+                        __typename?: "ExhibitionBodyQuote_by_textDefaultSlice";
+                        primary?:
+                          | {
+                              __typename?: "ExhibitionBodyQuote_by_textDefaultSlicePrimary";
+                              text?: any | null | undefined;
+                              quoteText?: any | null | undefined;
+                              quoteAuthor?: string | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | {
+                        __typename?: "ExhibitionBodyQuote_by_textTextleft";
+                        primary?:
+                          | {
+                              __typename?: "ExhibitionBodyQuote_by_textTextleftPrimary";
+                              text?: any | null | undefined;
+                              quoteText?: any | null | undefined;
+                              quoteAuthor?: string | null | undefined;
+                            }
+                          | null
+                          | undefined;
+                      }
+                    | null
+                    | undefined;
+                }
+              | {
                   __typename?: "ExhibitionBodyText";
                   primary?:
                     | {
@@ -846,6 +913,25 @@ export const GetExhibitionDocument = gql`
                 quoteText
                 quoteAuthor
                 image
+              }
+            }
+          }
+        }
+        ... on ExhibitionBodyQuote_by_text {
+          type
+          variation {
+            ... on ExhibitionBodyQuote_by_textDefaultSlice {
+              primary {
+                text
+                quoteText
+                quoteAuthor
+              }
+            }
+            ... on ExhibitionBodyQuote_by_textTextleft {
+              primary {
+                text
+                quoteText
+                quoteAuthor
               }
             }
           }

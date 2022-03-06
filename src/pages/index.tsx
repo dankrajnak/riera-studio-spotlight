@@ -9,7 +9,7 @@ import { getPrismicRageImage, RageServiceReturn } from "../PrismicRage/shared";
 import indexQuery from "../PrismicRage/indexQuery";
 import CenterLayout from "../Layout/CenterLayout";
 import SplitText from "../Utils/SplitText";
-import Chevron from "../Utils/Chevron";
+import Chevron from "../Components/Chevron";
 import LinkHelper from "../Utils/LinkHelper";
 import A11y from "../Utils/A11y";
 import Plane from "../Layout/Plane";

@@ -59,6 +59,27 @@
           }
         }
       }
+    },
+    "QuoteByText": {
+      "default-slice": {
+        "primary": {
+          "text": {
+            "config": {
+              "patternType": "STORY",
+              "blocks": 3
+            }
+          },
+          "quote-text": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          },
+          "quote-author": {
+            "content": "quote author"
+          }
+        }
+      }
     }
   }
 }
