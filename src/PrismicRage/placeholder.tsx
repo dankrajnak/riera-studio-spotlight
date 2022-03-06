@@ -11,7 +11,6 @@ export type ImageWithBlur = {
 };
 
 // CAN ONLY BE USED IN getStaticProps.  SHOULD NOT RUN ON CLIENT
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getPrismicRageImageWithPlaceholder = async (
   img: any
 ): Promise<ImageWithBlur> => {

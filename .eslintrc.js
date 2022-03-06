@@ -1,13 +1,5 @@
 module.exports = {
-  extends: [
-    "plugin:@typescript-eslint/recommended",
-    "react-app",
-    "plugin:jsx-a11y/recommended",
-    "next",
-    "prettier",
-  ],
-  plugins: ["@typescript-eslint", "jsx-a11y", "react-hooks"],
-  parser: `@typescript-eslint/parser`,
+  extends: ["next/core-web-vitals"],
   rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
@@ -19,7 +11,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "jsx-a11y/anchor-is-valid": 0,
-    "react/react-in-jsx-scope": 0,
     "object-shorthand": "error",
     "no-console": ["warn", { allow: ["warn", "error"] }],
     "import/order": "warn",

@@ -13,7 +13,6 @@ export interface PrismicRageImageWithBlur extends PrismicRageImage {
   blurDataURL: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getPrismicRageImage = (img: any): PrismicRageImage => {
   if (!img.url || typeof img.url !== "string") {
     throw new Error(
