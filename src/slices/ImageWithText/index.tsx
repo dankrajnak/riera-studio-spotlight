@@ -22,7 +22,7 @@ const ImageWithText = ({ slice }: { slice: Props }) => {
     <div>
       <div
         ref={imageRef}
-        className={`w-2/5 mb-3 mx-auto  ${
+        className={`w-full md:w-2/5 mb-3 mx-auto  ${
           isLeft ? "md:float-left" : "md:float-right"
         }`}
       >
