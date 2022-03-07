@@ -15,7 +15,7 @@ export const _DefaultSlice = () => (
         description: [
           {
             type: "paragraph",
-            text: "Cillum laborum amet in ut minim minim tempor aliquip enim dolore.",
+            text: "Et ea est eiusmod elit irure excepteur consectetur amet consectetur voluptate proident excepteur officia. Laboris consectetur laborum consectetur sit quis dolor consequat nulla enim consectetur ipsum.",
             spans: [],
           },
         ],
@@ -23,7 +23,7 @@ export const _DefaultSlice = () => (
           dimensions: { width: 900, height: 500 },
           alt: "Placeholder image",
           copyright: null,
-          url: "https://images.unsplash.com/photo-1591012911207-0dbac31f37da?w=900&h=500&fit=crop",
+          url: "https://images.unsplash.com/photo-1560762484-813fc97650a0?w=900&h=500&fit=crop",
         },
       },
       id: "_DefaultSlice",
@@ -43,7 +43,7 @@ export const _ImageLeft = () => (
         description: [
           {
             type: "paragraph",
-            text: "Ut cupidatat do non esse mollit elit tempor duis consectetur pariatur ullamco occaecat est non deserunt. Culpa culpa aliquip mollit ullamco.",
+            text: "Tempor eu occaecat sunt et. Reprehenderit amet magna irure esse labore sunt sunt amet aliquip proident ea qui.",
             spans: [],
           },
         ],
@@ -51,7 +51,7 @@ export const _ImageLeft = () => (
           dimensions: { width: 900, height: 500 },
           alt: "Placeholder image",
           copyright: null,
-          url: "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=900&h=500&fit=crop",
+          url: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&h=500&fit=crop",
         },
       },
       id: "_ImageLeft",
