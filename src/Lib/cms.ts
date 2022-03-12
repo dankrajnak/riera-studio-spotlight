@@ -1,14 +1,35 @@
-import { PrismicLink } from "apollo-link-prismic";
-import Prismic from "@prismicio/client";
+import { createPrismicLink } from "apollo-link-prismic";
+import * as prismic from "@prismicio/client";
 import { ApolloClient, InMemoryCache, QueryOptions } from "@apollo/client";
-import { ApiOptions } from "@prismicio/client/types/Api";
-import { DefaultClient } from "@prismicio/client/types/client";
 import { LinkResolver } from "prismic-reactjs";
 
-export const PrismicClient = (req: ApiOptions["req"]): DefaultClient =>
-  Prismic.client("https://riera-studio-spotlight.cdn.prismic.io/api/v2", {
+import { enableAutoPreviews } from "@prismicio/next";
+import sm from "../../sm.json";
+
+export const endpoint = sm.apiEndpoint;
+export const repositoryName = prismic.getRepositoryName(endpoint);
+
+export const PrismicClient = ({
+  config,
+  previewData,
+  req,
+}: {
+  config?: prismic.ClientConfig;
+  previewData?: any;
+  req?: prismic.HttpRequestLike;
+}): prismic.Client => {
+  const client = prismic.createClient(
+    "https://riera-studio-spotlight.cdn.prismic.io/api/v2",
+    config || {}
+  );
+
+  enableAutoPreviews({
+    client,
+    previewData,
     req,
   });
+  return client;
+};
 
 export const linkResolver: LinkResolver = (doc): string => {
   if (doc.type === "exhibition") {
@@ -37,7 +58,7 @@ export const withPreview = <TVariables = any, TData = any>(
 };
 
 const cms = new ApolloClient({
-  link: PrismicLink({
+  link: createPrismicLink({
     uri: "https://riera-studio-spotlight.prismic.io/graphql",
   }),
   cache: new InMemoryCache(),

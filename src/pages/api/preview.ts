@@ -10,12 +10,12 @@ const preview = async (
   res: NextApiResponse
 ): Promise<void> => {
   const { token: ref, documentId } = req.query;
-  const redirectUrl = await PrismicClient(req)
-    .getPreviewResolver(
-      Array.isArray(ref) ? ref[0] : ref,
-      Array.isArray(documentId) ? documentId[0] : documentId
-    )
-    .resolve(linkResolver, "/");
+  const redirectUrl = await PrismicClient({ req }).resolvePreviewURL({
+    linkResolver,
+    defaultURL: "/",
+    previewToken: Array.isArray(ref) ? ref[0] : ref,
+    documentID: Array.isArray(documentId) ? documentId[0] : documentId,
+  });
 
   if (!redirectUrl) {
     res.status(401).json({ message: "Invalid token" });
