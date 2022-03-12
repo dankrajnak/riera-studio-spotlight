@@ -1,7 +1,7 @@
 import { createPrismicLink } from "apollo-link-prismic";
 import * as prismic from "@prismicio/client";
 import { ApolloClient, InMemoryCache, QueryOptions } from "@apollo/client";
-import { LinkResolver } from "prismic-reactjs";
+import * as prismicH from "@prismicio/helpers";
 
 import { enableAutoPreviews } from "@prismicio/next";
 import sm from "../../sm.json";
@@ -31,7 +31,7 @@ export const PrismicClient = ({
   return client;
 };
 
-export const linkResolver: LinkResolver = (doc): string => {
+export const linkResolver: prismicH.LinkResolverFunction = (doc): string => {
   if (doc.type === "exhibition") {
     return "/exhibition/" + doc.uid;
   }

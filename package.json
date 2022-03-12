@@ -30,7 +30,6 @@
     "lightgallery": "^2.4.0",
     "next": "^12.1.0",
     "plaiceholder": "^2.0.1",
-    "prismic-reactjs": "^1.3.4",
     "query-string": "^7.0.1",
     "react": "17.0.2",
     "react-div-100vh": "^0.7.0",

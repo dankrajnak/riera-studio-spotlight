@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import { RichText } from "prismic-reactjs";
+import { PrismicRichText } from "@prismicio/react";
 import Image from "next/image";
 import { Fragment } from "react";
 import { motion } from "framer-motion";
@@ -113,7 +113,7 @@ const ExhibitionSliceZone = ({
         slices.map((slice, i) => {
           switch (slice.__typename) {
             case "ExhibitionBodyText":
-              return <RichText key={i} render={slice.primary.text} />;
+              return <PrismicRichText key={i} field={slice.primary.text} />;
             case "ExhibitionBodyQuote":
               return (
                 <Quote
