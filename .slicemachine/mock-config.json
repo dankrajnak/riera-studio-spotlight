@@ -80,6 +80,11 @@
           }
         }
       }
+    },
+    "ImageGrid": {
+      "default": {
+        "primary": {}
+      }
     }
   }
 }

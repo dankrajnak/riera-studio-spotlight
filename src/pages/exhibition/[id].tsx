@@ -15,7 +15,12 @@ import { PreviewProp } from "../api/preview";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
-import { ImageWithText, QuoteByImage, TextByText } from "../../slices";
+import {
+  ImageGrid,
+  ImageWithText,
+  QuoteByImage,
+  TextByText,
+} from "../../slices";
 import Quote from "../../Components/Quote";
 import QuoteByText from "../../slices/QuoteByText";
 import { ArrayUtils } from "../../Utils/ArrayUtils";
@@ -144,6 +149,9 @@ const ExhibitionSliceZone = ({
             }
             case "ExhibitionBodyQuote_by_text": {
               return <QuoteByText slice={slice.variation} />;
+            }
+            case "ExhibitionBodyImage_grid": {
+              return <ImageGrid slice={slice.variation} />;
             }
             default:
               return null;

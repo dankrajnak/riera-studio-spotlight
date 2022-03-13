@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
@@ -39,6 +40,7 @@ export type Exhibition = _Document &
 
 export type ExhibitionBody =
   | ExhibitionBodyImage
+  | ExhibitionBodyImage_Grid
   | ExhibitionBodyImage_With_Text
   | ExhibitionBodyQuote
   | ExhibitionBodyQuote_By_Image
@@ -72,6 +74,25 @@ export type ExhibitionBodyImagePrimary = {
   __typename?: "ExhibitionBodyImagePrimary";
   image?: Maybe<Scalars["Json"]>;
 };
+
+export type ExhibitionBodyImage_Grid = {
+  __typename?: "ExhibitionBodyImage_grid";
+  label?: Maybe<Scalars["String"]>;
+  type?: Maybe<Scalars["String"]>;
+  variation?: Maybe<ExhibitionBodyImage_GridVariation>;
+};
+
+export type ExhibitionBodyImage_GridDefault = {
+  __typename?: "ExhibitionBodyImage_gridDefault";
+  items?: Maybe<Array<ExhibitionBodyImage_GridDefaultItems>>;
+};
+
+export type ExhibitionBodyImage_GridDefaultItems = {
+  __typename?: "ExhibitionBodyImage_gridDefaultItems";
+  image?: Maybe<Scalars["Json"]>;
+};
+
+export type ExhibitionBodyImage_GridVariation = ExhibitionBodyImage_GridDefault;
 
 export type ExhibitionBodyImage_With_Text = {
   __typename?: "ExhibitionBodyImage_with_text";
@@ -315,74 +336,74 @@ export type Query = {
 };
 
 export type Query_AllDocumentsArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  firstPublicationDate?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  fulltext?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  id_in?: Maybe<Array<Scalars["String"]>>;
-  lang?: Maybe<Scalars["String"]>;
-  last?: Maybe<Scalars["Int"]>;
-  lastPublicationDate?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  similar?: Maybe<Similar>;
-  sortBy?: Maybe<SortDocumentsBy>;
-  tags?: Maybe<Array<Scalars["String"]>>;
-  tags_in?: Maybe<Array<Scalars["String"]>>;
-  type?: Maybe<Scalars["String"]>;
-  type_in?: Maybe<Array<Scalars["String"]>>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  firstPublicationDate?: InputMaybe<Scalars["DateTime"]>;
+  firstPublicationDate_after?: InputMaybe<Scalars["DateTime"]>;
+  firstPublicationDate_before?: InputMaybe<Scalars["DateTime"]>;
+  fulltext?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["String"]>;
+  id_in?: InputMaybe<Array<Scalars["String"]>>;
+  lang?: InputMaybe<Scalars["String"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  lastPublicationDate?: InputMaybe<Scalars["DateTime"]>;
+  lastPublicationDate_after?: InputMaybe<Scalars["DateTime"]>;
+  lastPublicationDate_before?: InputMaybe<Scalars["DateTime"]>;
+  similar?: InputMaybe<Similar>;
+  sortBy?: InputMaybe<SortDocumentsBy>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
+  tags_in?: InputMaybe<Array<Scalars["String"]>>;
+  type?: InputMaybe<Scalars["String"]>;
+  type_in?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export type QueryAllExhibitionsArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  firstPublicationDate?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  fulltext?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  id_in?: Maybe<Array<Scalars["String"]>>;
-  lang?: Maybe<Scalars["String"]>;
-  last?: Maybe<Scalars["Int"]>;
-  lastPublicationDate?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  similar?: Maybe<Similar>;
-  sortBy?: Maybe<SortExhibitiony>;
-  tags?: Maybe<Array<Scalars["String"]>>;
-  tags_in?: Maybe<Array<Scalars["String"]>>;
-  uid?: Maybe<Scalars["String"]>;
-  uid_in?: Maybe<Array<Scalars["String"]>>;
-  where?: Maybe<WhereExhibition>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  firstPublicationDate?: InputMaybe<Scalars["DateTime"]>;
+  firstPublicationDate_after?: InputMaybe<Scalars["DateTime"]>;
+  firstPublicationDate_before?: InputMaybe<Scalars["DateTime"]>;
+  fulltext?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["String"]>;
+  id_in?: InputMaybe<Array<Scalars["String"]>>;
+  lang?: InputMaybe<Scalars["String"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  lastPublicationDate?: InputMaybe<Scalars["DateTime"]>;
+  lastPublicationDate_after?: InputMaybe<Scalars["DateTime"]>;
+  lastPublicationDate_before?: InputMaybe<Scalars["DateTime"]>;
+  similar?: InputMaybe<Similar>;
+  sortBy?: InputMaybe<SortExhibitiony>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
+  tags_in?: InputMaybe<Array<Scalars["String"]>>;
+  uid?: InputMaybe<Scalars["String"]>;
+  uid_in?: InputMaybe<Array<Scalars["String"]>>;
+  where?: InputMaybe<WhereExhibition>;
 };
 
 export type QueryAllHomepagesArgs = {
-  after?: Maybe<Scalars["String"]>;
-  before?: Maybe<Scalars["String"]>;
-  first?: Maybe<Scalars["Int"]>;
-  firstPublicationDate?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  firstPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  fulltext?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
-  id_in?: Maybe<Array<Scalars["String"]>>;
-  lang?: Maybe<Scalars["String"]>;
-  last?: Maybe<Scalars["Int"]>;
-  lastPublicationDate?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_after?: Maybe<Scalars["DateTime"]>;
-  lastPublicationDate_before?: Maybe<Scalars["DateTime"]>;
-  similar?: Maybe<Similar>;
-  sortBy?: Maybe<SortHomepagey>;
-  tags?: Maybe<Array<Scalars["String"]>>;
-  tags_in?: Maybe<Array<Scalars["String"]>>;
-  uid?: Maybe<Scalars["String"]>;
-  uid_in?: Maybe<Array<Scalars["String"]>>;
-  where?: Maybe<WhereHomepage>;
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  firstPublicationDate?: InputMaybe<Scalars["DateTime"]>;
+  firstPublicationDate_after?: InputMaybe<Scalars["DateTime"]>;
+  firstPublicationDate_before?: InputMaybe<Scalars["DateTime"]>;
+  fulltext?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["String"]>;
+  id_in?: InputMaybe<Array<Scalars["String"]>>;
+  lang?: InputMaybe<Scalars["String"]>;
+  last?: InputMaybe<Scalars["Int"]>;
+  lastPublicationDate?: InputMaybe<Scalars["DateTime"]>;
+  lastPublicationDate_after?: InputMaybe<Scalars["DateTime"]>;
+  lastPublicationDate_before?: InputMaybe<Scalars["DateTime"]>;
+  similar?: InputMaybe<Similar>;
+  sortBy?: InputMaybe<SortHomepagey>;
+  tags?: InputMaybe<Array<Scalars["String"]>>;
+  tags_in?: InputMaybe<Array<Scalars["String"]>>;
+  uid?: InputMaybe<Scalars["String"]>;
+  uid_in?: InputMaybe<Array<Scalars["String"]>>;
+  where?: InputMaybe<WhereHomepage>;
 };
 
 export type QueryExhibitionArgs = {
@@ -426,17 +447,17 @@ export enum SortHomepagey {
 }
 
 export type WhereExhibition = {
-  title?: Maybe<Scalars["String"]>;
-  title_fulltext?: Maybe<Scalars["String"]>;
+  title?: InputMaybe<Scalars["String"]>;
+  title_fulltext?: InputMaybe<Scalars["String"]>;
 };
 
 export type WhereHomepage = {
-  active_exhibitions?: Maybe<WhereHomepageActive_Exhibitions>;
+  active_exhibitions?: InputMaybe<WhereHomepageActive_Exhibitions>;
 };
 
 export type WhereHomepageActive_Exhibitions = {
   /** exhibition */
-  exhibition?: Maybe<Scalars["String"]>;
+  exhibition?: InputMaybe<Scalars["String"]>;
 };
 
 /** A prismic document */
@@ -507,20 +528,13 @@ export type AllExhibitionIdsQuery = {
   __typename?: "Query";
   allExhibitions: {
     __typename?: "ExhibitionConnectionConnection";
-    edges?:
-      | Array<
-          | {
-              __typename?: "ExhibitionConnectionEdge";
-              node: {
-                __typename?: "Exhibition";
-                _meta: { __typename?: "Meta"; uid?: string | null | undefined };
-              };
-            }
-          | null
-          | undefined
-        >
-      | null
-      | undefined;
+    edges?: Array<{
+      __typename?: "ExhibitionConnectionEdge";
+      node: {
+        __typename?: "Exhibition";
+        _meta: { __typename?: "Meta"; uid?: string | null };
+      };
+    } | null> | null;
   };
 };
 
@@ -530,172 +544,134 @@ export type GetExhibitionQueryVariables = Exact<{
 
 export type GetExhibitionQuery = {
   __typename?: "Query";
-  exhibition?:
-    | {
-        __typename?: "Exhibition";
-        main_image?: any | null | undefined;
-        title?: string | null | undefined;
-        body?:
-          | Array<
-              | {
-                  __typename?: "ExhibitionBodyImage";
-                  primary?:
-                    | {
-                        __typename?: "ExhibitionBodyImagePrimary";
-                        image?: any | null | undefined;
-                      }
-                    | null
-                    | undefined;
-                }
-              | {
-                  __typename?: "ExhibitionBodyImage_with_text";
-                  type?: string | null | undefined;
-                  variation?:
-                    | {
-                        __typename?: "ExhibitionBodyImage_with_textDefaultSlice";
-                        primary?:
-                          | {
-                              __typename?: "ExhibitionBodyImage_with_textDefaultSlicePrimary";
-                              image?: any | null | undefined;
-                              description?: any | null | undefined;
-                            }
-                          | null
-                          | undefined;
-                      }
-                    | {
-                        __typename?: "ExhibitionBodyImage_with_textImageleft";
-                        primary?:
-                          | {
-                              __typename?: "ExhibitionBodyImage_with_textImageleftPrimary";
-                              image?: any | null | undefined;
-                              description?: any | null | undefined;
-                            }
-                          | null
-                          | undefined;
-                      }
-                    | null
-                    | undefined;
-                }
-              | {
-                  __typename?: "ExhibitionBodyQuote";
-                  primary?:
-                    | {
-                        __typename?: "ExhibitionBodyQuotePrimary";
-                        text?: any | null | undefined;
-                        author?: string | null | undefined;
-                      }
-                    | null
-                    | undefined;
-                }
-              | {
-                  __typename?: "ExhibitionBodyQuote_by_image";
-                  type?: string | null | undefined;
-                  variation?:
-                    | {
-                        __typename?: "ExhibitionBodyQuote_by_imageDefaultSlice";
-                        primary?:
-                          | {
-                              __typename?: "ExhibitionBodyQuote_by_imageDefaultSlicePrimary";
-                              quoteText?: any | null | undefined;
-                              quoteAuthor?: string | null | undefined;
-                              image?: any | null | undefined;
-                            }
-                          | null
-                          | undefined;
-                      }
-                    | {
-                        __typename?: "ExhibitionBodyQuote_by_imageImageleft";
-                        primary?:
-                          | {
-                              __typename?: "ExhibitionBodyQuote_by_imageImageleftPrimary";
-                              quoteText?: any | null | undefined;
-                              quoteAuthor?: string | null | undefined;
-                              image?: any | null | undefined;
-                            }
-                          | null
-                          | undefined;
-                      }
-                    | null
-                    | undefined;
-                }
-              | {
-                  __typename?: "ExhibitionBodyQuote_by_text";
-                  type?: string | null | undefined;
-                  variation?:
-                    | {
-                        __typename?: "ExhibitionBodyQuote_by_textDefaultSlice";
-                        primary?:
-                          | {
-                              __typename?: "ExhibitionBodyQuote_by_textDefaultSlicePrimary";
-                              text?: any | null | undefined;
-                              quoteText?: any | null | undefined;
-                              quoteAuthor?: string | null | undefined;
-                            }
-                          | null
-                          | undefined;
-                      }
-                    | {
-                        __typename?: "ExhibitionBodyQuote_by_textTextleft";
-                        primary?:
-                          | {
-                              __typename?: "ExhibitionBodyQuote_by_textTextleftPrimary";
-                              text?: any | null | undefined;
-                              quoteText?: any | null | undefined;
-                              quoteAuthor?: string | null | undefined;
-                            }
-                          | null
-                          | undefined;
-                      }
-                    | null
-                    | undefined;
-                }
-              | {
-                  __typename?: "ExhibitionBodyText";
-                  primary?:
-                    | {
-                        __typename?: "ExhibitionBodyTextPrimary";
-                        text?: any | null | undefined;
-                      }
-                    | null
-                    | undefined;
-                }
-              | {
-                  __typename?: "ExhibitionBodyText_by_text";
-                  variation?:
-                    | {
-                        __typename?: "ExhibitionBodyText_by_textDefaultSlice";
-                        primary?:
-                          | {
-                              __typename?: "ExhibitionBodyText_by_textDefaultSlicePrimary";
-                              left?: any | null | undefined;
-                              right?: any | null | undefined;
-                            }
-                          | null
-                          | undefined;
-                      }
-                    | null
-                    | undefined;
-                }
-            >
-          | null
-          | undefined;
-        body1?:
-          | Array<{
-              __typename?: "ExhibitionBody1Gallery_image";
-              primary?:
-                | {
-                    __typename?: "ExhibitionBody1Gallery_imagePrimary";
-                    image?: any | null | undefined;
-                    work_title?: string | null | undefined;
-                  }
-                | null
-                | undefined;
-            }>
-          | null
-          | undefined;
-      }
-    | null
-    | undefined;
+  exhibition?: {
+    __typename?: "Exhibition";
+    main_image?: any | null;
+    title?: string | null;
+    body?: Array<
+      | {
+          __typename?: "ExhibitionBodyImage";
+          primary?: {
+            __typename?: "ExhibitionBodyImagePrimary";
+            image?: any | null;
+          } | null;
+        }
+      | {
+          __typename?: "ExhibitionBodyImage_grid";
+          variation?: {
+            __typename?: "ExhibitionBodyImage_gridDefault";
+            items?: Array<{
+              __typename?: "ExhibitionBodyImage_gridDefaultItems";
+              image?: any | null;
+            }> | null;
+          } | null;
+        }
+      | {
+          __typename?: "ExhibitionBodyImage_with_text";
+          type?: string | null;
+          variation?:
+            | {
+                __typename?: "ExhibitionBodyImage_with_textDefaultSlice";
+                primary?: {
+                  __typename?: "ExhibitionBodyImage_with_textDefaultSlicePrimary";
+                  image?: any | null;
+                  description?: any | null;
+                } | null;
+              }
+            | {
+                __typename?: "ExhibitionBodyImage_with_textImageleft";
+                primary?: {
+                  __typename?: "ExhibitionBodyImage_with_textImageleftPrimary";
+                  image?: any | null;
+                  description?: any | null;
+                } | null;
+              }
+            | null;
+        }
+      | {
+          __typename?: "ExhibitionBodyQuote";
+          primary?: {
+            __typename?: "ExhibitionBodyQuotePrimary";
+            text?: any | null;
+            author?: string | null;
+          } | null;
+        }
+      | {
+          __typename?: "ExhibitionBodyQuote_by_image";
+          type?: string | null;
+          variation?:
+            | {
+                __typename?: "ExhibitionBodyQuote_by_imageDefaultSlice";
+                primary?: {
+                  __typename?: "ExhibitionBodyQuote_by_imageDefaultSlicePrimary";
+                  quoteText?: any | null;
+                  quoteAuthor?: string | null;
+                  image?: any | null;
+                } | null;
+              }
+            | {
+                __typename?: "ExhibitionBodyQuote_by_imageImageleft";
+                primary?: {
+                  __typename?: "ExhibitionBodyQuote_by_imageImageleftPrimary";
+                  quoteText?: any | null;
+                  quoteAuthor?: string | null;
+                  image?: any | null;
+                } | null;
+              }
+            | null;
+        }
+      | {
+          __typename?: "ExhibitionBodyQuote_by_text";
+          type?: string | null;
+          variation?:
+            | {
+                __typename?: "ExhibitionBodyQuote_by_textDefaultSlice";
+                primary?: {
+                  __typename?: "ExhibitionBodyQuote_by_textDefaultSlicePrimary";
+                  text?: any | null;
+                  quoteText?: any | null;
+                  quoteAuthor?: string | null;
+                } | null;
+              }
+            | {
+                __typename?: "ExhibitionBodyQuote_by_textTextleft";
+                primary?: {
+                  __typename?: "ExhibitionBodyQuote_by_textTextleftPrimary";
+                  text?: any | null;
+                  quoteText?: any | null;
+                  quoteAuthor?: string | null;
+                } | null;
+              }
+            | null;
+        }
+      | {
+          __typename?: "ExhibitionBodyText";
+          primary?: {
+            __typename?: "ExhibitionBodyTextPrimary";
+            text?: any | null;
+          } | null;
+        }
+      | {
+          __typename?: "ExhibitionBodyText_by_text";
+          variation?: {
+            __typename?: "ExhibitionBodyText_by_textDefaultSlice";
+            primary?: {
+              __typename?: "ExhibitionBodyText_by_textDefaultSlicePrimary";
+              left?: any | null;
+              right?: any | null;
+            } | null;
+          } | null;
+        }
+    > | null;
+    body1?: Array<{
+      __typename?: "ExhibitionBody1Gallery_image";
+      primary?: {
+        __typename?: "ExhibitionBody1Gallery_imagePrimary";
+        image?: any | null;
+        work_title?: string | null;
+      } | null;
+    }> | null;
+  } | null;
 };
 
 export type HomepageQueryVariables = Exact<{ [key: string]: never }>;
@@ -704,41 +680,27 @@ export type HomepageQuery = {
   __typename?: "Query";
   allHomepages: {
     __typename?: "HomepageConnectionConnection";
-    edges?:
-      | Array<
-          | {
-              __typename?: "HomepageConnectionEdge";
-              node: {
-                __typename?: "Homepage";
-                active_exhibitions?:
-                  | Array<{
-                      __typename?: "HomepageActive_exhibitions";
-                      exhibition?:
-                        | {
-                            __typename?: "Exhibition";
-                            title?: string | null | undefined;
-                            main_image?: any | null | undefined;
-                            _meta: {
-                              __typename?: "Meta";
-                              uid?: string | null | undefined;
-                            };
-                          }
-                        | { __typename?: "Homepage" }
-                        | { __typename?: "_ExternalLink" }
-                        | { __typename?: "_FileLink" }
-                        | { __typename?: "_ImageLink" }
-                        | null
-                        | undefined;
-                    }>
-                  | null
-                  | undefined;
-              };
-            }
-          | null
-          | undefined
-        >
-      | null
-      | undefined;
+    edges?: Array<{
+      __typename?: "HomepageConnectionEdge";
+      node: {
+        __typename?: "Homepage";
+        active_exhibitions?: Array<{
+          __typename?: "HomepageActive_exhibitions";
+          exhibition?:
+            | {
+                __typename?: "Exhibition";
+                title?: string | null;
+                main_image?: any | null;
+                _meta: { __typename?: "Meta"; uid?: string | null };
+              }
+            | { __typename?: "Homepage" }
+            | { __typename?: "_ExternalLink" }
+            | { __typename?: "_FileLink" }
+            | { __typename?: "_ImageLink" }
+            | null;
+        }> | null;
+      };
+    } | null> | null;
   };
 };
 
@@ -748,41 +710,27 @@ export type MenuQuery = {
   __typename?: "Query";
   allHomepages: {
     __typename?: "HomepageConnectionConnection";
-    edges?:
-      | Array<
-          | {
-              __typename?: "HomepageConnectionEdge";
-              node: {
-                __typename?: "Homepage";
-                active_exhibitions?:
-                  | Array<{
-                      __typename?: "HomepageActive_exhibitions";
-                      exhibition?:
-                        | {
-                            __typename?: "Exhibition";
-                            title?: string | null | undefined;
-                            main_image?: any | null | undefined;
-                            _meta: {
-                              __typename?: "Meta";
-                              uid?: string | null | undefined;
-                            };
-                          }
-                        | { __typename?: "Homepage" }
-                        | { __typename?: "_ExternalLink" }
-                        | { __typename?: "_FileLink" }
-                        | { __typename?: "_ImageLink" }
-                        | null
-                        | undefined;
-                    }>
-                  | null
-                  | undefined;
-              };
-            }
-          | null
-          | undefined
-        >
-      | null
-      | undefined;
+    edges?: Array<{
+      __typename?: "HomepageConnectionEdge";
+      node: {
+        __typename?: "Homepage";
+        active_exhibitions?: Array<{
+          __typename?: "HomepageActive_exhibitions";
+          exhibition?:
+            | {
+                __typename?: "Exhibition";
+                title?: string | null;
+                main_image?: any | null;
+                _meta: { __typename?: "Meta"; uid?: string | null };
+              }
+            | { __typename?: "Homepage" }
+            | { __typename?: "_ExternalLink" }
+            | { __typename?: "_FileLink" }
+            | { __typename?: "_ImageLink" }
+            | null;
+        }> | null;
+      };
+    } | null> | null;
   };
 };
 
@@ -932,6 +880,15 @@ export const GetExhibitionDocument = gql`
                 text
                 quoteText
                 quoteAuthor
+              }
+            }
+          }
+        }
+        ... on ExhibitionBodyImage_grid {
+          variation {
+            ... on ExhibitionBodyImage_gridDefault {
+              items {
+                image
               }
             }
           }

@@ -20,16 +20,7 @@ const LabelledImage = ({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div
-      ref={ref}
-      className=" mb-0"
-      style={{
-        display: "flex",
-        width: "100%",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+    <div ref={ref} className="flex w-full flex-col items-center mb-0">
       {width &&
         (blurs ? (
           <SVGBlur

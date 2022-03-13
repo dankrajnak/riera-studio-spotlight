@@ -84,6 +84,15 @@ query GetExhibition($uid: String!) {
           }
         }
       }
+      ... on ExhibitionBodyImage_grid {
+        variation {
+          ... on ExhibitionBodyImage_gridDefault {
+            items {
+              image
+            }
+          }
+        }
+      }
     }
     body1 {
       ... on ExhibitionBody1Gallery_image {
