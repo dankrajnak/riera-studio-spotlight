@@ -6,7 +6,9 @@ type Props = ExhibitionSlice<"ExhibitionBodyImage_grid">["variation"];
 const ImageWithText = ({ slice }: { slice: Props }) => {
   const images = slice.items
     .map(({ image }, i) =>
-      image ? <LabelledImage key={i} image={image} /> : null
+      image ? (
+        <LabelledImage key={i} image={image.img} blurs={image.blurs} />
+      ) : null
     )
     .filter((image) => image);
 

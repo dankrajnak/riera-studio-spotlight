@@ -61,6 +61,21 @@ const exhibitionQuery = async (
                 ),
               },
             };
+          case "ExhibitionBodyImage_grid":
+            const thing = {
+              ...el,
+              variation: {
+                ...el.variation,
+                items: await Promise.all(
+                  el.variation.items?.map(async (item) => ({
+                    ...item,
+                    image: await getPrismicRageImageWithPlaceholder(item.image),
+                  }))
+                ),
+              },
+            };
+            console.log(thing.variation.items);
+            return thing;
           default:
             return el;
         }
