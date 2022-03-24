@@ -28,6 +28,5 @@
   "background_color": "#f2e2ce",
   "description": "What's new at Riera Studios",
   "display": "minimal-ui",
-  "start_url": "/",
-  "theme_color": "#d95525"
+  "start_url": "/"
 }

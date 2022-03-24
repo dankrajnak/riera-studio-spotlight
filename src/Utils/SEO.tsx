@@ -51,7 +51,6 @@ const SEO = ({
       name: `twitter:description`,
       content: description,
     },
-    { name: `theme-color`, content: "##d95525" },
     { name: `og:image`, content: "/android-chrome-512x512.png" },
     { name: "keywords", content: keywords.join(", ") },
   ];
