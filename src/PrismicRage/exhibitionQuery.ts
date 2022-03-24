@@ -62,7 +62,7 @@ const exhibitionQuery = async (
               },
             };
           case "ExhibitionBodyImage_grid":
-            const thing = {
+            return {
               ...el,
               variation: {
                 ...el.variation,
@@ -74,8 +74,6 @@ const exhibitionQuery = async (
                 ),
               },
             };
-            console.log(thing.variation.items);
-            return thing;
           default:
             return el;
         }
