@@ -6,7 +6,7 @@ type Props = {
 };
 const Footer = ({ exhibitions }: Props) => {
   return (
-    <footer className=" bg-black-300 border-t-black-500 border-t-1 w-full px-12 py-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+    <footer className=" bg-black-300 border-t-black-500 border-t-1 w-full px-12 pt-5 pb-12 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
       <div>
         Contact
         <div>
