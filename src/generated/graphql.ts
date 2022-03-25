@@ -674,6 +674,23 @@ export type GetExhibitionQuery = {
   } | null;
 };
 
+export type FooterQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FooterQuery = {
+  __typename?: "Query";
+  allExhibitions: {
+    __typename?: "ExhibitionConnectionConnection";
+    edges?: Array<{
+      __typename?: "ExhibitionConnectionEdge";
+      node: {
+        __typename?: "Exhibition";
+        title?: string | null;
+        _meta: { __typename?: "Meta"; uid?: string | null };
+      };
+    } | null> | null;
+  };
+};
+
 export type HomepageQueryVariables = Exact<{ [key: string]: never }>;
 
 export type HomepageQuery = {
@@ -955,6 +972,60 @@ export type GetExhibitionLazyQueryHookResult = ReturnType<
 export type GetExhibitionQueryResult = Apollo.QueryResult<
   GetExhibitionQuery,
   GetExhibitionQueryVariables
+>;
+export const FooterDocument = gql`
+  query footer {
+    allExhibitions {
+      edges {
+        node {
+          title
+          _meta {
+            uid
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useFooterQuery__
+ *
+ * To run a query within a React component, call `useFooterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFooterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFooterQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFooterQuery(
+  baseOptions?: Apollo.QueryHookOptions<FooterQuery, FooterQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<FooterQuery, FooterQueryVariables>(
+    FooterDocument,
+    options
+  );
+}
+export function useFooterLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<FooterQuery, FooterQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<FooterQuery, FooterQueryVariables>(
+    FooterDocument,
+    options
+  );
+}
+export type FooterQueryHookResult = ReturnType<typeof useFooterQuery>;
+export type FooterLazyQueryHookResult = ReturnType<typeof useFooterLazyQuery>;
+export type FooterQueryResult = Apollo.QueryResult<
+  FooterQuery,
+  FooterQueryVariables
 >;
 export const HomepageDocument = gql`
   query Homepage {

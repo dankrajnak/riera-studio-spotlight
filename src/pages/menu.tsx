@@ -97,7 +97,7 @@ const Menu = ({
             </a>
           </Link>
         </div>
-        <div className="menu-container">
+        <div className="menu-container bg-black-900">
           <MenuContent exhibitions={exhibitions} />
         </div>
       </motion.div>
@@ -128,7 +128,6 @@ const Menu = ({
             MENU_BUTTON_DIMENSIONS.height +
             20}px
             30px 0px 30px;
-          background: ${Colors.black};
         }
       `}</style>
     </>

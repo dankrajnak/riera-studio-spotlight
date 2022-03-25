@@ -1,7 +1,7 @@
 import { ApolloQueryResult } from "@apollo/client";
 import { ImageLoader } from "next/image";
 import { GetExhibitionQuery } from "../generated/graphql";
-import { ExhibitionType } from "./exhibitionQuery";
+import { ExhibitionQueryReturn } from "./exhibitionQuery";
 
 export interface PrismicRageImage {
   alt: string | null;
@@ -31,10 +31,11 @@ export const getPrismicRageImage = (img: any): PrismicRageImage => {
   };
 };
 
-type ExhibitionSliceTypeNames = ExhibitionType["body"][0]["__typename"];
+type ExhibitionSliceTypeNames =
+  ExhibitionQueryReturn["exhibition"]["body"][0]["__typename"];
 
 export type ExhibitionSlice<T extends ExhibitionSliceTypeNames> = Extract<
-  Partial<ExhibitionType["body"][0]>,
+  Partial<ExhibitionQueryReturn["exhibition"]["body"][0]>,
   { __typename?: T }
 >;
 

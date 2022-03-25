@@ -3,6 +3,7 @@ import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { ColorsA } from "../Utils/Colors";
 import { MENU_PATH } from "../pages/menu";
+import Footer from "../Components/Footer";
 
 export const MENU_BUTTON_DIMENSIONS = {
   width: 50,
@@ -39,7 +40,15 @@ const MenuButton: React.FC<{ isOpen: boolean; backLink?: string | null }> = ({
         href={isOpen ? backLink || "/" : getMenuLink(router)}
         as={isOpen ? undefined : MENU_PATH}
       >
-        <a className="menu-button">
+        <a
+          className={`menu-button flex items-center justify-center border-0 rounded-full bg-black-900 bg-opacity-90 ${
+            isOpen ? "drop-shadow-md" : "drop-shadow-none"
+          }`}
+          style={{
+            width: MENU_BUTTON_DIMENSIONS.width,
+            height: MENU_BUTTON_DIMENSIONS.height,
+          }}
+        >
           <HamburgerMenu
             isOpen={isOpen}
             color="white"
@@ -49,28 +58,6 @@ const MenuButton: React.FC<{ isOpen: boolean; backLink?: string | null }> = ({
           />
         </a>
       </Link>
-      <style jsx>{`
-        .menu-button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border: none;
-          background-color: ${ColorsA.black(0.8)};
-          border-radius: 30px;
-          width: ${MENU_BUTTON_DIMENSIONS.width}px;
-          height: ${MENU_BUTTON_DIMENSIONS.height}px;
-        }
-      `}</style>
-      <style jsx>{`
-        .menu-button {
-          ${isOpen
-            ? ""
-            : `box-shadow: 0 1.8px 2.2px rgba(0, 0, 0, 0.31),
-          0 4.3px 5.3px rgba(0, 0, 0, 0.223), 0 8.1px 10px rgba(0, 0, 0, 0.185),
-          0 14.5px 17.9px rgba(0, 0, 0, 0.155),
-          0 27.2px 33.4px rgba(0, 0, 0, 0.125), 0 65px 80px rgba(0, 0, 0, 0.087)`}
-        }
-      `}</style>
     </>
   );
 };

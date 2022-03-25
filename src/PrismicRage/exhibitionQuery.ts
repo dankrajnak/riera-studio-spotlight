@@ -14,18 +14,20 @@ import {
 
 type GalleryImage = { image: ImageWithBlur; title: string };
 
-export type ExhibitionType = Omit<
-  GetExhibitionQuery["exhibition"] & {
-    main_image: PrismicRageImage;
-    galleryImages: GalleryImage[];
-  },
-  "body1"
->;
+export type ExhibitionQueryReturn = {
+  exhibition: Omit<
+    GetExhibitionQuery["exhibition"] & {
+      main_image: PrismicRageImage;
+      galleryImages: GalleryImage[];
+    },
+    "body1"
+  >;
+};
 
 const exhibitionQuery = async (
   uid: string,
   previewRef?: unknown
-): Promise<ExhibitionType> => {
+): Promise<ExhibitionQueryReturn> => {
   const resp = await cms.query<GetExhibitionQuery, GetExhibitionQueryVariables>(
     withPreview(
       {
@@ -47,40 +49,44 @@ const exhibitionQuery = async (
     );
   };
   return {
-    ...exhibitions,
-    body: await Promise.all(
-      exhibitions.body.map(async (el) => {
-        switch (el.__typename) {
-          case "ExhibitionBodyImage":
-            return {
-              ...el,
-              primary: {
-                ...el.primary,
-                image: await getPrismicRageImageWithPlaceholder(
-                  el.primary.image
-                ),
-              },
-            };
-          case "ExhibitionBodyImage_grid":
-            return {
-              ...el,
-              variation: {
-                ...el.variation,
-                items: await Promise.all(
-                  el.variation.items?.map(async (item) => ({
-                    ...item,
-                    image: await getPrismicRageImageWithPlaceholder(item.image),
-                  }))
-                ),
-              },
-            };
-          default:
-            return el;
-        }
-      })
-    ),
-    main_image: await getPrismicRageImage(exhibitions.main_image),
-    galleryImages: await getGalleryImages(),
+    exhibition: {
+      ...exhibitions,
+      body: await Promise.all(
+        exhibitions.body.map(async (el) => {
+          switch (el.__typename) {
+            case "ExhibitionBodyImage":
+              return {
+                ...el,
+                primary: {
+                  ...el.primary,
+                  image: await getPrismicRageImageWithPlaceholder(
+                    el.primary.image
+                  ),
+                },
+              };
+            case "ExhibitionBodyImage_grid":
+              return {
+                ...el,
+                variation: {
+                  ...el.variation,
+                  items: await Promise.all(
+                    el.variation.items?.map(async (item) => ({
+                      ...item,
+                      image: await getPrismicRageImageWithPlaceholder(
+                        item.image
+                      ),
+                    }))
+                  ),
+                },
+              };
+            default:
+              return el;
+          }
+        })
+      ),
+      main_image: await getPrismicRageImage(exhibitions.main_image),
+      galleryImages: await getGalleryImages(),
+    },
   };
 };
 

@@ -1,0 +1,12 @@
+query footer {
+  allExhibitions {
+    edges {
+      node {
+        title
+        _meta {
+          uid
+        }
+      }
+    }
+  }
+}
