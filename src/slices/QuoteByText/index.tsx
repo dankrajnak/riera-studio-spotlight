@@ -1,7 +1,7 @@
 import React from "react";
-import { PrismicRichText } from "@prismicio/react";
 import Quote from "../../Components/Quote";
 import { ExhibitionSlice } from "../../PrismicRage/shared";
+import RichText from "../../PrismicRage/RichText";
 
 type Slice = ExhibitionSlice<"ExhibitionBodyQuote_by_text">["variation"];
 
@@ -16,9 +16,7 @@ const QuoteByText = ({ slice }: { slice: Slice }) => {
       </div>
     </div>
   );
-  const text = slice.primary.text && (
-    <PrismicRichText field={slice.primary.text} />
-  );
+  const text = slice.primary.text && <RichText field={slice.primary.text} />;
 
   const isLeft = slice.__typename === "ExhibitionBodyQuote_by_textTextleft";
 

@@ -1,5 +1,4 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { PrismicRichText } from "@prismicio/react";
 import Image from "next/image";
 import { Fragment } from "react";
 import { motion } from "framer-motion";
@@ -26,6 +25,7 @@ import QuoteByText from "../../slices/QuoteByText";
 import { ArrayUtils } from "../../Utils/ArrayUtils";
 import { footerQuery } from "../../PrismicRage/footerQuery";
 import Footer from "../../Components/Footer";
+import RichText from "../../PrismicRage/RichText";
 
 // import plugins if you need
 
@@ -122,7 +122,8 @@ const ExhibitionSliceZone = ({
         slices.map((slice, i) => {
           switch (slice.__typename) {
             case "ExhibitionBodyText":
-              return <PrismicRichText key={i} field={slice.primary.text} />;
+              return <RichText key={i} field={slice.primary.text} />;
+
             case "ExhibitionBodyQuote":
               return (
                 <Quote

@@ -14,5 +14,9 @@ module.exports = {
       black: colors.stone,
     },
   },
-  plugins: [],
+  // avoid conflict between tailwind aspect ratio plugin and tailwind 3.0 aspect ratio
+  corePlugins: {
+    aspectRatio: false,
+  },
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

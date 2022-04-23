@@ -1,6 +1,7 @@
 import { PrismicRichText } from "@prismicio/react";
 import { useMeasure } from "react-use";
 import LabelledImage from "../../Components/LabelledImage";
+import RichText from "../../PrismicRage/RichText";
 import { ExhibitionSlice } from "../../PrismicRage/shared";
 
 type Props = ExhibitionSlice<"ExhibitionBodyImage_with_text">["variation"];
@@ -9,7 +10,7 @@ const ImageWithText = ({ slice }: { slice: Props }) => {
   const [textRef, { height: textHeight }] = useMeasure();
 
   const text = slice.primary.description && (
-    <PrismicRichText field={slice.primary.description} />
+    <RichText field={slice.primary.description} />
   );
   const image = slice.primary.image && (
     <LabelledImage image={slice.primary.image} />
