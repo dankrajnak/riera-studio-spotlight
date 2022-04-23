@@ -1,6 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/image";
-import { Fragment } from "react";
 import { motion } from "framer-motion";
 
 import exhibitionQuery, {

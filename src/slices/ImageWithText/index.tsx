@@ -1,4 +1,3 @@
-import { PrismicRichText } from "@prismicio/react";
 import { useMeasure } from "react-use";
 import LabelledImage from "../../Components/LabelledImage";
 import RichText from "../../PrismicRage/RichText";
